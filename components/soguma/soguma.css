@@ -1,0 +1,15 @@
+
+.soguma-container {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	/* margin: 0; */
+	/* padding: 0; */
+	/* background-color: violet; */
+	border: 2px;
+	width: 100%;
+	height: 100%;
+	padding-top: 100%;
+	/* height: 700px; */
+}

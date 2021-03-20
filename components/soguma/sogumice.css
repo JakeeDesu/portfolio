@@ -1,0 +1,15 @@
+.sogumice-container {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: yellowgreen;
+	height: 1000px;
+	width: 100%;
+}
+
+.sogumice {
+	background-color: slateblue;
+	height: 40%;
+	width: 30%;
+}

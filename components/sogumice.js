@@ -66,7 +66,7 @@ export default function Sogumice ({ height, width }) {
 		>
 			<motion.div className="flex justify-center items-center bg-blue-300  border-gray-900 border-4 h-24 w-24 rounded-full "
 
-			variants={circleVariants}		
+			variants={circleVariants}
 			>
 				<motion.div className="-top-full bg-red-400 h-14 w-14 rounded-full shadow-glow"
 			initial="hidden"

@@ -31,9 +31,8 @@ export default function DarkSky({ height }) {
 
 	}
 	return (
-		<div className={`relative flex flex-col ${height} w-full bg-gray-900 overflow-hidden`} >
-			<div className="h-1/4 w-full bg-blue-400"
-			></div>
+		<div className={`relative flex flex-col ${height} w-full overflow-hidden`} >
+			<div className="h-1/4 w-full bg-blue-400"></div>
 			<div className={`relative h-1/2 w-full`}>
 				<motion.div
 					className="absolute -top-full -left-1/4 h-2xfull w-3/4 rounded-fullp4   bg-blue-400"

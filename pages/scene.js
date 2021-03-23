@@ -3,7 +3,7 @@ import Sogumice from '../components/sogumice'
 import LoloIcon from '../components/loloIcon'
 import ImageDisplayer from '../components/imageDisplayer'
 import DescriptionCard from '../components/descriptionCard'
-import Image from 'next/Image'
+// import Image from 'next/Image'
 
 
 export default function Scene () {

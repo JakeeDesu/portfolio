@@ -1,4 +1,4 @@
-import Image from 'next/Image'
+// import Image from 'next/Image'
 import { wrap } from 'popmotion'
 import { useState } from 'react'
 import { motion, AnimatePresence} from 'framer-motion'
@@ -68,7 +68,7 @@ const imageIndex = wrap(0, images.length, page);
 			            opacity: { duration: 0.2 }
 			          }}
 			          drag="y"
-			          dragConstraints={{ left: 0, right: 0 }}
+			          dragConstraints={{ top: 0, bottom: 0 }}
 			          dragElastic={1}
 			          onDragEnd={(e, { offset, velocity }) => {
 			            const swipe = swipePower(offset.y, velocity.y);

@@ -1,4 +1,4 @@
-import Image from 'next/Image'
+// import Image from 'next/Image'
 import { motion } from 'framer-motion'
 
 export default function LoloIcon ({ size }) {
@@ -31,12 +31,25 @@ export default function LoloIcon ({ size }) {
       }
     }}
     >
-      <Image
+      <img
+      className="h-40 w-32 object-contain"
         src="/row-tail1.png"
         width={120 * size / 10}
         height={200 * size / 10}
       />
-      <Image
+      {/* <Image      <Image
+        src="/row-tail1.png"
+        width={120 * size / 10}
+        height={200 * size / 10}
+      /> */}
+      {/* <Image
+        src="/row.png"
+        width={35 * size / 10}
+        height={35 * size / 10}
+      /> */}
+      <img
+
+        className="h-24 w-24 object-contain"
         src="/row.png"
         width={35 * size / 10}
         height={35 * size / 10}

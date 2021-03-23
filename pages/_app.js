@@ -8,16 +8,16 @@ function MyApp({ Component, pageProps }) {
       <motion.div initial="start" animate="opened" exit="exitPage"
         variants={{
           start : {
-            y : -1000,
+            y : 1000,
           },
           opened : {
             y : 0,
             transition :{
-              duration : 2
+              duration : 0.3
             }
           },
           exitPage: {
-            y : 1000
+            y : -1000
           }
         }}
       >

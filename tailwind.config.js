@@ -59,8 +59,8 @@ module.exports = {
       'fullp5': '75%',
     },
     boxShadow : {
-      'glow': '0 0px 20px 8px rgba(255, 255, 255, 0.5)',
-      '2glow': '0 0px 60px 15px rgba(255, 255, 255, 0.5)',
+      'glow': '0px 0px 20px 8px rgba(255, 255, 255, 0.5)',
+      '2glow': '0px 0px 60px 15px rgba(255, 255, 255, 0.5)',
     },
     extend: {},
   },

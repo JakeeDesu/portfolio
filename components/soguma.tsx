@@ -78,7 +78,7 @@ const gimsProps = [
 	}
 ]
 
-const data = ["about me", "my projects", "art", "p1", "p2"] 
+const data = ["about me", "my projects", "art", "p1", "p2"]
 
 export default function Soguma({ height, width }) {
 
@@ -94,12 +94,12 @@ export default function Soguma({ height, width }) {
 	// console.log(getGimPropsById(3));
 	return (
 		<motion.div
-			className={`relative flex justify-center items-start ${height || "h-1/2"} ${width || "w-1/2"} bg-white bg-opacity-10 border-gray-900 shadow-2xl bg-blue-100`}
-			
+			className={`relative flex justify-center items-start ${height || "h-1/2"} ${width || "w-1/2"}  border-gray-900 shadow-2xl `}
+
 		>
 
 			{gimsProps.map((gim) => (
-				<Gim 
+				<Gim
 					key={gim.id}
 					gimId={gim.id}
 					data={data}

@@ -64,7 +64,7 @@ const gimsProps = [
 	}
 	,
 	{
-		id: 4, 
+		id: 4,
 		type: "hidden",
 		leftRight: -1,
 		next: 2,
@@ -104,6 +104,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 				// width : `${currentGim.properties.size}px`,
 				scale: prevGim.properties.scale,
 				zIndex: `${prevGim.properties.zIndex}`,
+				boxShadow : "0 0px 20px 8px rgba(255, 255, 255, 0.5)"
 			};
 
 		},
@@ -115,6 +116,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 			// w : `${currentGim.properties.size}px`,
 			scale: currentGim.properties.scale,
 			zIndex: `${currentGim.properties.zIndex}`,
+			boxShadow : "0 0px 20px 8px rgba(255, 255, 255, 0.3)",
 			transition: {
 				y: {
 					yoyo : Infinity,
@@ -134,6 +136,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 				// width : `${currentGim.properties.size}px`,
 				scale: nextGim.properties.scale,
 				zIndex: `${nextGim.properties.zIndex}`,
+				boxShadow : "0 0px 20px 8px rgba(255, 255, 255, 0.5)"
 			};
 		}
 	}
@@ -141,7 +144,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 	return (
 		// <AnimatePresence initial={false} custom={direction * -1}>
 			<motion.div
-				className={`absolute flex justify-center items-center ${"h-36" || "h-4"} ${"w-36" || "w-4"} rounded-full ${ "bg-pink-600"}`}
+				className={`absolute flex justify-center items-center ${"h-36" || "h-14"} ${"w-36" || "w-14"}  bg-red-400  rounded-full `}
 				key={steps}
 				variants={gimVariants}
 				initial="enter"
@@ -156,7 +159,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 					// y: [-10 , 10],
 					// x: [-10 , 10],
 					transition :{
-						duration : 0.5,
+						duration : 0.2,
 						// y: {
 						// 	yoyo : Infinity,
 						// 	duration: 1,
@@ -167,7 +170,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 						// 	duration: 1,
 						// },
 					},
-					boxShadow : "0 0px 20px 8px rgba(255, 255, 255, 0.2)"
+					boxShadow : "0 0px 60px 15px rgba(255, 255, 255, 0.5)"
 				}}
 				onMouseDown={() => nextPosition(currentGim.leftRight)}
 			><h1>

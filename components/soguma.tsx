@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useTransform, useViewportScroll, useMotionValue } from 'framer-motion'
 import Gim from './gim'
 import { wrap } from 'popmotion'
 
@@ -78,16 +78,17 @@ const gimsProps = [
 	}
 ]
 
-const data = ["about me", "my projects", "art", "p1", "p2"] 
+const data = ["about me", "my projects", "art", "p1", "p2"]
 
 export default function Soguma({ height, width }) {
-
+	const { scrollYProgress } = useViewportScroll();
+  const sogumaScale = useTransform(scrollYProgress, [0, 0.3, 1], [1, 0.2, 0]);
+	const sogumaYoffset = useTransform(scrollYProgress, [0, 0.3, 1], [0, -200, -500]);
 	const [[direction, steps], setRotate] = useState([0, 0]);
 
 	const currentIndex = wrap(0, 4, steps)
 
 	const nextPosition = (newDirection: number) => {
-		console.log("clickkkkkk");
 		setRotate([newDirection, steps + newDirection]);
 	}
 
@@ -113,9 +114,15 @@ export default function Soguma({ height, width }) {
 					},
 				},
 			}}
+			style={
+				{
+					scale : sogumaScale,
+					y : sogumaYoffset
+				}
+			}
 		>
 			{gimsProps.map((gim) => (
-				<Gim 
+				<Gim
 					key={gim.id}
 					gimId={gim.id}
 					data={data}

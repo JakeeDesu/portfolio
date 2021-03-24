@@ -41,22 +41,22 @@ export default function DarkSkyOpen({ height }) {
 
 	}
 	return (
-		<div className={`relative flex flex-col ${height} w-full bg-gray-900 overflow-hidden`} >
-				<div className={`relative h-1/3 w-full bg-gray-900`}>
+		<div className={`relative flex flex-col ${height} w-full bg-gradient-to-b from-gray-900 to-blue-400  overflow-hidden`} >
+				<div className={`relative h-1/3 w-full bg-gradient-to-b from-gray-900 to-blue-400 `}>
 					<motion.div
-						className="absolute top-1/4 -left-1/4 h-xfull w-3/4 rounded-fullp4   bg-blue-400"
+						className="absolute top-1/4 -left-1/4 h-xfull w-3/4 rounded-fullp4   bg-gray-900"
 						initial="hidden1"
 						animate="visible1"
 						variants={variants}
 					></motion.div>
 					<motion.div
-						className="absolute top-1/4 -right-1/4 h-2xfull w-3/4 rounded-fullp4  bg-blue-400"
+						className="absolute top-1/4 -right-1/4 h-2xfull w-3/4 rounded-fullp4  bg-gray-900"
 						initial="hidden2"
 						animate="visible2"
 						variants={variants}
 					></motion.div>
 				</div>
-				<div className="h-2/3 bg-blue-400 w-full">
+				<div className="h-2/3 bg-gray-900 w-full">
 
 				</div>
 		</div>

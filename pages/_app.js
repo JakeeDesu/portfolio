@@ -9,37 +9,38 @@ function MyApp({ Component, pageProps }) {
   const variants = {
     start : {
       scale: 2,
-      y : (Component === Home) ?  2000 : 1000,
+      y :  1000,
     },
     opened : {
       scale : 1,
       y : 0,
+      // top : 0,
       transition :{
         // type: "spring",
-        ease : "easeOut",
+        ease : "easeInOut",
         duration : 2,
-        // delay : 0.2
+        delay : 0.2
       }
     },
     exitPage: {
-      y : -1000
+      y : 1000
     }
   }
 
   return (
 
-    <div className={`${ Component == Home ? 'bg-gray-900' : ' bg-blue-400'} h-screen w-full overflow-hidden`}>
+    <motion.div className={`${ 'bg-gray-900'} w-full overflowHidden`}>
       <AnimatePresence >
-        <motion.div className="bg-gray-900" key={Component} initial="start" animate="opened" exit="exitPage"
+        <motion.div className="flex flex-coll justify-center items-center  bg-gray-900" key={Component} initial="start" animate="opened" exit="exitPage"
           variants={variants}
           transition={{
-            duration : 3
+            duration : 2
           }}
         >
           <Component {...pageProps} />
         </motion.div>
       </AnimatePresence>
-    </div>
+    </motion.div>
   )
 }
 

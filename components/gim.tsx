@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useTransform, useViewportScroll } from 'framer-motion'
 import { wrap } from 'popmotion'
 
 
@@ -64,7 +64,7 @@ const gimsProps = [
 	}
 	,
 	{
-		id: 4, 
+		id: 4,
 		type: "hidden",
 		leftRight: -1,
 		next: 2,
@@ -87,6 +87,8 @@ const getGimPropsById = (gimId: number) => {
 
 export default function Gim({data, gimId, direction, steps, nextPosition }) {
 
+	const { scrollYProgress } = useViewportScroll();
+  const yRange = useTransform(scrollYProgress, [0, 0.9], [0, 1]);
 	const btnRef = useRef(null);
 	const [animationDelay, setDelay] = useState(Math.random());
 
@@ -129,7 +131,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 				y: {
 					yoyo : Infinity,
 					duration: 1,
-					delay : animationDelay * 2
+					// delay : animationDelay * 2
 				},
 				type : "spring",
 				duration : 1.3
@@ -163,7 +165,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 					// duration : 4,
 				}}
 				whileHover={{
-					scale: currentGim.properties.scale * 1.2,
+					// scale: currentGim.properties.scale * 1.2,
 					boxShadow: '0 0px 20px 8px rgba(255, 255, 255, 0.5)',
 					transition :{
 						duration : 0.3,

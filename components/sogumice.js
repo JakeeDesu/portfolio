@@ -1,6 +1,10 @@
-import { motion } from 'framer-motion'
+import { motion, useTransform, useViewportScroll, useMotionValue  } from 'framer-motion'
 
 export default function Sogumice ({ height, width }) {
+
+	const { scrollYProgress } = useViewportScroll();
+	const sogumiceScale = useTransform(scrollYProgress, [0, 0.3, 1], [0, 0.2, 1]);
+	const sogumiceYoffset = useTransform(scrollYProgress, [0, 0.3, 1], [0, -200, 0]);
 
 	const sogumiceVariants = {
 		hidden: {
@@ -63,17 +67,19 @@ export default function Sogumice ({ height, width }) {
 			initial="hidden"
 			animate="visible"
 			variants={sogumiceVariants}
+
 		>
 			<motion.div className="flex justify-center items-center bg-blue-300  border-gray-900 border-4 h-24 w-24 rounded-full "
 
 			variants={circleVariants}
+
 			>
-				<motion.div className="-top-full bg-red-400 h-14 w-14 rounded-full shadow-glow"
+				{/*<motion.div className="-top-full bg-red-400 h-14 w-14 rounded-full shadow-glow"
 			initial="hidden"
 			animate="visible"
 			variants={gimVariants}
 				>
-				</motion.div>
+				</motion.div>*/}
 			</motion.div>
 			{/* <h1>Sogumice</h1> */}
 		</motion.div>

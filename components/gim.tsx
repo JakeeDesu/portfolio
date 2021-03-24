@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { wrap } from 'popmotion'
 
@@ -14,8 +14,8 @@ const gimsProps = [
 		properties: {
 			title: "main",
 			size: 100,
-			posi: { x: 40, y: 55 },
-			scale: 2,
+			posi: { x: 34, y: 55 },
+			scale: 1.8,
 			zIndex: 10,
 		}
 	},
@@ -28,8 +28,8 @@ const gimsProps = [
 		properties: {
 			title: "next",
 			size: 60,
-			posi: { x: 85, y: 45 },
-			scale: 1.2,
+			posi: { x: 75, y: 40 },
+			scale: 1,
 			zIndex: 10,
 
 		}
@@ -43,8 +43,8 @@ const gimsProps = [
 		properties: {
 			title: "previous",
 			size: 80,
-			posi: { x: 5, y: 12 },
-			scale: 1.1,
+			posi: { x: 15, y: 12 },
+			scale: 0.9,
 			zIndex: 0,
 		}
 	},
@@ -57,8 +57,8 @@ const gimsProps = [
 		properties: {
 			title: "...",
 			size: 50,
-			posi: { x: 60, y: 18 },
-			scale: 0.5,
+			posi: { x: 60, y: 8 },
+			scale: 0.3,
 			zIndex: 0,
 		}
 	}
@@ -73,7 +73,7 @@ const gimsProps = [
 			title: "hidden",
 			size: 40,
 			posi: { x: 40, y: 9 },
-			scale: 0.4,
+			scale: 0.1,
 			zIndex: 0,
 		}
 	}
@@ -87,7 +87,15 @@ const getGimPropsById = (gimId: number) => {
 
 export default function Gim({data, gimId, direction, steps, nextPosition }) {
 
+	const btnRef = useRef(null);
 	const [animationDelay, setDelay] = useState(Math.random());
+
+	useEffect(() => {
+			btnRef.current.setAttribute("disabled", "disabled");
+		// const timer = setTimeout(() => btnRef.current.setAttribute("disabled", "disabled") , 1300);
+		// return () => clearTimeout(timer);
+	}, [])
+	// btnRef.current.setAttribute("disabled", "disabled");
 
 	console.log("render gim : [" + gimId + "] random number : " + animationDelay);
 	const currentIndex = wrap(0, gimsProps.length, steps)
@@ -104,6 +112,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 				// width : `${currentGim.properties.size}px`,
 				scale: prevGim.properties.scale,
 				zIndex: `${prevGim.properties.zIndex}`,
+				backgroudColor : direction ? "red" : "blue",
 			};
 
 		},
@@ -114,7 +123,8 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 			// h : `${currentGim.properties.size}px`,
 			// w : `${currentGim.properties.size}px`,
 			scale: currentGim.properties.scale,
-			zIndex: `${currentGim.properties.zIndex}`,
+			zIndex:  direction > 0 && gimId == 2? 10 : `${currentGim.properties.zIndex}`,
+			backgroudColor : direction ? "red" : "blue",
 			transition: {
 				y: {
 					yoyo : Infinity,
@@ -122,7 +132,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 					delay : animationDelay * 2
 				},
 				type : "spring",
-				duration : 1
+				duration : 1.3
 			}
 		},
 		exit: (direction: number) => {
@@ -133,7 +143,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 				// heigth : `${currentGim.properties.size}px`,
 				// width : `${currentGim.properties.size}px`,
 				scale: nextGim.properties.scale,
-				zIndex: `${nextGim.properties.zIndex}`,
+				zIndex:  `${nextGim.properties.zIndex}`,
 			};
 		}
 	}
@@ -141,7 +151,8 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 	return (
 		// <AnimatePresence initial={false} custom={direction * -1}>
 			<motion.div
-				className={`absolute flex justify-center items-center ${"h-36" || "h-4"} ${"w-36" || "w-4"} rounded-full ${ "bg-pink-600"}`}
+				ref={btnRef}
+				className={`absolute flex justify-center items-center ${"h-36" || "h-4"} ${"w-36" || "w-4"} rounded-full ${ "bg-red-400"}`}
 				key={steps}
 				variants={gimVariants}
 				initial="enter"
@@ -153,10 +164,9 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 				}}
 				whileHover={{
 					scale: currentGim.properties.scale * 1.2,
-					// y: [-10 , 10],
-					// x: [-10 , 10],
+					boxShadow: '0 0px 20px 8px rgba(255, 255, 255, 0.5)',
 					transition :{
-						duration : 0.5,
+						duration : 0.3,
 						// y: {
 						// 	yoyo : Infinity,
 						// 	duration: 1,
@@ -167,7 +177,6 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 						// 	duration: 1,
 						// },
 					},
-					boxShadow : "0 0px 20px 8px rgba(255, 255, 255, 0.2)"
 				}}
 				onMouseDown={() => nextPosition(currentGim.leftRight)}
 			><h1>

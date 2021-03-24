@@ -94,10 +94,26 @@ export default function Soguma({ height, width }) {
 	// console.log(getGimPropsById(3));
 	return (
 		<motion.div
-			className={`relative flex justify-center items-start ${height || "h-1/2"} ${width || "w-1/2"} bg-white bg-opacity-10 border-gray-900 shadow-2xl bg-blue-100`}
-			
+			className={`relative flex justify-center items-start ${height || "h-1/2"} ${width || "w-1/2"}  border-gray-900 shadow-2xl  `}
+			initial="initial"
+			animate="standing"
+			variants={{
+				initial : {
+					y : -410,
+					x : 30,
+					scale : 0.1,
+				},
+				standing : {
+					y : 0,
+					x: 0,
+					scale: 1,
+					transition : {
+						duration : 1.5,
+						// x : { yoyo : Infinity, duration : 2},
+					},
+				},
+			}}
 		>
-
 			{gimsProps.map((gim) => (
 				<Gim 
 					key={gim.id}
@@ -108,9 +124,39 @@ export default function Soguma({ height, width }) {
 					nextPosition={nextPosition}
 				/>
 			))}
-			<motion.div className="relative  h-56 w-48 bg-white"
+			<motion.div className="relative h-60 w-44 bg-white"
+				initial="initial"
+				animate="standing"
+				variants={{
+					initial : {
+						scale : 0.2,
+						x:10,
+						// opacity : 0,
+						y : -100,
+						rotate : 20,
+						// transition : {
+						// 	duration : 2,
+						// }
+					},
+					standing : {
+						scale: 1.1,
+						// opacity : 1,
+						y : [-12, -25],
+						rotate : 5,
+						x : [-5 ,0],
+						transition : {
+							y : { yoyo : Infinity, duration : 1},
+							duration : 2,
+							// delay : 2.5,
+							x : { duration : 2},
+							scale : {type : 'spring', duration : 1}
+						},
+					},
+				}}
 				onMouseDown={() => nextPosition(-1)}
-			></motion.div>
+			>
+				<a href='/scene'>link</a>
+			</motion.div>
 		</motion.div>
 	);
 }

@@ -1,7 +1,7 @@
 export default function DescriptionCard() {
 
 	return (
-      <div className="w-full flex flex-col justify-start items-start  m-10 p-24 border-2 border-gray-500 rounded-sm shadow-glow text-white">
+      <div className="w-full flex flex-col justify-start items-start  m-10 p-24  border-gray-500 rounded-sm  text-white">
         <div className="flex flex-row justify-start items-center m-2 text-8xl">
           <h1>Title</h1>
         </div>

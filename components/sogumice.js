@@ -63,7 +63,7 @@ export default function Sogumice ({ height, width }) {
 		},
 	}
 	return (
-		<motion.div className={`flex justify-center items-center ${height || "h-1/2"} ${width || "w-1/2"} bg-white border-gray-900 rounded-full shadow-2xl`}
+		<motion.div className={`flex justify-center items-center ${height || "h-1/2"} ${width || "w-1/2"} bg-white border-gray-900 rounded-full shadow-glow`}
 			// initial="hidden"
 			// animate="visible"
 			// variants={sogumiceVariants}

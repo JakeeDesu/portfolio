@@ -15,19 +15,19 @@ export default function Scene () {
 	const sogumiceScale = useTransform(scrollYProgress, [0,0.2, 0.5, 1], [0.1, 0.5 ,2, 1]);
 	const sogumiceYoffset = useTransform(scrollYProgress, [0,0.2, 0.5, 1], [-500, 10, 0, -50]);
 	const skyOpacity = useTransform(scrollYProgress, [0,0.3, 0.5, 1], [0, 1, 1, 1]);
-	const sogumiceOpacity = useTransform(scrollYProgress, [0,0.2, 0.5, 1], [0,1, 1, 1]);
+	const sogumiceOpacity = useTransform(scrollYProgress, [0,0.2, 0.5, 1], [0,0.4, 1, 1]);
 
 	useEffect(() => {
 
 	}, [  ]);
-	
+
 	return (
 		<motion.div className="relative flex justify-center items-center h-screen w-full bg-gradient-to-t from-gray-900 to-blue-400 "
 		// style={
 		// 	{
 		// 		scale : sceneScale,
 		// 	}
-		// }			
+		// }
 		>
 			<motion.div className="absolute top-0 left-0 h-full w-full"
 			>

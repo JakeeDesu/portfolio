@@ -29,9 +29,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
 
-    <motion.div className={`${ 'bg-gray-900'} w-full overflowHidden`}>
+    <motion.div className={`${ 'bg-gray-900'} w-full overflow-hidden `}>
       <AnimatePresence >
-        <motion.div className="flex flex-coll justify-center items-center  bg-gray-900" key={Component} initial="start" animate="opened" exit="exitPage"
+        <motion.div className="flex flex-coll justify-center items-center w-full   bg-gray-900" key={Component} initial="start" animate="opened" exit="exitPage"
           variants={variants}
           transition={{
             duration : 2

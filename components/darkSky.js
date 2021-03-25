@@ -6,13 +6,13 @@ export default function DarkSky({ openSky, height }) {
 	// const x2 = useMotionValue(0)
 
 	const { scrollYProgress } = useViewportScroll();
-	const skyScale = useTransform(scrollYProgress, [0, 1], [2, 1]);
-	const sky1offsetX = useTransform(scrollYProgress, [0, 0, 1], [500, 0]);
+	const skyScale = useTransform(scrollYProgress, [0, 0.5, 1], [2, 1, 1]);
+	const sky1offsetX = useTransform(scrollYProgress, [0, 0.5, 1], [900,0, 0]);
 	// const y1= useTransform(scrollYProgress, [0, 1], [50, 0]);
 	// const y2 = useTransform(scrollYProgress, [0, 1], [50, 0]);
 	// const x1p = useTransform(sky1offsetX[0], (x) => `${x}%`);
 	// const x2p = useTransform(sky2offsetX[0], (x) => `${x}%`);
-	const sky2offsetX = useTransform(scrollYProgress, [0, 1], [-500, 0]);
+	const sky2offsetX = useTransform(scrollYProgress, [0, 0.5, 1], [-900,0,  0]);
 	const variants = {
 
 		hidden1: {
@@ -42,7 +42,7 @@ export default function DarkSky({ openSky, height }) {
 
 	}
 	return (
-		<div className={`relative flex flex-col ${height} w-full overflow-hidden bg-red-100`} >
+		<div className={`relative flex flex-col ${height} w-full overflow-hidden`} >
 			<div className="h-1/4 w-full bg-gray-900"></div>
 			<div className={`relative h-1/2 w-full`}>
 				<motion.div

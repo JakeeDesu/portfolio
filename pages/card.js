@@ -9,7 +9,7 @@ import DescriptionCard from '../components/descriptionCard'
 export default function Card () {
 
 	return (
-		<div className="flex flex-col w-full h-auto bg-gray-900">
+		<div className="flex flex-col w-full h-auto bg-gradient-to-b from-gray-900 to-gray-900">
 			<div className="flex flex-row justify-between h-screen w-full p-5">
 				<DescriptionCard/>
 				<ImageDisplayer/>

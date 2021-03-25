@@ -1,7 +1,11 @@
 {
   "/_app": "pages/_app.js",
+  "/api/hello": "pages/api/hello.js",
+  "/card": "pages/card.html",
+  "/home": "pages/home.html",
+  "/": "pages/index.html",
+  "/scene": "pages/scene.html",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/scene": "pages/scene.js",
-  "/home": "pages/home.js"
+  "/404": "pages/404.html"
 }

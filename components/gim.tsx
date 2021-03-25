@@ -104,7 +104,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 	const currentGim = getGimPropsById(gimId);
 	const prevGim = (direction < 0) ? getGimPropsById(currentGim.prev) : getGimPropsById(currentGim.next);
 	const nextGim = (direction < 0) ? getGimPropsById(currentGim.next) : getGimPropsById(currentGim.prev);
-	const gimVariants = {
+	const gimvariants = {
 		enter: (direction: number) => {
 			return {
 				y: 0,
@@ -113,8 +113,8 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 				// heigth : `${currentGim.properties.size}px`,
 				// width : `${currentGim.properties.size}px`,
 				scale: prevGim.properties.scale,
-				zIndex: `${prevGim.properties.zIndex}`,
-				backgroudColor : direction ? "red" : "blue",
+				zIndex: prevGim.properties.zIndex,
+				// backgroudColor : direction ? "red" : "blue",
 			};
 
 		},
@@ -125,8 +125,8 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 			// h : `${currentGim.properties.size}px`,
 			// w : `${currentGim.properties.size}px`,
 			scale: currentGim.properties.scale,
-			zIndex:  direction > 0 && gimId == 2? 10 : `${currentGim.properties.zIndex}`,
-			backgroudColor : direction ? "red" : "blue",
+			zIndex:  direction > 0 && gimId == 2? 10 : currentGim.properties.zIndex,
+			// backgroudColor : direction ? "red" : "blue",
 			transition: {
 				y: {
 					yoyo : Infinity,
@@ -145,7 +145,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 				// heigth : `${currentGim.properties.size}px`,
 				// width : `${currentGim.properties.size}px`,
 				scale: nextGim.properties.scale,
-				zIndex:  `${nextGim.properties.zIndex}`,
+				zIndex:  nextGim.properties.zIndex,
 			};
 		}
 	}
@@ -154,9 +154,9 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 		// <AnimatePresence initial={false} custom={direction * -1}>
 			<motion.div
 				ref={btnRef}
-				className={`absolute flex justify-center items-center ${"h-36" || "h-4"} ${"w-36" || "w-4"} rounded-full ${ "bg-red-400"}`}
+				className={`absolute flex justify-center items-center ${"h-36" || "h-4"} ${"w-36" || "w-4"} rounded-full bg-red-400`}
 				key={steps}
-				variants={gimVariants}
+				variants={gimvariants}
 				initial="enter"
 				animate="standing"
 				custom={direction}
@@ -182,7 +182,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 				}}
 				onMouseDown={() => nextPosition(currentGim.leftRight)}
 			><h1>
-				{currentData.current}
+				{currentData ? currentData.current : ""}
 			</h1>
 			</motion.div>
 		// </AnimatePresence>

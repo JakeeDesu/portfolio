@@ -3,8 +3,8 @@ import { motion, useTransform, useViewportScroll, useMotionValue  } from 'framer
 export default function Sogumice ({ height, width }) {
 
 	const { scrollYProgress } = useViewportScroll();
-	const sogumiceScale = useTransform(scrollYProgress, [0, 0.3, 1], [0, 0.2, 1]);
-	const sogumiceYoffset = useTransform(scrollYProgress, [0, 0.3, 1], [0, -200, 0]);
+	const sogumiceScale = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.2, 1]);
+	const sogumiceYoffset = useTransform(scrollYProgress, [0, 0.5, 1], [-100, 0, 0]);
 
 	const sogumiceVariants = {
 		hidden: {
@@ -64,9 +64,16 @@ export default function Sogumice ({ height, width }) {
 	}
 	return (
 		<motion.div className={`flex justify-center items-center ${height || "h-1/2"} ${width || "w-1/2"} bg-white border-gray-900 rounded-full shadow-2xl`}
-			initial="hidden"
-			animate="visible"
-			variants={sogumiceVariants}
+			// initial="hidden"
+			// animate="visible"
+			// variants={sogumiceVariants}
+			// style={
+			// 	{
+			// 		scale : sogumiceScale,
+			// 		top : sogumiceYoffset,
+			// 		// opacity : sogumiceOpacity
+			// 	}
+			// }
 
 		>
 			<motion.div className="flex justify-center items-center bg-blue-300  border-gray-900 border-4 h-24 w-24 rounded-full "

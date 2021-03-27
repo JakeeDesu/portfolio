@@ -3,6 +3,7 @@ export const theme = {
 	light : {
 		backgroundColor : 'bg-sogumaBlue',
 		shadowsColor : 'from-black to-sogumaPurple ',
+		gimHolder : ' h-44 w-44 border-gray-900 border-4 h-44 w-44',
 		gims: {
       style : 'bg-white ',
       text : 'text-black'
@@ -26,10 +27,12 @@ export const theme = {
       bottomEyeLash : ' border-t-2 border-gray-100',
       bottomEyeLash2 : ' border-2 border-gray-100 bg-white',
     }
+
 	},
 	dark : {
 		backgroundColor : 'bg-gray-900 ',
 		shadowsColor : 'from-gray-900 to-blue-400 ',
+		gimHolder : ' h-44 w-44 border-gray-300 border-2 h-44 w-44 shadow-glow',
     gims: {
       style : ' bg-black border-blue-400 border-4 shadow-softglow ',
       text : 'text-white'

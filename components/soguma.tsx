@@ -4,6 +4,7 @@ import Gim from './gim'
 import { wrap } from 'popmotion'
 import SogumaEye from './sugumaEye'
 import { theme } from './theme'
+// import svgImage from '../public/rightHand.svg'
 
 const gimsProps = [
 	{
@@ -125,7 +126,10 @@ export default function Soguma({ height, width, setOnDisplay, onDisplay, darkThe
 					}
 				}
 			>
-						<div className="absolute left-0 bottom-0 flex justify-center items-center h-44 w-44 m-6  rounded-full border-gray-300 border-2">
+						<div className={`absolute left-0 bottom-0 flex justify-center items-center m-6 rounded-full ${ darkTheme ? theme.dark.gimHolder : theme.light.gimHolder}`}>
+								<div className="relative w-full h-full" >
+										<img className="absolute -top-28 -right-28" src="/rightHand.svg"/>
+								</div>
 						</div>
 				{gimsProps.map((gim) => (
 					<Gim
@@ -140,7 +144,7 @@ export default function Soguma({ height, width, setOnDisplay, onDisplay, darkThe
 						darkTheme={darkTheme}
 					/>
 				))}
-				<motion.div className={`relative flex justify-center items-start h-60 w-44 ${ darkTheme ? theme.dark.soguma.body : theme.light.soguma.body}`}
+				<motion.div className={`relative flex justify-center items-start h-60 w-44  ${ darkTheme ? theme.dark.soguma.body : theme.light.soguma.body}`}
 					initial="initial"
 					animate="standing"
 					variants={{

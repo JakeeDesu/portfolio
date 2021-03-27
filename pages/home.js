@@ -4,6 +4,7 @@ import DarkSky from '../components/darkSky'
 import Sogumice from '../components/sogumice'
 import LoloIcon from '../components/loloIcon'
 import EyeSwitch from '../components/eyeSwitch'
+import MiniSoso from '../components/miniSoso'
 
 import Scene from './scene'
 import Card from './card'
@@ -15,7 +16,7 @@ import { theme } from '../components/theme'
 
 
 export default function Home () {
-	const [darkTheme, setDarkTheme] = useState(false);
+	const [darkTheme, setDarkTheme] = useState(true);
 	const [onDisplay, setOnDisplay] = useState({displayState : false, itemId : -1, type : 0})
 	const [animateGim, setAnimateGim] = useState(false);
 	const { scrollYProgress } = useViewportScroll();
@@ -40,6 +41,19 @@ export default function Home () {
 	}
 	return (
 		<motion.div className={`relative flex flex-col w-full h-auto overflow-hidden`} style={{ scrollBehavior : "smooth"}}>
+			<img className="absolute z-50 h-16 w-16 top-28 right-28" src="/soso3.svg"/>
+			<div className="absolute z-50 top-100 left-1/4" >
+				<MiniSoso height="h-16" width="w-16" />
+			</div>
+			<div className="absolute z-50 top-96 left-2/4" >
+				<MiniSoso height="h-24" width="w-24" />
+			</div>
+			<div className="absolute z-50 top-150 left-3/4" >
+				<MiniSoso height="h-12" width="w-12" />
+			</div>
+			<div className="absolute z-50 bottom-100 right-1/4" >
+				<MiniSoso height="h-10" width="w-10" />
+			</div>
 			<nav className="fixed z-50 top-20 right-8 h-40 w-24 ">
 				<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
 			</nav>

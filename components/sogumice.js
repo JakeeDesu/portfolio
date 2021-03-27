@@ -63,7 +63,7 @@ export default function Sogumice ({ height, width }) {
 		},
 	}
 	return (
-		<motion.div className={`flex justify-center items-center ${height || "h-1/2"} ${width || "w-1/2"} bg-white border-gray-900 rounded-full shadow-glow`}
+		<motion.div className={`flex justify-center items-center ${height || "h-1/2"} ${width || "w-1/2"} bg-blue-200 border-gray-900 rounded-full `}
 			// initial="hidden"
 			// animate="visible"
 			// variants={sogumiceVariants}
@@ -76,7 +76,7 @@ export default function Sogumice ({ height, width }) {
 			// }
 
 		>
-			<motion.div className="flex justify-center items-center bg-blue-300  border-gray-900 border-4 h-24 w-24 rounded-full "
+			<motion.div className="flex justify-center items-center bg-gray-900  border-gray-900 border-4 h-24 w-24 rounded-full "
 
 			variants={circleVariants}
 

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
+import { theme } from './theme'
 
-export default function DarkSkyOpen({ height }) {
+export default function DarkSkyOpen({ height, darkTheme }) {
 
 	const variants = {
 
@@ -41,22 +42,22 @@ export default function DarkSkyOpen({ height }) {
 
 	}
 	return (
-		<div className={`relative flex flex-col ${height} w-full bg-gradient-to-b from-gray-900 to-blue-400  overflow-hidden`} >
-				<div className={`relative h-1/3 w-full bg-gradient-to-b from-gray-900 to-blue-400 `}>
+		<div className={`relative flex flex-col ${height} w-full bg-gradient-to-b  ${ darkTheme && theme.dark.shadowsColor || theme.light.shadowsColor }  overflow-hidden`} >
+				<div className={`relative h-1/3 w-full bg-gradient-to-b ${ darkTheme && theme.dark.shadowsColor || theme.light.shadowsColor } `}>
 					<motion.div
-						className="absolute top-1/4 -left-1/4 h-xfull w-3/4 rounded-fullp4   bg-gray-900"
+						className={`absolute top-1/4 -left-1/4 h-xfull w-3/4 rounded-fullp4   ${ darkTheme && theme.dark.backgroundColor || theme.light.backgroundColor }`}
 						initial="hidden1"
 						animate="visible1"
 						variants={variants}
 					></motion.div>
 					<motion.div
-						className="absolute top-1/4 -right-1/4 h-2xfull w-3/4 rounded-fullp4  bg-gray-900"
+						className={`absolute top-1/4 -right-1/4 h-2xfull w-3/4 rounded-fullp4  ${ darkTheme && theme.dark.backgroundColor || theme.light.backgroundColor }`}
 						initial="hidden2"
 						animate="visible2"
 						variants={variants}
 					></motion.div>
 				</div>
-				<div className="h-2/3 bg-gray-900 w-full">
+				<div className={`h-2/3 w-full ${ darkTheme && theme.dark.backgroundColor || theme.light.backgroundColor }`}>
 
 				</div>
 		</div>

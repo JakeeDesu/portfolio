@@ -1,10 +1,34 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: colors.black,
+      white: colors.white,
+      gray: colors.trueGray,
+      indigo: colors.indigo,
+      red: colors.rose,
+      yellow: colors.amber,
+      blue: colors.blue,
+      sogumaBlue: '#A1EDF0',//'#53b8f7',
+      sogumaSky: '#263459',
+      sogumaPink : '#d055b4',
+      sogumaGreen : '#B9DB79' ,//'#cdc733',//,'#9ede73',//
+      sogumaYellow : '#f7ea00',
+      sogumaOrange : '#FFBA6E',//'#e48900',
+      sogumaRed : '#be0000',
+      sogumaBrown : '#966c3b',
+      sogumaEarthy : '#d0af84',
+      sogumaPurple : '#A063DB',
+    },
     spacing: {
       '2xfull': '200%',
       'xfull': '150%',
+      '0': "0rem",
       '0.5': "0.125rem",
       '1'	: "0.25rem",
       '1.5': "0.375rem",
@@ -59,8 +83,14 @@ module.exports = {
       'fullp5': '75%',
     },
     boxShadow : {
+      'softglow': '0 0px 20px 8px rgba(255, 255, 255, 0.2)',
+      'soft2glow': '0 0px 60px 15px rgba(255, 255, 255, 0.2)',
       'glow': '0 0px 20px 8px rgba(255, 255, 255, 0.5)',
       '2glow': '0 0px 60px 15px rgba(255, 255, 255, 0.5)',
+      'softdark': '0 0px 20px 8px rgba(0, 0, 0, 0.2)',
+      'soft2dark': '0 0px 60px 15px rgba(0, 0, 0, 0.2)',
+      'dark': '0 0px 20px 8px rgba(0, 0, 0, 0.5)',
+      '2dark': '0 0px 60px 15px rgba(0, 0, 0, 0.5)',
     },
     extend: {},
   },

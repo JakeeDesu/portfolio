@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useTransform, useViewportScroll, useMotionValue } from 'framer-motion'
 import { wrap } from 'popmotion'
+import { theme } from './theme'
 
 
 
@@ -85,39 +86,29 @@ const getGimPropsById = (gimId: number) => {
 
 
 
-export default function Gim({data, gimId, direction, steps, nextPosition }) {
-
-	const x = useMotionValue(0)
-	const y = useMotionValue(0)
+export default function Gim({data, gimId, direction, steps, nextPosition, setOnDisplay, onDisplay, darkTheme }) {
 
 	const { scrollYProgress } = useViewportScroll();
-  const yRange = useTransform(scrollYProgress, [0, 0.9], [0, 1]);
-	const btnRef = useRef(null);
-	const [animationDelay, setDelay] = useState(Math.random());
+ 	const yRange = useTransform(scrollYProgress, [0, 0.9], [0, 1]);
 
-	useEffect(() => {
-			btnRef.current.setAttribute("disabled", "disabled");
-		// const timer = setTimeout(() => btnRef.current.setAttribute("disabled", "disabled") , 1300);
-		// return () => clearTimeout(timer);
-	}, [])
-	// btnRef.current.setAttribute("disabled", "disabled");
+  const [animationDelay, setDelay] = useState(Math.random());
+
 
 	console.log("render gim : [" + gimId + "] random number : " + animationDelay);
-	const currentIndex = wrap(0, gimsProps.length, steps)
+
 	const currentGim = getGimPropsById(gimId);
 	const prevGim = (direction < 0) ? getGimPropsById(currentGim.prev) : getGimPropsById(currentGim.next);
 	const nextGim = (direction < 0) ? getGimPropsById(currentGim.next) : getGimPropsById(currentGim.prev);
+
+
 	const gimvariants = {
 		enter: (direction: number) => {
 			return {
 				y: 0,
 				top: `${prevGim.properties.posi.y}%`,
 				left: `${prevGim.properties.posi.x}%`,
-				// heigth : `${currentGim.properties.size}px`,
-				// width : `${currentGim.properties.size}px`,
 				scale: prevGim.properties.scale,
 				zIndex: prevGim.properties.zIndex,
-				// backgroudColor : direction ? "red" : "blue",
 			};
 
 		},
@@ -125,11 +116,8 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 			y: [-10 , 10],
 			top: `${currentGim.properties.posi.y}%`,
 			left: `${currentGim.properties.posi.x}%`,
-			// h : `${currentGim.properties.size}px`,
-			// w : `${currentGim.properties.size}px`,
 			scale: currentGim.properties.scale,
 			zIndex:  direction > 0 && gimId == 2? 10 : currentGim.properties.zIndex,
-			// backgroudColor : direction ? "red" : "blue",
 			transition: {
 				y: {
 					yoyo : Infinity,
@@ -140,60 +128,69 @@ export default function Gim({data, gimId, direction, steps, nextPosition }) {
 				duration : 1.3
 			}
 		},
+		display : {
+			// position : 'fixed',
+				y :  0,
+				top : '',
+				left : '0%',
+				bottom : '0%',
+				transition : {
+					type: "spring",
+					duration : 0.8
+				}
+		},
 		exit: (direction: number) => {
 			return {
 				y : 0,
 				top: `${nextGim.properties.posi.y}%`,
 				left: `${nextGim.properties.posi.x}%`,
-				// heigth : `${currentGim.properties.size}px`,
-				// width : `${currentGim.properties.size}px`,
 				scale: nextGim.properties.scale,
 				zIndex:  nextGim.properties.zIndex,
 			};
 		}
 	}
 
-
 	const currentData = getGimCurrenData(data, gimId, steps, direction);
+
 	return (
-		// <AnimatePresence initial={false} custom={direction * -1}>
 			<motion.div
-				ref={btnRef}
-				className={`absolute flex justify-center items-center ${"h-36" || "h-4"} ${"w-36" || "w-4"} rounded-full bg-red-400`}
+				className={`absolute  flex justify-center items-center ${"h-36" || "h-4"} ${"w-36" || "w-4"} m-10 rounded-full ${ darkTheme ? theme.dark.gims.style : theme.light.gims.style}`}
 				key={steps}
 				variants={gimvariants}
 				initial="enter"
-				animate="standing"
+				animate={onDisplay.displayState && gimId == 0 ? "display" : "standing"}
 				custom={direction}
-				transition={{
-					// type: "spring",
-					// duration : 4,
+				drag
+				dragConstraints={{
+					top : 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
 				}}
-
 				whileHover={{
 					// scale: currentGim.properties.scale * 1.2,
-					boxShadow: '0 0px 20px 8px rgba(255, 255, 255, 0.5)',
+					// boxShadow: '0 0px 30px 2px rgb(255, 255, 255, 0.3)',
 					transition :{
 						duration : 0.3,
-						// y: {
-						// 	yoyo : Infinity,
-						// 	duration: 1,
-						// 	delay : animationDelay * 2
-						// },
-						// x: {
-						// 	yoyo : Infinity,
-						// 	duration: 1,
-						// },
 					},
 				}}
-				onMouseDown={() => nextPosition(currentGim.leftRight)}
-			><h1>
-				{currentData ? currentData.current : ""}
-			</h1>
+				onMouseUp={() => gimId == 0 ? setOnDisplay(!onDisplay.displayState, fixGimsDataIndex(data, steps + 1), 0): nextPosition(currentGim.leftRight)}
+			>
+
+				<div className="relative flex justify-center items-center w-full h-full" >
+					{!darkTheme && <div className="absolute -top-1/4 -left-1/4 h-32 w-32 bg-white rounded-full"></div>}
+					{!darkTheme && <div className="absolute top-1/4 -right-1/4 h-16 w-16 bg-white rounded-full"></div>}
+					<h1 className={`absolute top-1/4 mt-4 ${ darkTheme ? theme.dark.gims.text : theme.light.gims.text}`}>{currentData ? currentData.current : ""}</h1>
+				</div>
 			</motion.div>
-		// </AnimatePresence>
 	);
 }
+
+
+
+
+
+
 
 function fixGimsDataIndex(data, steps) {
 	let fixedIndex = steps < 0 ? ((data.length) + (steps % data.length)) % data.length  : steps % data.length;

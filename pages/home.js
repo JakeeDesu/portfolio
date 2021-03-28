@@ -45,19 +45,11 @@ export default function Home () {
 			<div className="absolute z-50 top-100 left-1/4" >
 				<MiniSoso height="h-16" width="w-16" />
 			</div>
-			<div className="absolute z-50 top-96 left-2/4" >
-				<MiniSoso height="h-24" width="w-24" />
-			</div>
-			<div className="absolute z-50 top-150 left-3/4" >
-				<MiniSoso height="h-12" width="w-12" />
-			</div>
-			<div className="absolute z-50 bottom-100 right-1/4" >
-				<MiniSoso height="h-10" width="w-10" />
-			</div>
 			<nav className="fixed z-50 top-20 right-8 h-40 w-24 ">
 				<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
 			</nav>
-			<div className={`h-screen w-full `}>
+			<div className={`relative h-screen w-full `}>
+								<Card onDisplay={onDisplay} darkTheme={darkTheme} displayGim={displayGim}/>
 				<motion.div className="relative flex justify-center items-center h-full w-full">
 					<div className="absolute top-0 left-0 h-full w-full">
 						<DarkSkyOpen height="lg:h-full h-1/2 md:h-2/3" darkTheme={darkTheme}/>
@@ -66,9 +58,7 @@ export default function Home () {
 						<Soguma height="h-full"  width="w-full" setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme}/>
 					</motion.div>
 				</motion.div>
-
 			</div>
-			<Card onDisplay={onDisplay} darkTheme={darkTheme}/>
 		</motion.div>
 	)
 }

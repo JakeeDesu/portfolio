@@ -1,7 +1,8 @@
 // import DarkSky from '../components/darkSky'
 // import Sogumice from '../components/sogumice'
 // import LoloIcon from '../components/loloIcon'
-import { motion } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
+import { motion, useViewportScroll  } from 'framer-motion'
 import ImageDisplayer from '../components/imageDisplayer'
 import DescriptionCard from '../components/descriptionCard'
 // import Image from 'next/Image'
@@ -20,34 +21,56 @@ const theme = {
 	}
 }
 
-export default function Card ({ onDisplay, darkTheme }) {
+export default function Card ({ onDisplay, darkTheme, displayGim }) {
 
+	const carRef = useRef(false)
+	const { scrollYProgress } = useViewportScroll()
+	// const yRnage = useTransform(useViewportScroll, [0, 1], window.)
 	const variants = {
 		hidden : {
-			height : 0
+			zIndex : 0,
 		},
 		showsUp : {
-			boxShadow : ['0 0px 0px 0px rgba(255, 255, 255, 0.5)', '0 0px 20px 8px rgba(255, 255, 255, 0.5)'],
-			height:"auto"
+			zIndex : 50,
 		}
 	}
+
+	const variants2 = {
+		hidden : {
+			opacity : 0,
+		},
+		showsUp : {
+			opacity : 1,
+			// boxShadow : '0 0px 20px 8px rgba(255, 255, 255, 0.5)',
+			height:"auto",
+		}
+	}
+
 	return (
 		<motion.div
-			className="flex flex-col w-full h-auto bg-blue-100"
+			className="absolute flex flex-col justify-center items-center w-full h-full top-0 "
 			initial={false}
 			animate={ onDisplay.displayState ? "showsUp" : "hidden"}
 			variants={variants}
 			transition={{
-				boxShadow : {
-					duration : 3,
-				},
+
 				duration : 2
 			}}
 		>
-			<div className="flex flex-row justify-between w-full p-5">
+			<motion.div className="flex flex-row justify-between w-full h-auto p-5"
+				variants={variants2}
+				transition={{
+					boxShadow : {
+						duration : 3,
+					},
+					delay: 2,
+					duration : 2
+				}}
+				>
+				<motion.div className="h-100 w-100 text-white" onTap={(event, info) => displayGim()}>click me</motion.div>
 				<DescriptionCard/>
 				<ImageDisplayer/>
-			</div>
+			</motion.div>
 		</motion.div>
 	)
 }

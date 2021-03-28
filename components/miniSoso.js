@@ -7,6 +7,7 @@ const miniSosoTheme = {
   eyelash : 'absolute w-3/4 h-3/4 top-1/4 '
 
 }
+const scaleFactor =  Math.random() * 2;
 
 const eyelashVariants={
   start : {
@@ -28,31 +29,40 @@ const eyelashVariants={
     }
   }
 }
-const scaleFactor = Math.random();
+
 const variants={
   start : {
-    opacity : scaleFactor,
-    scale : scaleFactor,
-    y: 500 * scaleFactor,
-    x: 500 * scaleFactor,
-    transition :{
-      delay : Math.random() * 2,
+    opacity : 0,
+    scale : 0,
+    transition : {
+      delay: 3,
+      duration : 10
     }
   },
   animation : {
-    opacity : scaleFactor,
-    scale : scaleFactor * 0.8,
-    y: [500 * scaleFactor, -100 * scaleFactor, 1000 * scaleFactor],
-    x: [500 * scaleFactor, -1000 * scaleFactor, 400 * scaleFactor],
+    opacity : [0.5, 0.2],
+    scale : 0.5,
+    boxShadow : "0 0px 30px 5px rgba(255, 255, 255, 0.2)",
+    y: [0, 40 * 2, -5 * 2, 5 * 2, 0],
+    x: [0, 5 * 2, 1 * 2, -1 * 2, 0],
     transition : {
-      x : {
-        yoyo : Infinity,
+      opacity : {
+        repeat : Infinity,
+        repeatType : 'mirror',
         duration : 3
       },
+      x : {
+        type : 'spring',
+        repeat : Infinity,
+        repeatType : 'mirror',
+        duration : 5
+      },
       y : {
-        yoyo : Infinity,
-        duration : 3
-      }
+        type : 'spring',
+        repeat : Infinity,
+        repeatType : 'mirror',
+        duration : 5
+      },
     }
   }
 }
@@ -61,7 +71,7 @@ const hairVariants={
     y: 0,
     x: 0,
     transition :{
-      delay : Math.random() * 2,
+      delay : 2,
     }
   },
   animation : {
@@ -84,7 +94,7 @@ const eyeVariants={
     y: 0,
     x: 0,
     transition :{
-      delay : Math.random() * 2,
+      delay : 2,
     }
   },
   animation : {
@@ -107,10 +117,25 @@ export default function MiniSoso({ height, width }) {
 
 
   return (
-    <div className={`relative flex justify-center ${height} ${width}`}
+    <motion.div className={`relative flex justify-center rounded-full ${height} ${width}`}
       variants={variants}
       initial="start"
       animate="animation"
+      drag
+      dragConstraints={{
+        top : 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+      }}
+      // whileHover={{
+      //   opacity : 1,
+      //   scale : 1.2,
+      //   transition : {
+      //     duration : 0.3
+      //   }
+      //   // boxShadow : '0 0px 20px 8px rgba(255, 255, 255, 0.5)',
+      // }}
     >
       <motion.img className={miniSosoTheme.head} src="/soso-head.svg"
       />
@@ -129,6 +154,6 @@ export default function MiniSoso({ height, width }) {
         initial="start"
         animate="animation"
       />
-    </div>
+    </motion.div>
   );
 }

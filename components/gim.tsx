@@ -17,7 +17,7 @@ const gimsProps = [
 			size: 100,
 			posi: { x: 34, y: 55 },
 			scale: 1.8,
-			zIndex: 50,
+			zIndex: 100,
 		}
 	},
 	{
@@ -117,7 +117,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition, setOnD
 			top: `${currentGim.properties.posi.y}%`,
 			left: `${currentGim.properties.posi.x}%`,
 			scale: currentGim.properties.scale,
-			zIndex:  direction > 0 && gimId == 2? 10 : currentGim.properties.zIndex,
+			zIndex: (direction > 0 && gimId == 2) ? 10 : currentGim.properties.zIndex,
 			transition: {
 				y: {
 					yoyo : Infinity,
@@ -174,7 +174,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition, setOnD
 						duration : 0.3,
 					},
 				}}
-				onMouseUp={() => gimId == 0 ? setOnDisplay(!onDisplay.displayState, fixGimsDataIndex(data, steps + 1), 0): nextPosition(currentGim.leftRight)}
+				onTap={(event, info) => gimId == 0 ? setOnDisplay(!onDisplay.displayState, fixGimsDataIndex(data, steps + 1), 0): nextPosition(currentGim.leftRight)}
 			>
 
 				<div className="relative flex justify-center items-center w-full h-full" >

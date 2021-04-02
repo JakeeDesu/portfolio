@@ -1,11 +1,11 @@
 import '../styles/globals.css'
 import { motion, AnimatePresence } from 'framer-motion'
-import Home from '../pages/home'
+import Home from '.'
 
 
 function MyApp({ Component, pageProps }) {
 
-  console.log("page component ::::::::::: ", Component)
+  // console.log("page component ::::::::::: ", Component)
   const variants = {
     start : {
       scale: 2,
@@ -23,15 +23,22 @@ function MyApp({ Component, pageProps }) {
       }
     },
     exitPage: {
-      y : 1000
+      scale : 1,
+      y : -1000,
+      transition :{
+        // type: "spring",
+        ease : "easeInOut",
+        duration : 2,
+        // delay : 0.2
+      }
     }
   }
 
   return (
 
-    <motion.div className={`${ 'bg-gray-900'} w-full overflow-hidden `}>
-      <AnimatePresence >
-        <motion.div className="flex flex-coll justify-center items-center w-full   bg-gray-900" key={Component} initial="start" animate="opened" exit="exitPage"
+    <motion.div className={`${ 'bg-black'} w-full overflow-hidden `}>
+      <AnimatePresence  key={Component === Home ? 1 : 0 } >
+        <motion.div className="flex flex-coll justify-center items-center w-full  bg-black" key={Component === Home ? 1 : 0 } initial="start" animate="opened" exit="exitPage"
           variants={variants}
           transition={{
             duration : 2

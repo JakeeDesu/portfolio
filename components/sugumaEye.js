@@ -29,7 +29,7 @@ const pplVariants= {
 	}
 }
 
-export default function SogumaEye ({ height, width, darkTheme }) {
+export default function SogumaEye ({  darkTheme }) {
 
 
 
@@ -67,16 +67,26 @@ export default function SogumaEye ({ height, width, darkTheme }) {
 	}
 
 	return (
-		<motion.div className={`relative flex justify-center items-center ${height} ${width} rounded-full overflow-hidden ${ darkTheme ? theme.dark.soguma.eye.eyeball : theme.light.soguma.eye.eyeball}  m-2 `}
+		<motion.div className={`relative flex justify-center items-center  overflow-hidden ${ darkTheme ? theme.dark.soguma.eye.eyeball : theme.light.soguma.eye.eyeball}  m-2 `}
+		
+			initial={{
+				opacity : 0,
+			}}
 			animate={{
-				opacity : 1
+				y : [-10, -10, -10, -6, -5, -5, -5, 8, 8],
+				// rotate : [0, 0, 0, -5, -3,10, 11, 10, 10, 5],
+				opacity : 1,
+				transition : {
+					y : { yoyo : Infinity, duration : 5},
+					// rotate : { duration : 5 , repeat: Infinity},
+				},
 			}}
 
 		>
-			<motion.div className={`relative flex justify-center items-center rounded-full ${height} ${width}  ${darkTheme ? theme.dark.soguma.eye.iris : theme.light.soguma.eye.iris}`} variants={pplVariants} animate="animate">
-				<div className={`rounded-full ${darkTheme ? theme.dark.soguma.eye.pupil : theme.light.soguma.eye.pupil}`} ></div>
-				<div className={`absolute top-2/4 right-1/4 rounded-full ${darkTheme ? theme.dark.soguma.eye.reflection1 : theme.light.soguma.eye.reflection1}`} ></div>
-				<div className={`absolute top-2 right-2 rounded-full ${darkTheme ? theme.dark.soguma.eye.reflection2 : theme.light.soguma.eye.reflection2}`} ></div>
+			<motion.div className={`relative flex justify-center items-center   ${darkTheme ? theme.dark.soguma.eye.iris : theme.light.soguma.eye.iris}`} variants={pplVariants} animate="animate">
+				<div className={` ${darkTheme ? theme.dark.soguma.eye.pupil : theme.light.soguma.eye.pupil}`} ></div>
+				<div className={`absolute top-2/4 right-1/4  ${darkTheme ? theme.dark.soguma.eye.reflection1 : theme.light.soguma.eye.reflection1}`} ></div>
+				<div className={`absolute top-2 right-2  ${darkTheme ? theme.dark.soguma.eye.reflection2 : theme.light.soguma.eye.reflection2}`} ></div>
 			</motion.div>
 			<motion.div className={`absolute w-full h-1/2 top-full overflow-hidden ${darkTheme ? theme.dark.soguma.eye.eyelashes : theme.light.soguma.eye.eyelashes}`} variants={upperEyeVariants} animate="animate">
 				{/* <div className="absolute w-full h-full rounded-full -bottom-1/2 border-2" ></div> */}

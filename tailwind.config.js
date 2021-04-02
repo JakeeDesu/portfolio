@@ -81,10 +81,13 @@ module.exports = {
       'fullp3': '65%',
       'fullp4': '70%',
       'fullp5': '75%',
+      '0' : '0%'
     },
     boxShadow : {
+      'none' : 'none',
       'softglow': '0 0px 20px 8px rgba(255, 255, 255, 0.2)',
-      'soft2glow': '0 0px 60px 15px rgba(255, 255, 255, 0.2)',
+      'soft2glow': '0 0px 60px 5px rgba(255, 255, 255, 0.1)',
+      'soft1glow': '0 0px 20px 2px rgba(255, 255, 255, 0.1)',
       'glow': '0 0px 20px 8px rgba(255, 255, 255, 0.5)',
       '2glow': '0 0px 60px 15px rgba(255, 255, 255, 0.5)',
       'softdark': '0 0px 20px 8px rgba(0, 0, 0, 0.2)',
@@ -92,10 +95,20 @@ module.exports = {
       'dark': '0 0px 20px 8px rgba(0, 0, 0, 0.5)',
       '2dark': '0 0px 60px 15px rgba(0, 0, 0, 0.5)',
     },
-    extend: {},
+    extend: {
+      inset: {
+        '1/6': '0.166666%',
+        '2/6': '0.333333%',
+        '3/6': '0.5%',
+        '4/6': '0.666666%',
+        '5/6': '0.833333%',
+        'wzna': '0.39%'
+       }
+    },
   },
   variants: {
     extend: {},
   },
   plugins: [],
 }
+//0.166666

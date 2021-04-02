@@ -1,188 +1,109 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence, useTransform, useViewportScroll, useMotionValue } from 'framer-motion'
-import { wrap } from 'popmotion'
+import SogumaTitle from './sogumaTitle'
+import { motion } from 'framer-motion'
 import { theme } from './theme'
+import { gimsProps, fromProps } from './gimProps' // gims props
 
 
 
-const gimsProps = [
-	{
-		id: 0, // needed to fix " key for map, organize layer order "
-		type: "main",
-		leftRight: 0,
-		next: 1,
-		prev: 2,
-		properties: {
-			title: "main",
-			size: 100,
-			posi: { x: 34, y: 55 },
-			scale: 1.8,
-			zIndex: 100,
-		}
-	},
-	{
-		id: 1,
-		type: "next",
-		leftRight: 1,
-		next: 3,
-		prev: 0,
-		properties: {
-			title: "next",
-			size: 60,
-			posi: { x: 75, y: 40 },
-			scale: 1,
-			zIndex: 10,
-
-		}
-	},
-	{
-		id: 2,
-		type: "previous",
-		leftRight: -1,
-		next: 0,
-		prev: 4,
-		properties: {
-			title: "previous",
-			size: 80,
-			posi: { x: 15, y: 12 },
-			scale: 0.9,
-			zIndex: 0,
-		}
-	},
-	{
-		id: 3,
-		type: "onHold",
-		leftRight: 1,
-		next: 4,
-		prev: 1,
-		properties: {
-			title: "...",
-			size: 50,
-			posi: { x: 60, y: 8 },
-			scale: 0.3,
-			zIndex: 0,
-		}
-	}
-	,
-	{
-		id: 4,
-		type: "hidden",
-		leftRight: -1,
-		next: 2,
-		prev: 3,
-		properties: {
-			title: "hidden",
-			size: 40,
-			posi: { x: 40, y: 9 },
-			scale: 0.1,
-			zIndex: 0,
-		}
-	}
-]
 
 const getGimPropsById = (gimId: number) => {
 	return gimsProps.filter((gimProps) => gimProps.id == gimId).pop() || gimsProps[0];
 }
 
-
-
-export default function Gim({data, gimId, direction, steps, nextPosition, setOnDisplay, onDisplay, darkTheme }) {
-
-	const { scrollYProgress } = useViewportScroll();
- 	const yRange = useTransform(scrollYProgress, [0, 0.9], [0, 1]);
-
-  const [animationDelay, setDelay] = useState(Math.random());
-
-
-	console.log("render gim : [" + gimId + "] random number : " + animationDelay);
+function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay, darkTheme }) {
 
 	const currentGim = getGimPropsById(gimId);
-	const prevGim = (direction < 0) ? getGimPropsById(currentGim.prev) : getGimPropsById(currentGim.next);
-	const nextGim = (direction < 0) ? getGimPropsById(currentGim.next) : getGimPropsById(currentGim.prev);
+	const prevGim = (direction < 0 && !onDisplay.displayState) ? getGimPropsById(currentGim.prev) : getGimPropsById(currentGim.next);
+	const animationKey = onDisplay.displayState ? steps + 1 : steps;
 
 
-	const gimvariants = {
-		enter: (direction: number) => {
+	const variants = {
+		enter: (onDisplay: any) => {
 			return {
 				y: 0,
-				top: `${prevGim.properties.posi.y}%`,
-				left: `${prevGim.properties.posi.x}%`,
-				scale: prevGim.properties.scale,
+				top: onDisplay.displayState ? `${currentGim.properties.posi.y}%` : (onDisplay.displayOff ? `${fromProps.properties.posi.y}%` : `${prevGim.properties.posi.y}%`),
+				left: onDisplay.displayState ? `${currentGim.properties.posi.x}%` : (onDisplay.displayOff ? `${fromProps.properties.posi.x}%` : `${prevGim.properties.posi.x}%`),
+				scale: onDisplay.displayState ? currentGim.properties.scale : (onDisplay.displayOff ? fromProps.properties.scale : prevGim.properties.scale),
 				zIndex: prevGim.properties.zIndex,
 			};
 
 		},
-		standing: {
-			y: [-10 , 10],
-			top: `${currentGim.properties.posi.y}%`,
-			left: `${currentGim.properties.posi.x}%`,
+		standing: (onDisplay: any) => {
+			return {
+				y: onDisplay.displayState ? 0 : [-10, 10],
+				top: onDisplay.displayState ? `${fromProps.properties.posi.y}%` : `${currentGim.properties.posi.y}%`,
+				left: onDisplay.displayState ? `${fromProps.properties.posi.x}%` : `${currentGim.properties.posi.x}%`,
+				scale: onDisplay.displayState ? fromProps.properties.scale : currentGim.properties.scale,
+				zIndex: onDisplay.displayState ? fromProps.properties.zIndex : (gimId == 2 || onDisplay.displayOff ? 0 : currentGim.properties.zIndex),
+				transition: {
+					y: {
+						yoyo: Infinity,
+						duration: 1,
+					},
+					type: "spring",
+					duration: 1.3
+				}
+			};
+		},
+		display: {
 			scale: currentGim.properties.scale,
-			zIndex: (direction > 0 && gimId == 2) ? 10 : currentGim.properties.zIndex,
+			boxShadow: 'none',
+			y: 0,
+			top: '',
+			left: '50%',
+			bottom: '0%',
 			transition: {
-				y: {
-					yoyo : Infinity,
-					duration: 1,
-					// delay : animationDelay * 2
-				},
-				type : "spring",
-				duration : 1.3
+				type: "spring",
+				duration: 0.8
 			}
 		},
-		display : {
-			// position : 'fixed',
-				y :  0,
-				top : '',
-				left : '0%',
-				bottom : '0%',
-				transition : {
-					type: "spring",
-					duration : 0.8
-				}
+		hover: (onDisplay: any) => {
+			if (onDisplay.displayState)
+				return {
+					opacity: 1,
+					scale: currentGim.properties.scale * 1.2,
+					transition: {
+						duration: 0.3
+					}
+				};
 		},
-		exit: (direction: number) => {
-			return {
-				y : 0,
-				top: `${nextGim.properties.posi.y}%`,
-				left: `${nextGim.properties.posi.x}%`,
-				scale: nextGim.properties.scale,
-				zIndex:  nextGim.properties.zIndex,
-			};
-		}
 	}
 
 	const currentData = getGimCurrenData(data, gimId, steps, direction);
 
-	return (
-			<motion.div
-				className={`absolute  flex justify-center items-center ${"h-36" || "h-4"} ${"w-36" || "w-4"} m-10 rounded-full ${ darkTheme ? theme.dark.gims.style : theme.light.gims.style}`}
-				key={steps}
-				variants={gimvariants}
-				initial="enter"
-				animate={onDisplay.displayState && gimId == 0 ? "display" : "standing"}
-				custom={direction}
-				drag
-				dragConstraints={{
-					top : 0,
-					left: 0,
-					right: 0,
-					bottom: 0,
-				}}
-				whileHover={{
-					// scale: currentGim.properties.scale * 1.2,
-					// boxShadow: '0 0px 30px 2px rgb(255, 255, 255, 0.3)',
-					transition :{
-						duration : 0.3,
-					},
-				}}
-				onTap={(event, info) => gimId == 0 ? setOnDisplay(!onDisplay.displayState, fixGimsDataIndex(data, steps + 1), 0): nextPosition(currentGim.leftRight)}
-			>
+	const clickGim = () => {
+		if (gimId == 0)
+			setOnDisplay(!onDisplay.displayState, fixGimsDataIndex(data, steps + 1), 0)
+		else if (!(onDisplay.displayState))
+			moveGims(currentGim.leftRight)
+		return false;
+	}
 
-				<div className="relative flex justify-center items-center w-full h-full" >
-					{!darkTheme && <div className="absolute -top-1/4 -left-1/4 h-32 w-32 bg-white rounded-full"></div>}
-					{!darkTheme && <div className="absolute top-1/4 -right-1/4 h-16 w-16 bg-white rounded-full"></div>}
-					<h1 className={`absolute top-1/4 mt-4 ${ darkTheme ? theme.dark.gims.text : theme.light.gims.text}`}>{currentData ? currentData.current : ""}</h1>
-				</div>
-			</motion.div>
+	return (
+		<motion.div
+			className={`absolute  md:flex justify-center items-center hidden ${darkTheme && theme.dark.gims.style(false) || theme.light.gims.style}`}
+			key={animationKey}
+			variants={variants}
+			initial="enter"
+			animate="standing"
+			custom={onDisplay}
+			drag
+			dragConstraints={{
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
+			}}
+			whileHover="hover"
+			onMouseDown={() => clickGim()}
+		>
+
+			<SogumaTitle
+				darkTheme={darkTheme}
+				text={currentData ? currentData.current : ""}
+			/>
+
+		</motion.div>
 	);
 }
 
@@ -193,7 +114,7 @@ export default function Gim({data, gimId, direction, steps, nextPosition, setOnD
 
 
 function fixGimsDataIndex(data, steps) {
-	let fixedIndex = steps < 0 ? ((data.length) + (steps % data.length)) % data.length  : steps % data.length;
+	let fixedIndex = steps < 0 ? ((data.length) + (steps % data.length)) % data.length : steps % data.length;
 	return (fixedIndex);
 }
 
@@ -201,35 +122,37 @@ function getGimCurrenData(data, gimId, moveSteps, moveDirection) {
 	switch (gimId) {
 		case 0: // main gim
 			return {
-				current : data[fixGimsDataIndex(data, moveSteps + 1)],
-				next : data[fixGimsDataIndex(data, moveSteps + 2)],
-				prev : data[fixGimsDataIndex(data, moveSteps )],
+				current: data[fixGimsDataIndex(data, moveSteps + 1)],
+				next: data[fixGimsDataIndex(data, moveSteps + 2)],
+				prev: data[fixGimsDataIndex(data, moveSteps)],
 			};
 		case 1: // next gim
 			return {
-				current : data[fixGimsDataIndex(data, moveSteps + 2)],
-				next : data[fixGimsDataIndex(data, moveSteps + 3)],
-				prev : data[fixGimsDataIndex(data, moveSteps + 1)],
+				current: data[fixGimsDataIndex(data, moveSteps + 2)],
+				next: data[fixGimsDataIndex(data, moveSteps + 3)],
+				prev: data[fixGimsDataIndex(data, moveSteps + 1)],
 			};
 		case 2: // prev gim
 			return {
-				current : data[fixGimsDataIndex(data, moveSteps)],
-				next : data[fixGimsDataIndex(data, moveSteps - 1)],
-				prev : data[fixGimsDataIndex(data, moveSteps + 1)],
+				current: data[fixGimsDataIndex(data, moveSteps)],
+				next: data[fixGimsDataIndex(data, moveSteps - 1)],
+				prev: data[fixGimsDataIndex(data, moveSteps + 1)],
 			};
 		case 3: // onHold gim
 			return {
-				current : data[fixGimsDataIndex(data, moveSteps + 3)],
-				next : data[fixGimsDataIndex(data, moveSteps + 4)],
-				prev : data[fixGimsDataIndex(data, moveSteps + 2)],
+				current: data[fixGimsDataIndex(data, moveSteps + 3)],
+				next: data[fixGimsDataIndex(data, moveSteps + 4)],
+				prev: data[fixGimsDataIndex(data, moveSteps + 2)],
 			};
 		case 4: // hidden gim
 			let updatedIndex = (moveDirection < 0) ? moveSteps : moveSteps + 3;
 			return {
-				current : data[fixGimsDataIndex(data, moveSteps + 4)],
-				next : data[fixGimsDataIndex(data, moveSteps + 5)],
-				prev : data[fixGimsDataIndex(data, updatedIndex)],
+				current: data[fixGimsDataIndex(data, moveSteps + 4)],
+				next: data[fixGimsDataIndex(data, moveSteps + 5)],
+				prev: data[fixGimsDataIndex(data, updatedIndex)],
 			};
-		}
+	}
 	return (0);
 }
+
+export default Gim

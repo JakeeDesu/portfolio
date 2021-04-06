@@ -58,7 +58,7 @@ function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay,
 			}
 		},
 		hover: (onDisplay: any) => {
-			if (onDisplay.displayState)
+			if (!(onDisplay.displayState || onDisplay.displayOff))
 				return {
 					opacity: 1,
 					scale: currentGim.properties.scale * 1.2,

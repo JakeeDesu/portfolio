@@ -2,7 +2,7 @@
 export const theme = {
 	light : {
 		backgroundColor : 'bg-blue-400',
-		shadowsColor : 'bg-blue-100 border-gray-900 border-2',
+		shadowsColor : 'bg-blue-100',
 		gimHolder : '  h-44 w-44',
 		gims: {
       style : 'bg-white border-gray-900 border-2 lg:h-36 lg:w-36 md:h-28 md:w-28 h-16 w-16 ',
@@ -10,7 +10,7 @@ export const theme = {
     },
     soguma : {
       text : 'text-black text-center my-4 font-lg ',
-      body : 'bg-blue-200 border-gray-900 border-2  md:h-60 md:w-60  w-28 h-28',
+      body : 'bg-blue-200 border-gray-900 border-2  md:h-64 md:w-64  w-28 h-28',
       eye : {
         eyeball : 'bg-white  md:h-28 md:w-28 h-16 w-16 border-gray-900 border-2',
         iris : 'bg-sogumaRed border-black border-8 md:h-28 md:w-28 h-16 w-16',
@@ -40,7 +40,7 @@ export const theme = {
     },
     soguma : {
       text : 'text-white text-center text-2xl h-1/4 ',
-      body : (displayState) => {return `bg-black md:h-72 md:w-72 w-28 h-28 rounded-full ${!displayState && "shadow-soft2glow"} `},//'bg-black border-blue-400 border-4 shadow-soft2glow'
+      body : (displayState) => {return `bg-black md:h-72 md:w-72 w-28 h-28 rounded-full ${!displayState && ""} `},//'bg-black border-blue-400 border-4 shadow-soft2glow'
       eye : {
         eyeball : 'bg-gray-900 m-5 rounded-full md:h-36 md:w-36 h-20 w-20',
         iris : 'bg-yellow-400 border-black border-8 rounded-full md:h-36 md:w-36 h-20 w-20',

@@ -21,11 +21,14 @@ module.exports = {
       sogumaYellow : '#f7ea00',
       sogumaOrange : '#FFBA6E',//'#e48900',
       sogumaRed : '#be0000',
+      sogumaRed2 : "#7b113a",
+      sogumaRed3 : "#630000",
       sogumaBrown : '#966c3b',
       sogumaEarthy : '#d0af84',
       sogumaPurple : '#A063DB',
     },
     spacing: {
+      'halffull': '40%',
       '2xfull': '200%',
       'xfull': '150%',
       '0': "0rem",
@@ -51,6 +54,7 @@ module.exports = {
       '24': "6rem",
       '28': "7rem",
       '32': "8rem",
+      '34': "7rem",
       '36': "9rem",
       '40': "10rem",
       '44': "11rem",
@@ -102,7 +106,8 @@ module.exports = {
         '3/6': '0.5%',
         '4/6': '0.666666%',
         '5/6': '0.833333%',
-        'wzna': '0.39%'
+        'wzna': '0.39%',
+        '34': "7rem",
        }
     },
   },

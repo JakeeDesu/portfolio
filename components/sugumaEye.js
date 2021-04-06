@@ -82,7 +82,7 @@ export default function SogumaEye ({ onDisplay, darkTheme }) {
 				opacity : 1,
 				transition : {
 					y : { yoyo : Infinity, duration : 5},
-					duration : 0.3
+					duration : 1
 					// rotate : { duration : 5 , repeat: Infinity},
 				},
 			}}
@@ -103,11 +103,11 @@ export default function SogumaEye ({ onDisplay, darkTheme }) {
 			</motion.div>
 			<motion.div
 				className={`absolute w-full h-1/2 top-full overflow-hidden ${darkTheme ? theme.dark.soguma.eye.eyelashes : theme.light.soguma.eye.eyelashes}`}
-				variants={upperEyeVariants} initial={false} animate="animate">
+				variants={upperEyeVariants} initial="animate" animate="animate">
 			</motion.div>
 			<motion.div
 				className={`absolute w-full h-1/2 bottom-full overflow-hidden ${darkTheme ? theme.dark.soguma.eye.eyelashes : theme.light.soguma.eye.eyelashes}`}
-				variants={bottomEyeVariants} initial={false} animate="animate">
+				variants={bottomEyeVariants} initial="animate" animate="animate">
 			</motion.div>
 		</motion.div>
 	);

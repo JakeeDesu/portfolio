@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { motion, useTransform, useViewportScroll, useMotionValue } from 'framer-motion'
 
 
-export default function Home({ darkTheme, changeTheme}) {
+export default function Home({ about, repos, dataLoading, darkTheme, changeTheme}) {
 	const [onDisplay, setOnDisplay] = useState({ displayState: true, displayOff : false, itemId: -1, type: -1 })
 	const { scrollYProgress } = useViewportScroll();
 	const sogumaScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0.9, 0.8, 0.1]);
@@ -32,14 +32,10 @@ export default function Home({ darkTheme, changeTheme}) {
 		const newdisplayOff = onDisplay.displayState && !displayState ? true : false;
 		setOnDisplay({ ...onDisplay, displayState, displayOff : newdisplayOff, itemId, type });
 	}
-
-	const selectTitle = (type) => {
-
-		setOnDisplay({...onDisplay, type : type})
-	}
-
+	
 	return (
 		<motion.div className={`relative flex flex-col w-full h-auto overflow-hidden`}>
+{		console.log(dataLoading ? "not fetched yet" : "about :" , about, "repos : ", repos )}
 			<div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
 				<h1>onDisplay : {onDisplay.displayState ? "true" : "false"}</h1>
 				<h1>displayOff : {onDisplay.displayOff ? "true" : "false"}</h1>
@@ -68,12 +64,32 @@ export default function Home({ darkTheme, changeTheme}) {
 							}
 						}
 					>
-						<SogumaVx setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} selectTitle={selectTitle} />
+						<SogumaVx repos={repos} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 					</motion.div>
 				</motion.div>
 			</motion.div>
-			{/* <MainBoard onDisplay={onDisplay} /> */}
+			<MainBoard onDisplay={onDisplay} about={about} repos={repos} />
 			{/* {onDisplay.displayState && <Card onDisplay={onDisplay} darkTheme={darkTheme} displayGim={displayGim} />} */}
 		</motion.div>
 	)
+}
+
+export const getStaticProps = async () => {
+
+	const res1 = await fetch('https://api.github.com/users/JakeeDesu');
+	const res2 = await fetch('https://api.github.com/users/JakeeDesu/repos');
+	
+	const about = await res1.json();
+	const repos = await res2.json();
+	// console.log( brutData )
+	// const loading = brutData ? true : false;
+	// if (fetchedData)
+	// {
+
+	// }
+	const dataLoading = (about && repos) === undefined ? true : false; 
+	
+	return {
+		props : { about, repos, dataLoading  }
+	}
 }

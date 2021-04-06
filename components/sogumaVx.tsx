@@ -8,6 +8,7 @@ import SogumaEye from './sugumaEye'
 import { theme } from './theme'
 import { gimsProps } from './gimProps' // gims props
 
+
 const variants = {
 	initial: (onDisplay: any) => {
 		if (onDisplay.displayState)
@@ -46,33 +47,46 @@ const variants = {
 }
 
 
-const data = ["art", "about me", "p1",]
+const data = ["art", "about me", "p1"]
 
-export default function SogumaVx({ setOnDisplay, onDisplay, darkTheme, selectTitle }) {
+export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay, darkTheme }) {
 
 	const [[direction, steps], setRotate] = useState([0, 0]);
 	const [clickOff, setClickOff] = useState(true);
+	const [projects, setProjects] = useState([]);
 
 
 	const moveGims = (newDirection: number) => {
 		setRotate([newDirection, steps + newDirection]);
 	}
-
+	// console.log(dataLoading ? "fetched DATA : ": fetchedData )
+	useEffect(() => {
+		const initProjects = []
+		repos.map((project) => {
+			initProjects.push(project.name);
+		})
+		console.log(" projects d ZAAAAAAAAAAAAAAAAAAB: ", initProjects)
+		setProjects(initProjects)
+	}, [repos])
 	const onSogumaClick = () => {
 			switch (onDisplay.type) {
 				case  -1 : // none state
-					setOnDisplay(true, onDisplay.itemId, 0)
+					if ( onDisplay.itemId !== -1)
+						setOnDisplay(false, onDisplay.itemId, 2)
+					else
+						setOnDisplay(true, onDisplay.itemId, 0)
 					break;
 				case  0 : // menu state
 					setOnDisplay(true, onDisplay.itemId, -1)
 					break;
 				case  1 : // about state
-						if (!onDisplay.displayOff)
-							onDisplay.displayState ? setOnDisplay(false, -1, 1) : moveGims(-1);
+					setOnDisplay(true, onDisplay.itemId, 0)
 					break;
-				case  2 :
+				case  2 : //  case 1) gims on display | case 2) a project on display 
+					if (!onDisplay.displayOff)
+						onDisplay.displayState ? setOnDisplay(false, onDisplay.itemId, -1) : (onDisplay.itemId !== -1 ? (setOnDisplay(true, onDisplay.itemId, 2)) : (setOnDisplay(true, onDisplay.itemId, -1)));
 					break;
-				case  3 :
+				case  3 : 
 					break;
 			}
 	}
@@ -86,11 +100,12 @@ export default function SogumaVx({ setOnDisplay, onDisplay, darkTheme, selectTit
 			custom={onDisplay}
 			variants={variants}
 		>
-			{onDisplay.type === 3 && gimsProps.map((gim) => (
+			{	console.log(" waaaiiiiiiiiiiiting projects : ", projects) }
+			{onDisplay.type === 2 && gimsProps.map((gim) => (
 				<Gim
 					key={gim.id}
 					gimId={gim.id}
-					data={data}
+					data={projects}
 					direction={direction}
 					steps={steps}
 					moveGims={moveGims}
@@ -99,7 +114,7 @@ export default function SogumaVx({ setOnDisplay, onDisplay, darkTheme, selectTit
 					darkTheme={darkTheme}
 				/>
 			))}
-			<Menu onDisplay={onDisplay}  selectTitle={selectTitle}/>
+			{ onDisplay.type !=2 && <Menu onDisplay={onDisplay}  setOnDisplay={setOnDisplay}/>}
 			<Soguma
 				onDisplay={onDisplay}
 				darkTheme={darkTheme}
@@ -108,3 +123,4 @@ export default function SogumaVx({ setOnDisplay, onDisplay, darkTheme, selectTit
 		</motion.div>
 	);
 }
+  

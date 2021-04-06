@@ -76,6 +76,7 @@ export const gimsProps = [
 
 export const fromProps ={
 	properties: {
+		opacity : 0,
 		title: "start",
 		size: 40,
 		posi: { x: 45, y: 0 },

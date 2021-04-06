@@ -20,6 +20,7 @@ function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay,
 	const variants = {
 		enter: (onDisplay: any) => {
 			return {
+				opacity : 1,
 				y: 0,
 				top: onDisplay.displayState ? `${currentGim.properties.posi.y}%` : (onDisplay.displayOff ? `${fromProps.properties.posi.y}%` : `${prevGim.properties.posi.y}%`),
 				left: onDisplay.displayState ? `${currentGim.properties.posi.x}%` : (onDisplay.displayOff ? `${fromProps.properties.posi.x}%` : `${prevGim.properties.posi.x}%`),
@@ -30,11 +31,12 @@ function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay,
 		},
 		standing: (onDisplay: any) => {
 			return {
+				opacity : 1,
 				y: onDisplay.displayState ? 0 : [-10, 10],
 				top: onDisplay.displayState ? `${fromProps.properties.posi.y}%` : `${currentGim.properties.posi.y}%`,
 				left: onDisplay.displayState ? `${fromProps.properties.posi.x}%` : `${currentGim.properties.posi.x}%`,
 				scale: onDisplay.displayState ? fromProps.properties.scale : currentGim.properties.scale,
-				zIndex: onDisplay.displayState ? fromProps.properties.zIndex : (gimId == 2 || onDisplay.displayOff ? 0 : currentGim.properties.zIndex),
+				zIndex: onDisplay.displayState ? fromProps.properties.zIndex : (gimId == 2 || onDisplay.displayOff ? 10 : currentGim.properties.zIndex),
 				transition: {
 					y: {
 						yoyo: Infinity,
@@ -72,10 +74,15 @@ function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay,
 	const currentData = getGimCurrenData(data, gimId, steps, direction);
 
 	const clickGim = () => {
+		
 		if (gimId == 0)
-			setOnDisplay(!onDisplay.displayState, fixGimsDataIndex(data, steps + 1), 0)
+			setOnDisplay(!onDisplay.displayState, fixGimsDataIndex(data, steps + 1), onDisplay.type)
 		else if (!(onDisplay.displayState))
+		{
+			console.log("turn");
 			moveGims(currentGim.leftRight)
+		}
+		console.log("turn fail");
 		return false;
 	}
 
@@ -94,7 +101,7 @@ function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay,
 				right: 0,
 				bottom: 0,
 			}}
-			whileHover="hover"
+			// whileHover="hover"
 			onMouseDown={() => clickGim()}
 		>
 

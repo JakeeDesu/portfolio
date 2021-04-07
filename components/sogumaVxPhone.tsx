@@ -18,7 +18,7 @@ const variants = {
 			}
 		else
 			return {
-				y: -100,//-410,
+				y: 0,//-410,
 				scale: 0.7,//0.1,
 			};
 	},
@@ -26,7 +26,7 @@ const variants = {
 		if (onDisplay.displayState)
 			return {
 				scale: [1, 0.7],
-				y: [0, -100],
+				y: [0, 0],
 				transition: {
 					scale: { delay: 0.3, duration: 1 },
 					y: { delay: 0.3, duration: 1 }
@@ -65,7 +65,7 @@ export default function SogumaVxPhone({ repos ,fetchedData , setOnDisplay, onDis
 		repos.map((project) => {
 			initProjects.push(project.name);
 		})
-		console.log(" projects d ZAAAAAAAAAAAAAAAAAAB: ", initProjects)
+		// console.log(" projects d ZAAAAAAAAAAAAAAAAAAB: ", initProjects)
 		setProjects(initProjects)
 	}, [repos])
 	const onSogumaClick = () => {
@@ -92,27 +92,13 @@ export default function SogumaVxPhone({ repos ,fetchedData , setOnDisplay, onDis
 	const onDisplayKey = onDisplay.displayState ? 1 : 0;
 	return (
 		<motion.div
-			className="md:hidden relative flex flex-col justify-start items-center h-full w-full"
+			className="md:hidden relative flex flex-col justify-start items-center h-auto w-full"
 			key={onDisplayKey}
 			initial="initial"
 			animate="standing"
 			custom={onDisplay}
 			variants={variants}
 		>
-			{	console.log(" waaaiiiiiiiiiiiting projects : ", projects) }
-			{/* {onDisplay.type === 2 && gimsProps.map((gim) => (
-				<Gim
-					key={gim.id}
-					gimId={gim.id}
-					data={projects}
-					direction={direction}
-					steps={steps}
-					moveGims={moveGims}
-					setOnDisplay={setOnDisplay}
-					onDisplay={onDisplay}
-					darkTheme={darkTheme}
-				/>
-			))} */}
 			{ onDisplay.type !=2 && <MenuPhone onDisplay={onDisplay}  setOnDisplay={setOnDisplay}/>}
 			<SogumaPhone
 				onDisplay={onDisplay}

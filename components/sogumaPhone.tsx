@@ -3,8 +3,8 @@ import SogumaEye from './sugumaEye'
 import { theme } from './theme'
 
 const darkStanding = {
-	scale: [1.02, 1],
-	y: [-12, -25],
+	scale: [1.01, 1],
+	y: [-2, -5],
 	rotate: [0, 0, 0, -20, -13, 20, 21, 20, 20, 15, 0, 0, 0, -25, -17],
 	x: [-5, 0],
 	boxShadow : "0 0 60px 1px rgba(255,255,255,0.1)",
@@ -19,7 +19,7 @@ const darkStanding = {
 
 const whiteStanding = {
 	scale: 1,
-	y: [-12, -25],
+	y: [-2, -5],
 	rotate: 0,
 	x: 0,
 	transition: {

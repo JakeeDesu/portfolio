@@ -38,26 +38,24 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 	
 	return (
 		<motion.div className={`relative flex flex-col w-full h-auto overflow-hidden`}>
-{		console.log(dataLoading ? "not fetched yet" : "about :" , about, "repos : ", repos )}
-			{/* <div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
+{/* {		console.log(dataLoading ? "not fetched yet" : "about :" , about, "repos : ", repos )}
+			<div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
 				<h1>onDisplay : {onDisplay.displayState ? "true" : "false"}</h1>
 				<h1>displayOff : {onDisplay.displayOff ? "true" : "false"}</h1>
 				<h1>itemId : {onDisplay.itemId}</h1>
 				<h1>type : {onDisplay.type}</h1>
 				<Link href="/home" ><a>none existing url</a></Link>
-			</div> */}
-			{/* <nav className="fixed z-50 top-20 right-8 lg:h-40 lg:w-24 md:h-32 md:w-20 h-20 w-16">
+			</div>
+			<nav className="fixed z-50 top-20 right-8 lg:h-40 lg:w-24 md:h-32 md:w-20 h-20 w-16">
 				<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
 			</nav> */}
-			{/* <nav className="relative md:hidden z-50 h-16 w-full">
-			</nav> */}
-			<motion.div className={`relative flex flex-col justify-start lg:h-screen h-auto  w-full ${theme.dark.backgroundColor}`}
+			<motion.div className={`relative flex flex-col justify-start lg:h-screen h-auto m-0 p-0  w-full ${theme.dark.backgroundColor}`}
 			>
-				<motion.div className="relative flex justify-center items-center lg:h-full md:h-screen h-half w-full">
+				<motion.div className="relative flex justify-center items-center lg:h-full md:h-screen h-100 w-full">
 					<div className="absolute top-0 left-0 lg:h-full md:h-full h-full w-full ">
-						<DarkSkyOpen height="lg:h-full h-full md:h-3/5 w-full" darkTheme={darkTheme} />
+						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
 					</div>
-					<motion.div className="absolute z-20 flex justify-center items-start md:h-3/6 lg:h-4/6 md:top-40 top-1/4 h-full lg:top-1/4 w-full"
+					<motion.div className="absolute z-20 flex justify-center items-start md:h-100 lg:h-100 md:top-1/4 top-1/4 h-full lg:top-1/3 w-full"
 						style={ onDisplay.displayState ? 
 							{
 								scale: sogumaScale,
@@ -75,7 +73,7 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 				<MainBoard onDisplay={onDisplay} about={about} repos={repos} />
 				<BoardPhone onDisplay={onDisplay} about={about} repos={repos} />
 			</motion.div>
-			{/* {onDisplay.displayState && <Card onDisplay={onDisplay} darkTheme={darkTheme} displayGim={displayGim} />} */}
+			 {/* {onDisplay.displayState && <Card onDisplay={onDisplay} darkTheme={darkTheme} displayGim={displayGim} />} */}
 		</motion.div>
 	)
 }

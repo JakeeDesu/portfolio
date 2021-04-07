@@ -43,15 +43,16 @@ const BoardPhone = ({ onDisplay, about, repos }) => {
 	}, [onDisplay.itemId])
 	console.log(data)
 	return (
-		<AnimatePresence>
-			{ onDisplay.type === 1 && <motion.div
-				className="lg:absolute relative text-white md:hidden flex flex-col lg:flex-row lg:justify-evenly lg:items-end z-10 h-screen w-full lg:w-full "
-				initial="appear"
-				animate="onBoard"
-				exit="disappear"
-				variants={boardVariants}
-			>
+		<motion.div
+			className="lg:absolute relative text-white md:hidden lg:hidden flex flex-col lg:flex-row lg:justify-evenly lg:items-end z-10 md:z-0 h-screen w-full lg:w-full "
+			variants={boardVariants}
+		>
+			<AnimatePresence>
 				<motion.div className="flex w-full lg:h-5/6 flex-auto lg:w-1/2 top-0 lg:px-5 "
+					initial="appear"
+					animate="onBoard"
+					exit="disappear"
+
 				>
 					<div className="flex flex-col  justify-start items-center h-full w-full  p-10 lg:mr-5">
 						<div className="w-full flex flex-row justify-center items-center  p-1 " >
@@ -60,15 +61,15 @@ const BoardPhone = ({ onDisplay, about, repos }) => {
 								className="flex flex-col justify-center lg:items-start items-center mx-7 "
 								style={{
 									y: boardYoffset,
-									scale : boardScale,
+									scale: boardScale,
 									// opacity: boardOpacity
 								}}
-								>
+							>
 								<motion.h1 className="md:text-8xl lg:text-7xl text-4xl my-10">{data.title}</motion.h1>
 								<motion.p
 									style={{
 										y: textYoffset,
-										opacity : boardImageOpacity
+										opacity: boardImageOpacity
 									}}
 								>{data.description}</motion.p>
 							</motion.div>
@@ -76,16 +77,21 @@ const BoardPhone = ({ onDisplay, about, repos }) => {
 					</div>
 				</motion.div>
 				<motion.div className="flex  w-full lg:h-5/6 flex-auto lg:w-1/2 top-1/2 h-100 lg:px-5 bg-green-500"
+					initial="appear"
+					animate="onBoard"
+					exit="disappear"
 					style={{
-						opacity : 1//boardImageOpacity
+						opacity: 1//boardImageOpacity
 					}}
 				>
 					<div className="flex h-100 w-full  p-10 lg:ml-5 ">
 					</div>
 				</motion.div>
-			</motion.div>}
-				// { onDisplay.displayState && <Scene />}
-		</AnimatePresence>
+			</AnimatePresence>
+
+		</motion.div>
+
+		// { onDisplay.displayState && <Scene />}
 	);
 }
 

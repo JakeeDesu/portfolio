@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { jsx as _jsx } from \"react/jsx-runtime\";\nexport default function Soguma() {\n  return /*#__PURE__*/_jsx(\"div\", {\n    className: \"flex h-1/2 w-1/2 bg-gray-800\"\n  });\n}","map":null,"metadata":{},"sourceType":"module"}

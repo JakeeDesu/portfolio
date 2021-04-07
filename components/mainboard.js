@@ -45,7 +45,7 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 	return (
 		<AnimatePresence>
 			{ (onDisplay.type === 1 || onDisplay.type === 2 && onDisplay.displayState) && <motion.div
-				className="lg:absolute relative text-white hidden md:flex flex-col lg:flex-row lg:justify-evenly lg:items-end z-10 h-screen w-full lg:w-full "
+				className="lg:absolute relative text-white hidden md:flex flex-col lg:flex-row lg:justify-evenly lg:items-end md:z-10  z-0 h-screen w-full lg:w-full "
 				initial="appear"
 				animate="onBoard"
 				exit="disappear"

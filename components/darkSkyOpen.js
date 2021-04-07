@@ -43,7 +43,7 @@ export default function DarkSkyOpen({ height, darkTheme }) {
 	}
 	return (
 		<div className={`relative flex flex-col ${height} w-full bg-gradient-to-b  ${ darkTheme && theme.dark.shadowsColor || theme.light.shadowsColor }  overflow-hidden`} >
-				<div className={`relative h-1/3 w-full bg-gradient-to-b ${ darkTheme && theme.dark.shadowsColor || theme.light.shadowsColor } `}>
+				<div className={`relative lg:h-1/3 h-1/3 md:h-1/2 w-full bg-gradient-to-b ${ darkTheme && theme.dark.shadowsColor || theme.light.shadowsColor } `}>
 					<motion.div
 						className={`absolute top-1/4 -left-1/4 h-xfull w-3/4 rounded-fullp4   ${ darkTheme && theme.dark.backgroundColor || theme.light.backgroundColor }`}
 						initial="hidden1"
@@ -57,7 +57,7 @@ export default function DarkSkyOpen({ height, darkTheme }) {
 						variants={variants}
 					></motion.div>
 				</div>
-				<div className={`h-2/3 w-full ${ darkTheme && theme.dark.backgroundColor || theme.light.backgroundColor }`}>
+				<div className={`h-2/3 lg:h-2/3 md:1/2 w-full ${ darkTheme && theme.dark.backgroundColor || theme.light.backgroundColor }`}>
 
 				</div>
 		</div>

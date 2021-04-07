@@ -104,6 +104,7 @@ export default function SogumaVxPhone({ repos ,fetchedData , setOnDisplay, onDis
 				onDisplay={onDisplay}
 				darkTheme={darkTheme}
 				onSogumaClick={onSogumaClick}
+				setOnDisplay={setOnDisplay}
 			/>
 		</motion.div>
 	);

@@ -92,6 +92,10 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 					break;
 			}
 	}
+	const backToMenu = () => {
+		setOnDisplay(true, onDisplay.itemId, 0)
+	}
+
 	const onDisplayKey = onDisplay.displayState ? 1 : 0;
 	return (
 		<motion.div
@@ -117,6 +121,46 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 				/>
 			))}
 			{ onDisplay.type !=2 && <Menu onDisplay={onDisplay}  setOnDisplay={setOnDisplay}/>}
+
+			<AnimatePresence>
+				{onDisplay.type === 2 && onDisplay.displayState && <motion.div 
+					className="absolute -top-40 h-24 w-24 rounded-full border-4 border-gray-100  shadow-soft1glow cursor-pointer"
+					initial={{
+						opacity : 0,
+						scale : 0.5,
+						y: 10
+					}}
+					animate={{
+						opacity : 0.7,
+						scale : 0.8,
+						y: 0,
+						transition : {
+							duration : 0.5
+						}
+					}}
+					exit={{
+						opacity : 0,
+						scale : 0.5,
+						y: 10,
+						transition : {
+							duration : 0.3
+						}
+
+					}}
+					whileHover={{
+						opacity : 1,
+						scale : 1,
+						y: -20
+
+					}}
+					onMouseDown={backToMenu}
+				>
+					<div className="relative flex justify-center items-center w-full h-full text-2xl text-white">
+						<h1 className="">Menu</h1>
+						<hr className="absolute top-full border-2 border-gray-100 h-52 " ></hr>
+					</div>
+				</motion.div>}				
+			</AnimatePresence>
 			<Soguma
 				onDisplay={onDisplay}
 				darkTheme={darkTheme}

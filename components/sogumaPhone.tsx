@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import SogumaEye from './sugumaEye'
 import { theme } from './theme'
+import Menu from './menu'
+
 
 const darkStanding = {
 	scale: [1.01, 1],
@@ -58,7 +60,7 @@ const variants = {
 
 }
 
-function SogumaPhone({ onDisplay, darkTheme, onSogumaClick }) {
+function SogumaPhone({ onDisplay, darkTheme, onSogumaClick, setOnDisplay }) {
 	const switchId = darkTheme ? 1 : 0;
 
 	return (
@@ -73,6 +75,7 @@ function SogumaPhone({ onDisplay, darkTheme, onSogumaClick }) {
 			whileTap="onClick"
 			onMouseDown={() => onSogumaClick()}
 		>
+			{ onDisplay.type !=2 && <Menu onDisplay={onDisplay}  setOnDisplay={setOnDisplay}/>}
 			<SogumaEye
 				darkTheme={darkTheme}
 				onDisplay={onDisplay}

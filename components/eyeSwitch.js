@@ -43,7 +43,7 @@ export default function EyeSwitch ({ darkTheme, changeTheme, color1, color2}) {
 				}
 				// boxShadow : '0 0px 20px 8px rgba(255, 255, 255, 0.5)',
 			}}
-		>
+		> 
 			<motion.div className={`flex justify-center items-center rounded-full ${ darkTheme ? theme.dark.eyeSwitch.iris : theme.light.eyeSwitch.iris }`} variants={pplVariants} animate={darkTheme ? "closed": "opened"}>
 				<div className={`rounded-full ${ darkTheme ? theme.dark.eyeSwitch.pupil : theme.light.eyeSwitch.pupil }`} ></div>
 			</motion.div>

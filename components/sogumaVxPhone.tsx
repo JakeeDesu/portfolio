@@ -71,13 +71,13 @@ export default function SogumaVxPhone({ repos ,fetchedData , setOnDisplay, onDis
 	const onSogumaClick = () => {
 			switch (onDisplay.type) {
 				case  -1 : // none state
-						setOnDisplay(true, onDisplay.itemId, 0)
+						setOnDisplay(false, onDisplay.itemId, 1)
 					break;
 				case  0 : // menu state
 					setOnDisplay(false, onDisplay.itemId, -1)
 					break;
 				case  1 : // about state
-					setOnDisplay(true, onDisplay.itemId, 0)
+					setOnDisplay(true, onDisplay.itemId, -1)
 					break;
 				case  2 : //  case 1) gims on display | case 2) a project on display 
 					if (!onDisplay.displayOff)

@@ -21,8 +21,8 @@ export const theme = {
       }
     },
     eyeSwitch : {
-      iris : 'h-12 w-12 border-gray-500 border-2 bg-sogumaRed',
-      pupil : 'h-8 w-8 bg-black',
+      iris : 'lg:h-12 lg:w-12 md:h-10 md:w-10 h-8 w-8 border-gray-500 border-2 bg-sogumaRed',
+      pupil : 'lg:h-10 lg:w-10 h-5 w-5 bg-black',
       upperEyeLash : ' border-b-2 border-gray-100',
       upperEyeLash2 : ' border-2 border-gray-100 bg-white',
       bottomEyeLash : ' border-t-2 border-gray-100',
@@ -50,9 +50,10 @@ export const theme = {
         eyelashes : ' bg-black'
       }
     },
+    // md:h-32 md:w-20 h-16 w-12
     eyeSwitch : {
-      iris : 'h-12 w-12 border-gray-100 border-4 ',
-      pupil : 'h-4 w-4 bg-white',
+      iris : 'lg:h-12 lg:w-12 md:h-10 md:w-10 h-8 w-8 border-gray-100 border-4 ',
+      pupil : 'lg:h-4 lg:w-4 h-2 w-2 bg-white',
       upperEyeLash : ' border-b-2 border-gray-200',
       upperEyeLash2 : ' border-2 border-gray-200',
       bottomEyeLash : ' border-t-2 border-gray-200',

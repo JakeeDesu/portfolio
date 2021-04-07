@@ -45,7 +45,7 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 	return (
 		<AnimatePresence>
 			{ (onDisplay.type === 1 || onDisplay.type === 2 && onDisplay.displayState) && <motion.div
-				className="lg:absolute relative text-white flex flex-col lg:flex-row lg:justify-evenly lg:items-end z-10 h-screen w-full lg:w-full "
+				className="lg:absolute relative text-white hidden md:flex flex-col lg:flex-row lg:justify-evenly lg:items-end z-10 h-screen w-full lg:w-full "
 				initial="appear"
 				animate="onBoard"
 				exit="disappear"
@@ -80,7 +80,7 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 						opacity : 1//boardImageOpacity
 					}}
 				>
-					<div className="flex h-100 w-full  p-10 lg:ml-5 bg-yellow-700">
+					<div className="flex h-100 w-full  p-10 lg:ml-5 ">
 					</div>
 				</motion.div>
 			</motion.div>

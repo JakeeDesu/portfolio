@@ -44,10 +44,10 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 
 	return (
 		<div
-			className="absolute flex flex-col justify-center items-center h-full w-full"
+			className="hidden absolute md:flex flex-col justify-center items-center h-full w-full"
 		>
 			<motion.div
-				className="absolute  border-white border-2 border-opacity-20 shadow-soft2glow text-center text-white font-black  flex flex-col justify-center items-center h-100 w-48 bg-gradient-to-b  bg-gray-500 to-gray-400 bg-opacity-5 rounded-b-full top-36 pt-11"
+				className="absolute md:text-2xl lg:text-3xl border-white border-2 border-opacity-20 shadow-soft2glow text-center text-white font-black  flex flex-col justify-center items-center lg:h-100 md:h-80 lg:w-52 md:w-44 bg-gradient-to-b  bg-gray-500 to-gray-400 bg-opacity-5 rounded-b-full top-36 lg:pt-20 md:pt-12 "
 				initial={{
 					opacity: 1,
 					y: 0,
@@ -59,8 +59,8 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 				animate={onDisplay.type === 0 ? {
 					opacity: 1,
 					y: 0,
-					scaleY: [0.9, 1.09],
-					scaleX: [1, 1.04],
+					scaleY: [0.9, 1.03],
+					scaleX: [1, 1.03],
 					originY: 0,
 					originX: "50%",
 					transition: {
@@ -81,7 +81,7 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 						}
 					}}
 			>
-				<motion.h1 className=" text-center m-5 text-2xl cursor-pointer"
+				<motion.h1 className=" text-center lg:m-5 md:m-2 t cursor-pointer"
 					variants={variants}
 					initial="initial"
 					animate="animation"
@@ -89,14 +89,14 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 					onMouseDown={() => selectTitle(2)}
 
 				>ABOUT ME</motion.h1>
-				<motion.h1 className=" m-5 text-2xl cursor-pointer"
+				<motion.h1 className=" lg:m-5 md:m-2  cursor-pointer"
 					variants={variants}
 					initial="initial"
 					animate="animation"
 					whileHover="onHover"
 					onMouseDown={() => selectTitle(3)}
 				>MY PROJECTS</motion.h1>
-				<motion.h1 className=" m-5 text-2xl line-through cursor-pointer"
+				<motion.h1 className=" lg:m-5 md:m-2  line-through cursor-pointer"
 					variants={variants}
 					initial="initial"
 					animate="animation"
@@ -105,13 +105,13 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 				>ART</motion.h1>
 			</motion.div>
 			<motion.div
-				className="absolute w-64 top-36 opacity-70 overflow-hidden"
+				className="absolute lg:w-64 md:w-56 w-20 lg:top-36 md:top-28 top-12 opacity-70 overflow-hidden"
 				initial={{
 					y: -100,
 				}}
 				animate={onDisplay.type === 0 ? {
 					scale: 1,
-					y: [0, 10, 4, -1],
+					y: [2, 5, 4, 1],
 					transition: {
 						y: { duration: 3, yoyo: Infinity },
 						duration: 0.3,

@@ -84,7 +84,9 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 					break;
 				case  2 : //  case 1) gims on display | case 2) a project on display 
 					if (!onDisplay.displayOff)
-						onDisplay.displayState ? setOnDisplay(false, onDisplay.itemId, -1) : (onDisplay.itemId !== -1 ? (setOnDisplay(true, onDisplay.itemId, 2)) : (setOnDisplay(true, onDisplay.itemId, -1)));
+						onDisplay.displayState ? setOnDisplay(false, onDisplay.itemId, 2) : setOnDisplay(true, onDisplay.itemId, 2);
+					// else
+						// setOnDisplay(false, onDisplay.itemId, 2)
 					break;
 				case  3 : 
 					break;
@@ -93,7 +95,7 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 	const onDisplayKey = onDisplay.displayState ? 1 : 0;
 	return (
 		<motion.div
-			className="relative flex flex-col justify-start items-center h-full w-full "
+			className="relative hidden md:flex flex-col justify-start items-center h-full w-full"
 			key={onDisplayKey}
 			initial="initial"
 			animate="standing"

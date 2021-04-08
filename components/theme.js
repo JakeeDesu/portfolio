@@ -40,7 +40,7 @@ export const theme = {
     },
     soguma : {
       text : 'text-white text-center text-2xl h-1/4 ',
-      body : (displayState) => {return `bg-black md:h-60 md:w-60 lg:h-72 lg:w-72 w-36 h-36 rounded-full z-20 ${!displayState && ""} `},//'bg-black border-blue-400 border-4 shadow-soft2glow'
+      body : (displayState) => {return `bg-black md:h-60 md:w-60 lg:h-72 lg:w-72 w-36 h-36 rounded-full z-30 ${!displayState && ""} `},//'bg-black border-blue-400 border-4 shadow-soft2glow'
       eye : {
         eyeball : 'bg-gray-900 m-5 rounded-full md:h-36 md:w-36 h-20 w-20',
         iris : 'bg-yellow-400 border-black border-8 rounded-full md:h-36 md:w-36 h-20 w-20',

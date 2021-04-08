@@ -72,6 +72,9 @@ function Soguma({ onDisplay, darkTheme, onSogumaClick }) {
 			whileHover={onDisplay.displayState || onDisplay.displayOff ? "" : "onHover"}
 			whileTap="onClick"
 			onMouseDown={() => onSogumaClick()}
+			style={{
+				zIndex : 50,
+			}}
 		>
 			<SogumaEye
 				darkTheme={darkTheme}

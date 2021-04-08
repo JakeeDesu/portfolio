@@ -55,7 +55,7 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 					<div className="absolute top-0 left-0 lg:h-full md:h-full h-full w-full ">
 						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
 					</div>
-					<motion.div className="absolute z-20 flex justify-center items-start md:h-100 lg:h-100 md:top-1/4 top-1/4 h-full lg:top-1/3 w-full"
+					<motion.div className="absolute flex justify-center items-start md:h-100 lg:h-100 md:top-1/4 top-1/4 h-full lg:top-1/3 w-full z-20"
 						style={ onDisplay.displayState ? 
 							{
 								scale: sogumaScale,

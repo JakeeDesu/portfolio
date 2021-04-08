@@ -2,6 +2,7 @@ import Scene from './scene'
 import Image from 'next/image'
 import { motion, AnimatePresence, useViewportScroll, useTransform } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import ImageDisplayer from './imageDisplayer'
 
 const boardVariants = {
 	appear: {
@@ -45,7 +46,7 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 	return (
 		<AnimatePresence>
 			{ (onDisplay.type === 1 || onDisplay.type === 2 && onDisplay.displayState) && <motion.div
-				className="lg:absolute relative text-white hidden md:flex flex-col lg:flex-row lg:justify-evenly lg:items-end md:z-10  z-0 h-screen w-full lg:w-full "
+				className="lg:absolute relative text-white hidden md:flex flex-col lg:flex-row lg:justify-evenly lg:items-end md:z-0  z-0 h-screen w-full lg:w-full "
 				initial="appear"
 				animate="onBoard"
 				exit="disappear"
@@ -53,18 +54,18 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 			>
 				<motion.div className="flex w-full lg:h-5/6 flex-auto lg:w-1/2 top-0 lg:px-5 "
 				>
-					<div className="flex flex-col  justify-start items-center h-full w-full  p-10 lg:mr-5">
+					<div className="flex flex-col  justify-start items-center h-full w-full  p-10 lg:mr-5 ">
 						<div className="w-full flex flex-row justify-center items-center  p-1 " >
 							{/* <Image height={90} width={90}  src="/img3.png" /> */}
 							<motion.div
-								className="flex flex-col justify-center lg:items-start items-center mx-7 "
+								className="flex flex-col justify-center lg:justify-start lg:items-start items-center mx-7 w-full"
 								style={{
 									y: boardYoffset,
 									scale : boardScale,
 									// opacity: boardOpacity
 								}}
 								>
-								<motion.h1 className="md:text-8xl lg:text-7xl text-4xl my-10">{data.title}</motion.h1>
+								<motion.h1 className="md:text-8xl lg:text-7xl text-4xl my-10 ">{data.title}</motion.h1>
 								<motion.p
 									style={{
 										y: textYoffset,
@@ -80,8 +81,16 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 						opacity : 1//boardImageOpacity
 					}}
 				>
-					<div className="flex h-100 w-full  p-10 lg:ml-5 ">
-					</div>
+					{/* <div className="flex h-100 w-full  p-10 lg:ml-5 bg-gray-600">
+					<div className="w-full flex flex-row justify-center items-center  p-1 bg-blue-500" > */}
+							{/* <Image height={90} width={90}  src="/img3.png" /> */}
+							<motion.div
+								className="relative flex flex-col justify-center lg:justify-center lg:items-center items-center mx-7 w-full h-full z-50 overflow-hidden"
+								>
+								<ImageDisplayer images={['/Fractol/0.png','/Fractol/1.png','/Fractol/2.png','/Fractol/3.png']}/>
+							</motion.div>
+						{/* </div> */}
+					{/* </div> */}
 				</motion.div>
 			</motion.div>
 				// { onDisplay.displayState && <Scene />}

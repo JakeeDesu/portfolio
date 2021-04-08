@@ -38,7 +38,7 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 	
 	return (
 		<motion.div className={`relative flex flex-col w-full h-auto overflow-hidden`}>
-{/* {		console.log(dataLoading ? "not fetched yet" : "about :" , about, "repos : ", repos )}
+{/* {		console.log(dataLoading ? "not fetched yet" : "about :" , about, "repos : ", repos )} */}
 			<div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
 				<h1>onDisplay : {onDisplay.displayState ? "true" : "false"}</h1>
 				<h1>displayOff : {onDisplay.displayOff ? "true" : "false"}</h1>
@@ -46,12 +46,12 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 				<h1>type : {onDisplay.type}</h1>
 				<Link href="/home" ><a>none existing url</a></Link>
 			</div>
-			<nav className="fixed z-50 top-20 right-8 lg:h-40 lg:w-24 md:h-32 md:w-20 h-20 w-16">
+			{/* <nav className="fixed z-50 top-20 right-8 lg:h-40 lg:w-24 md:h-32 md:w-20 h-20 w-16">
 				<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
 			</nav> */}
-			<motion.div className={`relative flex flex-col justify-start lg:h-screen h-auto m-0 p-0  w-full ${theme.dark.backgroundColor}`}
+			<motion.div className={`relative flex flex-col justify-start lg:h-screen ${onDisplay.displayState && onDisplay.type !== -1 ? "h-auto" : "h-screen" } m-0 p-0  w-full ${theme.dark.backgroundColor}`}
 			>
-				<motion.div className="relative flex justify-center items-center lg:h-full md:h-screen h-100 w-full">
+				<motion.div className="relative flex justify-center items-center lg:h-full md:h-screen h-80 w-full">
 					<div className="absolute top-0 left-0 lg:h-full md:h-full h-full w-full ">
 						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
 					</div>

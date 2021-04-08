@@ -12,7 +12,7 @@ const darkStanding = {
 	boxShadow : "0 0 60px 1px rgba(255,255,255,0.1)",
 	transition: {
 		y: { yoyo: Infinity, duration: 1 },
-		duration: 1,
+		duration: 0.2,
 		x: { duration: 2 },
 		scale: { type: 'spring', duration: 0.5 },
 		rotate: { type: 'spring', duration: 5, yoyo: Infinity },
@@ -75,7 +75,6 @@ function SogumaPhone({ onDisplay, darkTheme, onSogumaClick, setOnDisplay }) {
 			whileTap="onClick"
 			onMouseDown={() => onSogumaClick()}
 		>
-			{ onDisplay.type !=2 && <Menu onDisplay={onDisplay}  setOnDisplay={setOnDisplay}/>}
 			<SogumaEye
 				darkTheme={darkTheme}
 				onDisplay={onDisplay}

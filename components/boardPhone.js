@@ -44,49 +44,53 @@ const BoardPhone = ({ onDisplay, about, repos }) => {
 	console.log(data)
 	return (
 		<motion.div
-			className="lg:absolute relative text-white md:hidden lg:hidden flex flex-col lg:flex-row lg:justify-evenly lg:items-end z-10 md:z-0 h-screen w-full lg:w-full "
+			className="relative text-white md:hidden flex flex-col z-10 w-full "
 			variants={boardVariants}
 		>
 			<AnimatePresence>
-				<motion.div className="flex w-full lg:h-5/6 flex-auto lg:w-1/2 top-0 lg:px-5 "
-					initial="appear"
-					animate="onBoard"
-					exit="disappear"
+				{onDisplay.displayState && onDisplay.type !== -1 && <div className="relative text-white md:hidden flex flex-col z-10 w-full">
 
-				>
-					<div className="flex flex-col  justify-start items-center h-full w-full  p-10 lg:mr-5">
-						<div className="w-full flex flex-row justify-center items-center  p-1 " >
-							{/* <Image height={90} width={90}  src="/img3.png" /> */}
-							<motion.div
-								className="flex flex-col justify-center lg:items-start items-center mx-7 "
-								style={{
-									y: boardYoffset,
-									scale: boardScale,
-									// opacity: boardOpacity
-								}}
-							>
-								<motion.h1 className="md:text-8xl lg:text-7xl text-4xl my-10">{data.title}</motion.h1>
-								<motion.p
+					<motion.div className="flex flex-col justify-start items-center w-full h-100 bg-green-100 px-4"
+						initial="appear"
+						animate="onBoard"
+						exit="disappear"
+					>
+						{/* <div className="flex flex-col  justify-start items-center h-full w-full  p-10 lg:mr-5">
+						</div> */}
+							<div className="w-full flex flex-row justify-center items-center  p-1 bg-yellow-700" >
+								{/* <Image height={90} width={90}  src="/img3.png" /> */}
+								<motion.div
+									className="flex flex-col justify-center lg:items-start items-center mx-7 "
 									style={{
-										y: textYoffset,
-										opacity: boardImageOpacity
+										y: boardYoffset,
+										scale: boardScale,
+										// opacity: boardOpacity
 									}}
-								>{data.description}</motion.p>
-							</motion.div>
+								>
+									<motion.h1 className="md:text-8xl lg:text-7xl text-4xl my-10">{data.title}</motion.h1>
+									<motion.p
+										style={{
+											y: textYoffset,
+											opacity: boardImageOpacity
+										}}
+									>{data.description}</motion.p>
+								</motion.div>
+							</div>
+					</motion.div>
+					<motion.div className="flex w-full h-100 flex-col justify-start items-center bg-red-100 px-4 bg-green-500"
+						initial="appear"
+						animate="onBoard"
+						exit="disappear"
+						style={{
+							opacity: 1//boardImageOpacity
+						}}
+					>
+						<div className="flex h-100 w-full  p-10 lg:ml-5 ">
 						</div>
-					</div>
-				</motion.div>
-				<motion.div className="flex  w-full lg:h-5/6 flex-auto lg:w-1/2 top-1/2 h-100 lg:px-5 bg-green-500"
-					initial="appear"
-					animate="onBoard"
-					exit="disappear"
-					style={{
-						opacity: 1//boardImageOpacity
-					}}
-				>
-					<div className="flex h-100 w-full  p-10 lg:ml-5 ">
-					</div>
-				</motion.div>
+					</motion.div>
+
+				</div>
+				}
 			</AnimatePresence>
 
 		</motion.div>

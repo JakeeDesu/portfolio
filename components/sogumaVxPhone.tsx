@@ -28,8 +28,8 @@ const variants = {
 				scale: [1, 0.7],
 				y: [0, 0],
 				transition: {
-					scale: { delay: 0.3, duration: 1 },
-					y: { delay: 0.3, duration: 1 }
+					scale: { duration: 0.5 },
+					y: {  duration: 0.5 }
 				}
 			}
 		else
@@ -39,8 +39,8 @@ const variants = {
 				scale: 1,
 				transition: {
 					// duration: 0.5,
-					scale: { delay: 0.3, duration: 1 },
-					y: { delay: 0.3, duration: 1 }
+					scale: {  duration: 0.5 },
+					y: {  duration: 0.5 }
 				}
 			};
 	},
@@ -49,11 +49,11 @@ const variants = {
 
 const data = ["art", "about me", "p1"]
 
-export default function SogumaVxPhone({ repos ,fetchedData , setOnDisplay, onDisplay, darkTheme }) {
+export default function SogumaVxPhone({ repos, fetchedData, setOnDisplay, onDisplay, darkTheme }) {
 
 	const [[direction, steps], setRotate] = useState([0, 0]);
-	const [clickOff, setClickOff] = useState(true);
-	const [projects, setProjects] = useState([]);
+	// const [clickOff, setClickOff] = useState(true);
+	// const [type, setType] = useState([ 0, -1]);
 
 
 	const moveGims = (newDirection: number) => {
@@ -61,33 +61,31 @@ export default function SogumaVxPhone({ repos ,fetchedData , setOnDisplay, onDis
 	}
 	// console.log(dataLoading ? "fetched DATA : ": fetchedData )
 	useEffect(() => {
-		const initProjects = []
-		repos.map((project) => {
-			initProjects.push(project.name);
-		})
-		// console.log(" projects d ZAAAAAAAAAAAAAAAAAAB: ", initProjects)
-		setProjects(initProjects)
-	}, [repos])
+		// if ( onDisplay.type > 0 )
+		// 	setOnDisplay(true, onDisplay.itemId, -1)
+		// const initProjects = []
+		// repos.map((project) => {
+		// 	initProjects.push(project.name);
+		// })
+		// // console.log(" projects d ZAAAAAAAAAAAAAAAAAAB: ", initProjects)
+		// setProjects(initProjects)
+	}, [])
+
 	const onSogumaClick = () => {
-			switch (onDisplay.type) {
-				case  -1 : // none state
-						setOnDisplay(false, onDisplay.itemId, 1)
-					break;
-				case  0 : // menu state
-					setOnDisplay(false, onDisplay.itemId, -1)
-					break;
-				case  1 : // about state
-					setOnDisplay(true, onDisplay.itemId, -1)
-					break;
-				case  2 : //  case 1) gims on display | case 2) a project on display 
-					if (!onDisplay.displayOff)
-						onDisplay.displayState ? setOnDisplay(false, onDisplay.itemId, 2) : setOnDisplay(true, onDisplay.itemId, 2);
-					// else
-						// setOnDisplay(false, onDisplay.itemId, 2)
-					break;
-				case  3 : 
-					break;
-			}
+		switch (onDisplay.type) {
+			case -1: // none state
+				setOnDisplay(false, onDisplay.itemId, 0)
+				break;
+			case 0: // menu state
+				setOnDisplay(true, onDisplay.itemId, -1)
+				break;
+			case 1: // menu state
+				setOnDisplay(true, onDisplay.itemId, -1)
+				break;
+			case 2: // menu state
+				setOnDisplay(false, onDisplay.itemId, 0)
+				break;
+		}
 	}
 	const onDisplayKey = onDisplay.displayState ? 1 : 0;
 	return (
@@ -99,14 +97,44 @@ export default function SogumaVxPhone({ repos ,fetchedData , setOnDisplay, onDis
 			custom={onDisplay}
 			variants={variants}
 		>
-			{ onDisplay.type !=2 && <MenuPhone onDisplay={onDisplay}  setOnDisplay={setOnDisplay}/>}
 			<SogumaPhone
 				onDisplay={onDisplay}
 				darkTheme={darkTheme}
 				onSogumaClick={onSogumaClick}
 				setOnDisplay={setOnDisplay}
 			/>
+			<AnimatePresence>
+				{!onDisplay.displayState && <motion.div
+				key={onDisplayKey}
+				className="md:hidden absolute top-full flex-col justify-center items-center w-full "
+					initial={{
+						opacity: 0,
+						originY : 0,
+						scale : 0,
+					}}
+					animate={{
+						scale : 1,
+						originY : 0,
+						opacity: 1,
+						transition : {
+							duration : 1,
+							type : 'spring',
+							bounce : 0.5
+						}
+					}}
+					exit={{
+						scale : 0,
+						originY : 0,
+						opacity: 0,
+						transition : {
+							duration : 1
+						}
+					}}
+				>
+					<MenuPhone onDisplay={onDisplay} setOnDisplay={setOnDisplay} />
+				</motion.div>}
+
+			</AnimatePresence>
 		</motion.div>
 	);
 }
-  

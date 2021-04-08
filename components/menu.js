@@ -44,7 +44,7 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 
 	return (
 		<div
-			className="hidden md:flex absolute -top-10  flex-col justify-center items-center h-90 w-full"
+			className="flex absolute md:-top-10 -top-0  flex-col justify-center items-center h-90 w-full"
 		>
 			<motion.div
 				className="relative flex flex-col justify-center items-center w-full h-full "

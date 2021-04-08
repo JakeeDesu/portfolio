@@ -57,7 +57,7 @@ const BoardPhone = ({ onDisplay, about, repos }) => {
 					>
 						{/* <div className="flex flex-col  justify-start items-center h-full w-full  p-10 lg:mr-5">
 						</div> */}
-							<div className="w-full flex flex-row justify-center items-center  p-1 bg-yellow-700" >
+							<div className="w-full flex flex-row justify-center items-center  p-1" >
 								{/* <Image height={90} width={90}  src="/img3.png" /> */}
 								<motion.div
 									className="flex flex-col justify-center lg:items-start items-center mx-7 "
@@ -77,7 +77,7 @@ const BoardPhone = ({ onDisplay, about, repos }) => {
 								</motion.div>
 							</div>
 					</motion.div>
-					<motion.div className="flex w-full h-100 flex-col justify-start items-center bg-red-100 px-4 bg-green-500"
+					<motion.div className="flex w-full h-100 flex-col justify-start items-center px-4 "
 						initial="appear"
 						animate="onBoard"
 						exit="disappear"

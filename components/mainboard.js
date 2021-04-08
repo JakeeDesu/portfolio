@@ -75,7 +75,7 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 						</div>
 					</div>
 				</motion.div>
-				<motion.div className="flex  w-full lg:h-5/6 flex-auto lg:w-1/2 top-1/2 h-100 lg:px-5 bg-green-500"
+				<motion.div className="flex  w-full lg:h-5/6 flex-auto lg:w-1/2 top-1/2 h-100 lg:px-5 "
 					style={{
 						opacity : 1//boardImageOpacity
 					}}

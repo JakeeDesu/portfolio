@@ -65,7 +65,7 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 		repos.map((project) => {
 			initProjects.push(project.name);
 		})
-		console.log(" projects d ZAAAAAAAAAAAAAAAAAAB: ", initProjects)
+		// console.log(" projects d ZAAAAAAAAAAAAAAAAAAB: ", initProjects)
 		setProjects(initProjects)
 	}, [repos])
 	const onSogumaClick = () => {
@@ -106,7 +106,7 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 			custom={onDisplay}
 			variants={variants}
 		>
-			{	console.log(" waaaiiiiiiiiiiiting projects : ", projects) }
+			{/* {	console.log(" waaaiiiiiiiiiiiting projects : ", projects) } */}
 			{onDisplay.type === 2 && gimsProps.map((gim) => (
 				<Gim
 					key={gim.id}

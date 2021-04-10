@@ -18,8 +18,9 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 	const { scrollYProgress } = useViewportScroll();
 	const sogumaScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0.9, 0.8, 0.1]);
 	const sogumaYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, -10, -100, -500]);
-
+	// const [[soguma, board], setElements] = useState([null,null])
 	useEffect(() => {
+		// setElements([document.getElementById('soguma'), document.getElementById('board')])
 		let timer;
 		if (!onDisplay.displayState && onDisplay.displayOff)
 		{
@@ -32,6 +33,18 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 
 	// set a gim on display mode
 	const displayGim = (displayState, itemId, type) => {
+		// setTimeout(() => {
+		// 	let board = document.getElementById('board');
+		// 	if (board && (onDisplay.displayState && onDisplay.type === 2))
+		// 	{
+		// 		board.scrollIntoView(false);
+		// 		console.log("func fired ")
+		// 	}
+		// 	else
+		// 		console.log("scroooooooooooooooooolll: NULLLLL type : " + type + " state : "+ displayState)
+
+		// }, 100)
+		console.log(" |||  DISPLAY : ", displayState ? "true" : "false" , " ||| type : " + type )
 		const newdisplayOff = onDisplay.displayState && !displayState ? true : false;
 		setOnDisplay({ ...onDisplay, displayState, displayOff : newdisplayOff, itemId, type });
 	}
@@ -39,19 +52,19 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 	return (
 		<motion.div className={`relative flex flex-col w-full h-auto overflow-hidden`}>
 {/* {		console.log(dataLoading ? "not fetched yet" : "about :" , about, "repos : ", repos )} */}
-			{/* <div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
+			<div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
 				<h1>onDisplay : {onDisplay.displayState ? "true" : "false"}</h1>
 				<h1>displayOff : {onDisplay.displayOff ? "true" : "false"}</h1>
 				<h1>itemId : {onDisplay.itemId}</h1>
 				<h1>type : {onDisplay.type}</h1>
 				<Link href="/home" ><a>none existing url</a></Link>
-			</div> */}
-			{/* <nav className="fixed z-50 top-20 right-8 lg:h-40 lg:w-24 md:h-32 md:w-20 h-20 w-16">
+			</div>
+			<nav className="fixed z-50 top-20 right-8 lg:h-40 lg:w-24 md:h-32 md:w-20 h-20 w-16">
 				<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
-			</nav> */}
-			<motion.div className={`relative flex flex-col justify-start lg:h-screen ${onDisplay.displayState && onDisplay.type !== -1 ? "h-auto" : "h-screen" } m-0 p-0  w-full ${theme.dark.backgroundColor}`}
+			</nav>
+			<motion.div className={`relative flex flex-col justify-start l:h-screen ${onDisplay.displayState && onDisplay.type !== -1 ? "h-auto" : "h-screen" } m-0 p-0  w-full ${theme.dark.backgroundColor}`}
 			>
-				<motion.div className="relative flex justify-center items-center lg:h-full md:h-screen h-80 w-full">
+				<motion.div id="soguma" className="relative flex justify-center items-center l:h-full md:h-screen h-80 w-full">
 					<div className="absolute top-0 left-0 lg:h-full md:h-full h-full w-full ">
 						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
 					</div>
@@ -70,8 +83,8 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 						<SogumaVxPhone repos={repos} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 					</motion.div>
 				</motion.div>
-				<MainBoard onDisplay={onDisplay} about={about} repos={repos} />
-				<BoardPhone onDisplay={onDisplay} about={about} repos={repos} />
+				<MainBoard id="board" onDisplay={onDisplay} about={about} repos={repos} />
+				{/* <BoardPhone onDisplay={onDisplay} about={about} repos={repos} /> */}
 			</motion.div>
 			 {/* {onDisplay.displayState && <Card onDisplay={onDisplay} darkTheme={darkTheme} displayGim={displayGim} />} */}
 		</motion.div>

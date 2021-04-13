@@ -5,20 +5,26 @@ import { useRef, useEffect, useState } from 'react'
 import { motion, useViewportScroll, useTransform } from 'framer-motion'
 import ImageDisplayer from '../components/imageDisplayer'
 import DescriptionCard from '../components/descriptionCard'
+import { gql } from "@apollo/client";
+import client from "../apollo-client";
 // import Image from 'next/Image'
 
 
 
-const Card = ({  onDisplay, darkTheme, displayGim }) => 
+const Card = ({ countries,  onDisplay, darkTheme, displayGim }) =>
 {
-	
+
 	// const carRef = useRef(false);
 	// const { scrollYProgress } = useViewportScroll();
 	// const cardYOffset = useTransform(scrollYProgress, [ 0 , 0.1 , 0.4 , 1 ], [ 0 , 0 , 0 , 0 ]);
 	// const cardScale = useTransform(scrollYProgress, [ 0 , 0.1 , 0.6 , 1 ], [ 0 , 0.7 , 0.8 , 1 ]);
 	// const cardOpacity = useTransform(scrollYProgress, [ 0 , 0.1 , 0.6 , 1 ], [ 0 , 0.1 , 1 , 1 ]);
 	// const cardretateX = useTransform(scrollYProgress, [ 0 , 0.1 , 0.6 , 1 ], [ -30 , -20 , -20 , 0 ]);
-	
+	useEffect(() =>{
+		if (countries)
+			console.log(countries)
+	}, [countries])
+
 	// const variants = {
 		// 	hidden: (yOffset, cardOpacity) => {
 			// 		return {
@@ -33,7 +39,7 @@ const Card = ({  onDisplay, darkTheme, displayGim }) =>
 						// 		};
 						// 	}
 						// }
-						
+
 						// const variants2 = {
 							// 	hidden: {
 								// 		height : '0%',
@@ -47,14 +53,14 @@ const Card = ({  onDisplay, darkTheme, displayGim }) =>
 									// 		// height:"auto",
 									// 	}
 									// }
-									
+
 									return (
-										
-										// <motion.div className="relative flex flex-row justify-between w-full h-screen" 
+
+										// <motion.div className="relative flex flex-row justify-between w-full h-screen"
 										// variants={variants2}
 										// initial={false}
 										// animate={onDisplay.displayState ? "showsUp" : "hidden"}
-										
+
 										// >
 										<motion.div className="relative flex flex-row justify-between w-full h-screen"
 										// key={scrollYProgress}
@@ -70,7 +76,7 @@ const Card = ({  onDisplay, darkTheme, displayGim }) =>
 												// 	scale : cardScale,
 												// 	rotateX: cardretateX,
 												// }}	variants={variants}
-												
+
 												>
 				{/* <motion.div className="h-100 w-100 text-white" onTap={(event, info) => displayGim()}>click me</motion.div> */}
 
@@ -80,5 +86,44 @@ const Card = ({  onDisplay, darkTheme, displayGim }) =>
 		// </motion.div>
 		)
 	}
-	
+
+	export async function getStaticProps() {
+    const { data } = await client.query({
+      query: gql`
+			query {
+				user(login: "JakeeDesu") {
+			     name
+			     bio
+			     email
+			     login
+			     pinnedItems(first: 6, types: REPOSITORY) {
+			       nodes {
+			         ... on Repository {
+			           id
+								 name
+			           url
+			           description
+			           openGraphImageUrl
+			           languages(first : 4) {
+			             nodes {
+			               color
+			               id
+			               name
+			             }
+			           }
+			         }
+			       }
+			     }
+			   }
+			}
+      `,
+    });
+
+    return {
+      props: {
+        countries: data,
+      },
+   };
+}
+
 	export default Card

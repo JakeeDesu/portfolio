@@ -1,0 +1,39 @@
+{
+	"localProjects": [
+		{
+			"name": "Fractol",
+			"type": ".png",
+			"path": "/Fractol/",
+			"infos": {
+				"titles": [
+					"burningShip",
+					"mandelbrot",
+					"tricorn",
+					"i dont know"
+				],
+				"descriptions": [
+					"fasdfasdf sdfsadfsdaf dsfsdafsdaf dfsadfsdaf dfasdfsdf asdfasdf asdfsa fasdf sadf  sadfsda fasf safsdafasdfs",
+					"fasdfasdf sdfsadfsdaf dsfsdafsdaf dfsadfsdaf dfasdfsdf asdfasdf asdfsa fasdf sadf  sadfsda fasf safsdafasdfs",
+					"fasdfasdf sdfsadfsdaf dsfsdafsdaf dfsadfsdaf dfasdfsdf asdfasdf asdfsa fasdf sadf  sadfsda fasf safsdafasdfs",
+					"fasdfasdf sdfsadfsdaf dsfsdafsdaf dfsadfsdaf dfasdfsdf asdfasdf asdfsa fasdf sadf  sadfsda fasf safsdafasdfs"
+				],
+				"images": [
+					"0",
+					"1",
+					"2",
+					"3"
+				]
+			}
+		},
+		{
+			"name": "FDF",
+			"type": ".png",
+			"path": "/FDF/",
+			"infos": {
+				"titles": [],
+				"descriptions": [],
+				"images": []
+			}
+		}
+	]
+}

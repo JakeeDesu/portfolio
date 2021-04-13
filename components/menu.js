@@ -44,7 +44,7 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 
 	return (
 		<div
-			className="flex absolute md:-top-10 -top-0  flex-col justify-center items-center h-90 w-full"
+			className="flex absolute md:-top-10 -top-0  flex-col justify-center items-center h-90 w-full pointer-events-auto"
 		>
 			<motion.div
 				className="relative flex flex-col justify-center items-center w-full h-full "
@@ -57,7 +57,7 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 			>
 
 				<motion.div
-					className="absolute md:text-2xl lg:text-3xl border-white border-2 border-opacity-20 shadow-soft2glow text-center text-white font-black  flex flex-col justify-center items-center lg:h-100 md:h-80 lg:w-52 md:w-44 bg-gradient-to-b  bg-gray-500 to-gray-400 bg-opacity-5 rounded-b-full top-36 lg:pt-20 md:pt-12 "
+					className="absolute md:text-2xl lg:text-3xl border-gray-900 border-2  shadow-soft2glow text-center text-black font-black  flex flex-col justify-center items-center lg:h-100 md:h-80 lg:w-52 md:w-44 bg-gradient-to-b  bg-gray-500 to-gray-400 bg-opacity-5 rounded-b-full top-36 lg:pt-20 md:pt-12 "
 					initial={{
 						opacity: 1,
 						y: 0,

@@ -99,7 +99,7 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 	const onDisplayKey = onDisplay.displayState ? 1 : 0;
 	return (
 		<motion.div
-			className="relative hidden md:flex flex-col justify-start items-center h-full w-full "
+			className="relative hidden md:flex flex-col justify-start items-center h-full w-full"
 			key={onDisplayKey}
 			initial="initial"
 			animate="standing"
@@ -131,7 +131,9 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 						y: 10
 					}}
 					animate={{
-						opacity : 0.7,
+						rotateZ : 8,
+						x : 25,
+						opacity : 0.8,
 						scale : 0.8,
 						y: 0,
 						transition : {
@@ -155,9 +157,9 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 					}}
 					onMouseDown={backToMenu}
 				>
-					<div className="relative flex justify-center items-center w-full h-full text-2xl text-white">
+					<div className="relative flex justify-center items-center w-full h-full text-2xl text-white pointer-events-auto">
 						<h1 className="">Menu</h1>
-						<hr className="absolute top-full border-2 border-gray-100 h-52 " ></hr>
+						<hr className="absolute top-full border-2 border-gray-100 h-52" ></hr>
 					</div>
 				</motion.div>}				
 			</AnimatePresence>

@@ -31,7 +31,7 @@ export const theme = {
 
 	},
 	dark : {
-		backgroundColor : 'bg-gray-900',//'bg-gray-900 ',
+		backgroundColor : 'bg-white',//'bg-gray-900 ',
 		shadowsColor : 'bg-black',//'from-gray-900 to-blue-400 ',
 		gimHolder : ' h-44 w-44 border-gray-300 border-2 h-44 w-44 shadow-glow',
     gims: {

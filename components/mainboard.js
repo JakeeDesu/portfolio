@@ -31,7 +31,8 @@ const boardVariants = {
 
 const imagesData=["hashhsa dfsdaf sadfdsaf asdfadsf","sadfasdf sdfasdf asdfads","sdafsdaf asfasd afasdf","fasdfasdf asdfasdf asdfasdfa asdfsa"]
 const images=['/Fractol/0.png', '/Fractol/1.png', '/Fractol/2.png', '/Fractol/3.png']
-const MainBoard = ({ onDisplay, about, repos }) => {
+
+const MainBoard = ({ onDisplay, repos }) => {
 	const [data, setData] = useState({
 		empty: true,
 		about:
@@ -69,7 +70,19 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 		if ((onDisplay.type === 1 || onDisplay.type === 2)) {
 			// console.log(data)
 			const projectData = repos[onDisplay.itemId > 0 ? onDisplay.itemId : 0]
-			setData({ ...data, empty: false, about: { title: about.login, description: about.bio, data: about }, project: { title: projectData.name, description: projectData.description, data: projectData } })
+			setData({ ...data,
+				empty: false,
+				about: {
+					title: "skills",
+					description: "bla bla bal",
+					data: {}
+				},
+				project: {
+					title: projectData.name,
+					description: projectData.description,
+					data: projectData
+				}
+			})
 
 		}
 	}, [onDisplay])
@@ -89,22 +102,29 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 			return data.project.description
 		return ""
 	}
+	const getFrames = () => {
+		if (onDisplay.type === 1)
+			return "/img4.jpg"
+		else if (onDisplay.type === 2)
+			return data.project.data.openGraphImageUrl
+		return "/me/0.png"
+	}
 
 	return (
 		<>
 			{ (onDisplay.type === 1 || ( onDisplay.type === 2 && onDisplay.displayState )) && <motion.div
-				className="lg:absolu relative text-white md:flex flex-col justify-center items-center  lg:items-en md:z-0  z-0 h-screen w-full "
+				className="relative text-black md:flex flex-col justify-center items-center  z-0 h-screen w-full "
 				initial="appear"
 				animate="onBoard"
 				exit="disappear"
 				variants={boardVariants}
 			>
-				<motion.div ref={ref} className="flex w-full l:h-5/6 flex-auto l:w-1/2 top-0 h-1/3 max-h-100 l:px-5 "
+				<motion.div ref={ref} className="flex w-full flex-auto top-0 h-2/3"
 				>
 					<Title title={getTitle()} description={getDescription()}/>
 				</motion.div>
-				
-				<motion.div className="flex  w-full l:h-5/6 flex-auto l:w-1/2 top-1/2 h-2/3 max-h-100 l:px-5 "
+
+				<motion.div className="flex  w-full  flex-auto top-1/2 h-1/3"
 					style={{
 						opacity: 1//boardImageOpacity
 					}}
@@ -112,7 +132,10 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 					<motion.div
 						className="relative flex flex-col justify-center l:justify-center l:items-center items-center p-10 w-full h-full z-50 overflow-hidden"
 					>
-						<ImageDisplayer projectName={getTitle()} />
+						<div className="h-1/2 w-11/12">
+								<img src={getFrames()} />
+						</div>
+						{/* <ImageDisplayer projectName={getTitle()} />*/}
 					</motion.div>
 				</motion.div>
 
@@ -120,7 +143,7 @@ const MainBoard = ({ onDisplay, about, repos }) => {
 				// { onDisplay.displayState && <Scene />}
 			}
 			</>
-		// </AnimatePresence> 
+		// </AnimatePresence>
 	);
 }
 

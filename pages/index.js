@@ -12,6 +12,8 @@ import Scene from '../components/scene'
 import { useEffect, useState, useRef } from 'react'
 import { motion, useTransform, useViewportScroll, useMotionValue } from 'framer-motion'
 import { theme } from '../components/theme'
+import { gql } from "@apollo/client";
+import client from "../apollo-client";
 
 function rotateByMousePosition(event, ref) {
 	const currentPosi = {
@@ -38,7 +40,7 @@ function maping(value, interval1, interval2) {
 	return  (value * (interval2[1] - interval2[0]) / interval1[1]) + interval2[0]
 }
 
-export default function Home({ about, repos, dataLoading, darkTheme, changeTheme}) {
+export default function Home({ gitData, darkTheme, changeTheme}) {
 	const [onDisplay, setOnDisplay] = useState({ displayState: true, displayOff : false, itemId: -1, type: -1 })
 	// const [mousePosition, setMousePosition] = useState({});
 	// const [size, setSize] = useState({height : 0, width : 0});
@@ -54,6 +56,7 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 	// const rY = maping(mousePosition.y, [0 , size.height], [0, 50])
 	// getLocalProjectData("Fractol");
 	// const [[soguma, board], setElements] = useState([null,null])
+	console.log("fetched data : ", gitData)
 	useEffect(() => {
 		// setElements([document.getElementById('soguma'), document.getElementById('board')])
 		// if (imageRef && imageRef.current)
@@ -67,7 +70,7 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 		{
 			timer = setTimeout(() => {
 				setOnDisplay({ ...onDisplay, displayOff : false });
-			}, 300) 
+			}, 300)
 		}
 		return () => clearTimeout(timer);
 	}, [onDisplay]);
@@ -89,7 +92,7 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 		const newdisplayOff = onDisplay.displayState && !displayState ? true : false;
 		setOnDisplay({ ...onDisplay, displayState, displayOff : newdisplayOff, itemId, type });
 	}
-	
+
 	const handleMouseMove = e => {
 		rotateByMousePosition(e, imageRef.current)
 	  };
@@ -124,15 +127,15 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 					<div className="absolute top-0 left-0 lg:h-full md:h-full h-full w-full ">
 						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
 					</div>
-					<div className="absolute w-full h-full top-0 left-0" 
-					
+					<div className="absolute w-full h-full top-0 left-0"
+
 					>
 						<motion.div className="relative flex flex-row justify-center items-center h-full w-1/2 "
 							style={{
 									scale: sogumaScale,
 									y: sogumaYoffset
 							}}
-						
+
 						>
 							{/* <div className="flex justify-center items-center h-full w-5/6 bg-red-600"> */}
 								<motion.div
@@ -158,7 +161,7 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 																				onMouseMove={handleMouseMoveText}
 																				onMouseLeave={handleMouseLeaveText}
 									>
-										<h1 className="text-5xl text-gray-800 font-extrabold my-5">JakeeDese</h1>
+										<h1 className="text-5xl text-gray-800 font-extrabold my-5">JakeeDesu</h1>
 										<p className=" text-xl mx-2">sadcsdcads sdcsdac asdc sdc sacsdc s sdcsdacsadcsas scsad cdscsacasdcsdacsacsdcsdcsad</p>
 									</motion.div>
 								</motion.div>
@@ -166,7 +169,7 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 						{/* </div> */}
 					</div>
 					<motion.div className="absolute flex justify-center items-start md:h-100 lg:h-100 md:top-1/4 top-1/4 h-full lg:top-1/3 w-full z-20 pointer-events-none"
-						style={ onDisplay.displayState ? 
+						style={ onDisplay.displayState ?
 							{
 								scale: sogumaScale,
 								y: sogumaYoffset
@@ -176,11 +179,11 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 							}
 						}
 					>
-						<SogumaVx repos={repos} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
-						<SogumaVxPhone repos={repos} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
+						<SogumaVx repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
+						<SogumaVxPhone repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 					</motion.div>
 				</motion.div>
-				<MainBoard id="board" onDisplay={onDisplay} about={about} repos={repos} />
+				 <MainBoard id="board" onDisplay={onDisplay} repos={gitData.pinnedItems.nodes} />
 				{/* <BoardPhone onDisplay={onDisplay} about={about} repos={repos} /> */}
 			</motion.div>
 			 {/* {onDisplay.displayState && <Card onDisplay={onDisplay} darkTheme={darkTheme} displayGim={displayGim} />} */}
@@ -188,22 +191,42 @@ export default function Home({ about, repos, dataLoading, darkTheme, changeTheme
 	)
 }
 
-export const getStaticProps = async () => {
 
-	const res1 = await fetch('https://api.github.com/users/JakeeDesu');
-	const res2 = await fetch('https://api.github.com/users/JakeeDesu/repos');
-	
-	const about = await res1.json();
-	const repos = await res2.json();
-	// console.log( brutData )
-	// const loading = brutData ? true : false;
-	// if (fetchedData)
-	// {
+export async function getStaticProps() {
+	const { data } = await client.query({
+		query: gql`
+		query {
+			user(login: "JakeeDesu") {
+				 name
+				 bio
+				 email
+				 login
+				 pinnedItems(first: 6, types: REPOSITORY) {
+					 nodes {
+						 ... on Repository {
+							 id
+							 name
+							 url
+							 description
+							 openGraphImageUrl
+							 languages(first : 4) {
+								 nodes {
+									 color
+									 id
+									 name
+								 }
+							 }
+						 }
+					 }
+				 }
+			 }
+		}
+		`,
+	});
 
-	// }
-	const dataLoading = (about && repos) === undefined ? true : false; 
-	
 	return {
-		props : { about, repos, dataLoading  }
-	}
+		props: {
+			gitData: data.user,
+		},
+ };
 }

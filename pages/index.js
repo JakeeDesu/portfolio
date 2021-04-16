@@ -7,6 +7,7 @@ import MainBoard from '../components/mainboard'
 import BoardPhone from '../components/boardPhone'
 import Link from 'next/link'
 import getLocalProjectData from '../components/utilities/getLocalProjectData'
+import { promises as fs } from 'fs'
 
 import Scene from '../components/scene'
 import { useEffect, useState, useRef } from 'react'
@@ -56,8 +57,9 @@ export default function Home({ gitData, darkTheme, changeTheme}) {
 	// const rY = maping(mousePosition.y, [0 , size.height], [0, 50])
 	// getLocalProjectData("Fractol");
 	// const [[soguma, board], setElements] = useState([null,null])
-	console.log("fetched data : ", gitData)
+
 	useEffect(() => {
+		console.log(" safadsf asdasfadsf sffetched data : ", gitData)
 		// setElements([document.getElementById('soguma'), document.getElementById('board')])
 		// if (imageRef && imageRef.current)
 		// {
@@ -179,11 +181,11 @@ export default function Home({ gitData, darkTheme, changeTheme}) {
 							}
 						}
 					>
-						<SogumaVx repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
+					<SogumaVx repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 						<SogumaVxPhone repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 					</motion.div>
 				</motion.div>
-				 <MainBoard id="board" onDisplay={onDisplay} repos={gitData.pinnedItems.nodes} />
+<MainBoard id="board" onDisplay={onDisplay} repos={gitData.pinnedItems.nodes} />
 				{/* <BoardPhone onDisplay={onDisplay} about={about} repos={repos} /> */}
 			</motion.div>
 			 {/* {onDisplay.displayState && <Card onDisplay={onDisplay} darkTheme={darkTheme} displayGim={displayGim} />} */}
@@ -191,42 +193,121 @@ export default function Home({ gitData, darkTheme, changeTheme}) {
 	)
 }
 
+async function postData(url = '', data = {}, token = '') {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+//    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'force-cache', // *default, no-cache, reload, force-cache, only-if-cached
+//    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+			'authorization': token ? `Bearer ${token}` : ""
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+//    redirect: 'follow', // manual, *follow, error
+//    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
 
 export async function getStaticProps() {
-	const { data } = await client.query({
-		query: gql`
-		query {
-			user(login: "JakeeDesu") {
-				 name
-				 bio
-				 email
-				 login
-				 pinnedItems(first: 6, types: REPOSITORY) {
-					 nodes {
-						 ... on Repository {
-							 id
-							 name
-							 url
-							 description
-							 openGraphImageUrl
-							 languages(first : 4) {
-								 nodes {
-									 color
-									 id
-									 name
+
+	const request = { query : `query {
+				user(login: "JakeeDesu") {
+					 name
+					 bio
+					 email
+					 login
+					 pinnedItems(first: 6, types: REPOSITORY) {
+						 nodes {
+							 ... on Repository {
+								 id
+								 name
+								 url
+								 description
+								 openGraphImageUrl
+								 languages(first : 4) {
+									 nodes {
+										 color
+										 id
+										 name
+									 }
 								 }
 							 }
 						 }
 					 }
 				 }
+			}` }
+			const token = "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"
+			const res = await fetch('https://api.github.com/graphql', {
+				method: 'POST', // *GET, POST, PUT, DELETE, etc.
+				headers: {
+					'Content-Type': 'application/json',
+					'authorization': token ? `Bearer ${token}` : ""
+				},
+				body: JSON.stringify(request)  // body data type must match "Content-Type" header
+			}).then(result => result.text()).then(restext => { const jsonData = JSON.parse(restext)
+				fs.writeFile(
+		 "./components/data/projects.json",
+		 JSON.stringify(jsonData),
+		 function (err) {
+			 if (err) {
+				 console.log(
+					 "Error occured in pinned projects 1",
+					 JSON.stringify(err)
+				 );
 			 }
-		}
-		`,
-	});
+		 }
+	 );
+	 return ({data : {
+		 ddd: "afasfsadf"
+	 }})
+			}).catch((error) =>
+			 console.log("Error occured in pinned projects 2", JSON.stringify(error))
+			);
 
+
+			// const  data =  fs.readfile; // parses JSON response into native JavaScript objects
+
+
+
+	// const res = postData(, { query : request }, "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")
+	// const { data } = await client.query({
+		// query: gql`
+		// query {
+		// 	user(login: "JakeeDesu") {
+		// 		 name
+		// 		 bio
+		// 		 email
+		// 		 login
+		// 		 pinnedItems(first: 6, types: REPOSITORY) {
+		// 			 nodes {
+		// 				 ... on Repository {
+		// 					 id
+		// 					 name
+		// 					 url
+		// 					 description
+		// 					 openGraphImageUrl
+		// 					 languages(first : 4) {
+		// 						 nodes {
+		// 							 color
+		// 							 id
+		// 							 name
+		// 						 }
+		// 					 }
+		// 				 }
+		// 			 }
+		// 		 }
+		// 	 }
+		// }
+		// `,
+	// });
+ //
 	return {
 		props: {
-			gitData: data.user,
+			gitData: res,
 		},
  };
 }

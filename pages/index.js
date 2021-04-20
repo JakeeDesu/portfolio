@@ -15,6 +15,7 @@ import { motion, useTransform, useViewportScroll, useMotionValue } from 'framer-
 import { theme } from '../components/theme'
 import { gql } from "@apollo/client";
 import client from "../apollo-client";
+import path from 'path'
 
 function rotateByMousePosition(event, ref) {
 	const currentPosi = {
@@ -41,7 +42,7 @@ function maping(value, interval1, interval2) {
 	return  (value * (interval2[1] - interval2[0]) / interval1[1]) + interval2[0]
 }
 
-export default function Home({ gitData, darkTheme, changeTheme}) {
+export default function Home({fetchedData, log, loaded, gitData, darkTheme, changeTheme}) {
 	const [onDisplay, setOnDisplay] = useState({ displayState: true, displayOff : false, itemId: -1, type: -1 })
 	// const [mousePosition, setMousePosition] = useState({});
 	// const [size, setSize] = useState({height : 0, width : 0});
@@ -59,7 +60,7 @@ export default function Home({ gitData, darkTheme, changeTheme}) {
 	// const [[soguma, board], setElements] = useState([null,null])
 
 	useEffect(() => {
-		console.log(" safadsf asdasfadsf sffetched data : ", gitData)
+		console.log("log : ", log ," files data : ", gitData, " loaded status : ", loaded, "fetched  data : ", fetchedData)
 		// setElements([document.getElementById('soguma'), document.getElementById('board')])
 		// if (imageRef && imageRef.current)
 		// {
@@ -181,11 +182,11 @@ export default function Home({ gitData, darkTheme, changeTheme}) {
 							}
 						}
 					>
-					<SogumaVx repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
-						<SogumaVxPhone repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
+		{/*			<SogumaVx repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
+						<SogumaVxPhone repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />*/}
 					</motion.div>
 				</motion.div>
-<MainBoard id="board" onDisplay={onDisplay} repos={gitData.pinnedItems.nodes} />
+	{/*				<MainBoard id="board" onDisplay={onDisplay} repos={gitData.pinnedItems.nodes} />*/}
 				{/* <BoardPhone onDisplay={onDisplay} about={about} repos={repos} /> */}
 			</motion.div>
 			 {/* {onDisplay.displayState && <Card onDisplay={onDisplay} darkTheme={darkTheme} displayGim={displayGim} />} */}
@@ -193,80 +194,168 @@ export default function Home({ gitData, darkTheme, changeTheme}) {
 	)
 }
 
-async function postData(url = '', data = {}, token = '') {
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'force-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//    credentials: 'same-origin', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json',
-			'authorization': token ? `Bearer ${token}` : ""
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-//    redirect: 'follow', // manual, *follow, error
-//    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify(data) // body data type must match "Content-Type" header
-  });
-  return response.json(); // parses JSON response into native JavaScript objects
+
+
+/************************** (load / save)  (from/to) local data ****************************/
+
+const LocalDataPath = "components/data"
+const LocalGitData = "LOCALGITDATA.json"
+
+const loadLocalData = async () => {
+
+	const dataDirPath = path.join(process.cwd(), LocalDataPath)
+	const existedFiles = await fs.readdir(dataDirPath)
+	if ( existedFiles.includes(LocalGitData) )
+	{
+		const filePath = path.join(dataDirPath, LocalGitData)
+		const content = await fs.readfile(filePath, 'utf8')
+		return { loaded : true , content }
+	}
+	else
+		return { loaded : false, content : {} }
 }
 
-export async function getStaticProps() {
+const saveLocalData = async (dataString) => {
 
-	const request = { query : `query {
-				user(login: "JakeeDesu") {
-					 name
-					 bio
-					 email
-					 login
-					 pinnedItems(first: 6, types: REPOSITORY) {
-						 nodes {
-							 ... on Repository {
-								 id
-								 name
-								 url
-								 description
-								 openGraphImageUrl
-								 languages(first : 4) {
-									 nodes {
-										 color
-										 id
-										 name
-									 }
+	const dataDirPath = path.join(process.cwd(), LocalDataPath)
+	const filePath = path.join(dataDirPath, LocalGitData)
+	const data = JSON.parse(dataString)
+	fs.writeFile(filePath, data, (err) => {
+		console.log("error during writing data into localdata error raised : ", err)
+	})
+
+}
+
+/************************** fetch github data ****************************/
+
+
+const graphQl_ENDPOINT = "https://api.github.com/graphql"
+const TOKEN = "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"
+
+const HEADERS = {
+	'Content-Type': 'application/json',
+	'authorization': TOKEN ? `Bearer ${TOKEN}` : ""
+}
+
+const graphQl_QUERY = { query : `query {
+			user(login: "JakeeDesu") {
+				 name
+				 bio
+				 email
+				 login
+				 pinnedItems(first: 6, types: REPOSITORY) {
+					 nodes {
+						 ... on Repository {
+							 id
+							 name
+							 url
+							 description
+							 openGraphImageUrl
+							 languages(first : 4) {
+								 nodes {
+									 color
+									 id
+									 name
 								 }
 							 }
 						 }
 					 }
 				 }
-			}` }
-			const token = "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"
-			const res = await fetch('https://api.github.com/graphql', {
-				method: 'POST', // *GET, POST, PUT, DELETE, etc.
-				headers: {
-					'Content-Type': 'application/json',
-					'authorization': token ? `Bearer ${token}` : ""
-				},
-				body: JSON.stringify(request)  // body data type must match "Content-Type" header
-			}).then(result => result.text()).then(restext => { const jsonData = JSON.parse(restext)
-				fs.writeFile(
-		 "./components/data/projects.json",
-		 JSON.stringify(jsonData),
-		 function (err) {
-			 if (err) {
-				 console.log(
-					 "Error occured in pinned projects 1",
-					 JSON.stringify(err)
-				 );
 			 }
-		 }
-	 );
-	 return ({data : {
-		 ddd: "afasfsadf"
-	 }})
-			}).catch((error) =>
-			 console.log("Error occured in pinned projects 2", JSON.stringify(error))
-			);
+		}`
+	}
+
+const REQUEST = {
+	method: 'POST',
+	headers: HEADERS,
+	body: JSON.stringify(graphQl_QUERY)
+}
+
+const queryData = async () => {
+
+
+	const data = await fetch(graphQl_ENDPOINT, REQUEST).then(res => res.text()).then(response => {
+		return {
+			fetched : true,
+			fetchedData : response
+		}
+	}).catch(error => {
+		if (error)
+			console.log('fetching error : ', error)
+		return {
+			fetched : false,
+			fetchedData : ""
+		}
+	})
+	return data
+}
+
+export async function getStaticProps() {
+
+	let log = "walou"
+	const fetchedData = await queryData()
+	if (fetchedData.fetched) {
+		log = "hi there"
+		await saveLocalData(fetchedData.fetchedData)
+	}
+	else {
+		log = "im not there"
+	}
+
+	const localData = await loadLocalData()
+
+	// const request = { query : `query {
+	// 			user(login: "JakeeDesu") {
+	// 				 name
+	// 				 bio
+	// 				 email
+	// 				 login
+	// 				 pinnedItems(first: 6, types: REPOSITORY) {
+	// 					 nodes {
+	// 						 ... on Repository {
+	// 							 id
+	// 							 name
+	// 							 url
+	// 							 description
+	// 							 openGraphImageUrl
+	// 							 languages(first : 4) {
+	// 								 nodes {
+	// 									 color
+	// 									 id
+	// 									 name
+	// 								 }
+	// 							 }
+	// 						 }
+	// 					 }
+	// 				 }
+	// 			 }
+	// 		}` }
+	//
+	// 		const res = await fetch('https://api.github.com/graphql', {
+	// 			method: 'POST', // *GET, POST, PUT, DELETE, etc.
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 				'authorization': TOKEN ? `Bearer ${TOKEN}` : ""
+	// 			},
+	// 			body: JSON.stringify(request)  // body data type must match "Content-Type" header
+	// 		}).then(result => result.text()).then(restext => { const jsonData = JSON.parse(restext)
+	// 			// if ( jsonData["message"] === "Bad credentials")
+	// 			fs.writeFile(
+	// 	 "./components/data/projects.json",
+	// 	 JSON.stringify(jsonData),
+	// 	 function (err) {
+	// 		 if (err) {
+	// 			 console.log(
+	// 				 "Error occured in pinned projects 1",
+	// 				 JSON.stringify(err)
+	// 			 );
+	// 		 }
+	// 	 }
+	//  );
+	//  return jsonData;
+	// 		}).catch((error) =>
+	// 		 console.log("Error occured in pinned projects 2", JSON.stringify(error))
+	// 		);
 
 
 			// const  data =  fs.readfile; // parses JSON response into native JavaScript objects
@@ -307,7 +396,10 @@ export async function getStaticProps() {
  //
 	return {
 		props: {
-			gitData: res,
+			log,
+			loaded : localData.loaded,
+			gitData: localData.content,
+			fetchedData : "sdfsa"
 		},
  };
 }

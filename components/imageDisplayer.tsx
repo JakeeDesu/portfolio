@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { wrap } from 'popmotion'
 import { useState, useEffect } from 'react'
-import getLocalProjectData from './utilities/getLocalProjectData'
+// import getLocalProjectData from './utilities/getLocalProjectData'
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
 import { title } from 'process'
 
@@ -68,7 +68,7 @@ const ImageDisplayer = ({ projectName }) => {
 	// const titles : []= "titles" as keyof typeof infos;
 	console.log("titles : ::::::::: ", path)
 	// const imageIndex = wrap(0, infos.titles , page);
-	
+
 	const paginate = (newDirection: number) => {
 		setPage([page + newDirection, newDirection]);
 	};

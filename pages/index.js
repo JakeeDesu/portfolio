@@ -230,7 +230,7 @@ const saveLocalData = (dataString) => {
 
 
 const graphQl_ENDPOINT = "https://api.github.com/graphql"
-const TOKEN = "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"
+const TOKEN = "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"
 
 const HEADERS = {
 	'Content-Type': 'application/json',
@@ -275,6 +275,13 @@ const queryData = async () => {
 
 
 	const data = await fetch(graphQl_ENDPOINT, REQUEST).then(res => res.text()).then(response => {
+		const jsonData = JSON.parse(response)
+		if (jsonData["message"] === "Bad credentials")
+			return {
+				fetched : false,
+				fetchedData : {}
+			}
+			else
 		return {
 			fetched : true,
 			fetchedData : response
@@ -282,11 +289,13 @@ const queryData = async () => {
 	}).catch(error => {
 		if (error)
 			console.log('fetching error : ', error)
+	})
+
+	if (data.fetchedData["message"] === "Bad credentials")
 		return {
 			fetched : false,
-			fetchedData : ""
+			fetchedData : {}
 		}
-	})
 	return data
 }
 
@@ -295,11 +304,11 @@ export async function getStaticProps() {
 	let log = "walou"
 	const fetchedData = await queryData()
 	if (fetchedData.fetched) {
-		log = "hi there"
+		console.log("hi there")
 		saveLocalData(fetchedData.fetchedData)
 	}
 	else {
-		log = "im not there"
+		console.log("im not there")
 	}
 
 	const localData = await loadLocalData()

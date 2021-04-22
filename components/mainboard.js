@@ -1,10 +1,12 @@
 import Scene from './scene'
 import Image from 'next/image'
 import Title from './title'
+import ProjectCover from './projectCover'
+import ProjectDescription from './projectDescription'
 import { useFocus } from './useFocus'
 import { motion, AnimatePresence, useViewportScroll, useTransform } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
-import ImageDisplayer from './imageDisplayer'
+
 
 const boardVariants = {
 	appear: {
@@ -110,32 +112,35 @@ const MainBoard = ({ onDisplay, repos }) => {
 		return "/me/0.png"
 	}
 
+	// <motion.div    className="flex justify-center bg-blue-300 z-50 w-11/12"
+	// 	>
+	// </motion.div>
 	return (
 		<>
 			{ (onDisplay.type === 1 || ( onDisplay.type === 2 && onDisplay.displayState )) && <motion.div
-				className="relative text-black md:flex flex-col justify-center items-center  z-0 h-screen w-full "
+				className="relative text-black flex flex-col justify-start items-center  z-0  w-full "
 				initial="appear"
 				animate="onBoard"
 				exit="disappear"
 				variants={boardVariants}
 			>
-				<motion.div ref={ref} className="flex w-full flex-auto top-0 h-2/3"
-				>
-					<Title title={getTitle()} description={getDescription()}/>
-				</motion.div>
 
-				<motion.div className="flex  w-full  flex-auto top-1/2 h-1/3"
+				<motion.div ref={ref} className="flex flex-col justify-center w-11/12 "
 					style={{
 						opacity: 1//boardImageOpacity
 					}}
 				>
+					<Title title={getTitle()} description={getDescription()}/>
 					<motion.div
-						className="relative flex flex-col justify-center l:justify-center l:items-center items-center p-10 w-full h-full z-50 overflow-hidden"
+						className="relative flex flex-col items-start justify-center w-11/12"
 					>
-						<div className="h-1/2 w-11/12">
-								<img src={getFrames()} />
-						</div>
+						<ProjectCover imageSrc={getFrames()} width="w-3/5" />
 						{/* <ImageDisplayer projectName={getTitle()} />*/}
+					</motion.div>
+					<motion.div
+						className="relative flex flex-col items-end justify-center w-11/12"
+					>
+						<ProjectDescription title={"title"} text={"text text text"} width="w-3/5"/>
 					</motion.div>
 				</motion.div>
 

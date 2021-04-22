@@ -42,7 +42,7 @@ function maping(value, interval1, interval2) {
 	return  (value * (interval2[1] - interval2[0]) / interval1[1]) + interval2[0]
 }
 
-export default function Home({fetchedData, log, loaded, gitData, darkTheme, changeTheme}) {
+export default function Home({ loaded, gitData, darkTheme, changeTheme}) {
 	const [onDisplay, setOnDisplay] = useState({ displayState: true, displayOff : false, itemId: -1, type: -1 })
 	// const [mousePosition, setMousePosition] = useState({});
 	// const [size, setSize] = useState({height : 0, width : 0});
@@ -60,7 +60,7 @@ export default function Home({fetchedData, log, loaded, gitData, darkTheme, chan
 	// const [[soguma, board], setElements] = useState([null,null])
 
 	useEffect(() => {
-		console.log("log : ", log ," files data : ", gitData, " loaded status : ", loaded, "fetched  data : ", fetchedData)
+		console.log(" files data : ", gitData, " loaded status : ", loaded)
 		// setElements([document.getElementById('soguma'), document.getElementById('board')])
 		// if (imageRef && imageRef.current)
 		// {
@@ -124,9 +124,9 @@ export default function Home({fetchedData, log, loaded, gitData, darkTheme, chan
 			{/* <nav className="fixed z-50 top-20 right-8 lg:h-40 lg:w-24 md:h-32 md:w-20 h-20 w-16">
 				<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
 			</nav> */}
-			<motion.div className={`relative flex flex-col justify-start l:h-screen ${onDisplay.displayState && onDisplay.type !== -1 ? "h-auto" : "h-screen" } m-0 p-0  w-full ${theme.dark.backgroundColor}`}
+			<motion.div className={`relative flex flex-col justify-start l:h-screen ${onDisplay.displayState && onDisplay.type !== -1 ? "" : "h-screen" } m-0 p-0  w-full ${theme.dark.backgroundColor}`}
 			>
-				<motion.div id="soguma" className="relative flex justify-center items-center l:h-full md:h-screen h-80 w-full">
+				<motion.div id="soguma" className="relative flex justify-center items-center l:h-full md:h-screen h-screen w-full">
 					<div className="absolute top-0 left-0 lg:h-full md:h-full h-full w-full ">
 						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
 					</div>
@@ -182,11 +182,11 @@ export default function Home({fetchedData, log, loaded, gitData, darkTheme, chan
 							}
 						}
 					>
-		{/*			<SogumaVx repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
-						<SogumaVxPhone repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />*/}
+					<SogumaVx repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
+						<SogumaVxPhone repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 					</motion.div>
 				</motion.div>
-	{/*				<MainBoard id="board" onDisplay={onDisplay} repos={gitData.pinnedItems.nodes} />*/}
+				<MainBoard id="board" onDisplay={onDisplay} repos={gitData.pinnedItems.nodes} />
 				{/* <BoardPhone onDisplay={onDisplay} about={about} repos={repos} /> */}
 			</motion.div>
 			 {/* {onDisplay.displayState && <Card onDisplay={onDisplay} darkTheme={darkTheme} displayGim={displayGim} />} */}
@@ -208,19 +208,19 @@ const loadLocalData = async () => {
 	if ( existedFiles.includes(LocalGitData) )
 	{
 		const filePath = path.join(dataDirPath, LocalGitData)
-		const content = await fs.readfile(filePath, 'utf8')
-		return { loaded : true , content }
+		const fileContent = await fs.readFile(filePath, 'utf8')
+		const content = JSON.parse(fileContent)
+		return { loaded : true , content : content.data.user }
 	}
 	else
 		return { loaded : false, content : {} }
 }
 
-const saveLocalData = async (dataString) => {
+const saveLocalData = (dataString) => {
 
 	const dataDirPath = path.join(process.cwd(), LocalDataPath)
 	const filePath = path.join(dataDirPath, LocalGitData)
-	const data = JSON.parse(dataString)
-	fs.writeFile(filePath, data, (err) => {
+ 	fs.writeFile(filePath, dataString, (err) => {
 		console.log("error during writing data into localdata error raised : ", err)
 	})
 
@@ -230,7 +230,7 @@ const saveLocalData = async (dataString) => {
 
 
 const graphQl_ENDPOINT = "https://api.github.com/graphql"
-const TOKEN = "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"
+const TOKEN = "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"
 
 const HEADERS = {
 	'Content-Type': 'application/json',
@@ -296,7 +296,7 @@ export async function getStaticProps() {
 	const fetchedData = await queryData()
 	if (fetchedData.fetched) {
 		log = "hi there"
-		await saveLocalData(fetchedData.fetchedData)
+		saveLocalData(fetchedData.fetchedData)
 	}
 	else {
 		log = "im not there"
@@ -396,10 +396,10 @@ export async function getStaticProps() {
  //
 	return {
 		props: {
-			log,
+			// log,
 			loaded : localData.loaded,
 			gitData: localData.content,
-			fetchedData : "sdfsa"
+			// fetchedData : JSON.parse(fetchedData.fetchedData)
 		},
  };
 }

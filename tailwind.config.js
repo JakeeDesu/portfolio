@@ -27,6 +27,14 @@ module.exports = {
       sogumaEarthy : '#d0af84',
       sogumaPurple : '#A063DB',
     },
+    padding: {
+       'full': '100%',
+       '1/5' : '0.2%',
+       '2/5' : '0.4%',
+       '3/5' : '0.6%',
+       '4/5' : '0.8%',
+       '1/2' : '0.5%',
+     },
     spacing: {
       'halffull': '40%',
       '2xfull': '200%',

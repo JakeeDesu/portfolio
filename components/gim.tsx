@@ -88,7 +88,7 @@ function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay,
 
 	return (
 		<motion.div
-			className={`absolute  md:flex justify-center items-center hidden pointer-events-auto ${darkTheme && theme.dark.gims.style(false) || theme.light.gims.style}`}
+			className={`absolute flex justify-center items-center  pointer-events-auto ${darkTheme && theme.dark.gims.style(false) || theme.light.gims.style}`}
 			key={animationKey}
 			variants={variants}
 			initial="enter"

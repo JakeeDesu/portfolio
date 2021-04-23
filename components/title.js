@@ -1,19 +1,22 @@
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import Image from 'next/image'
+import { useGetScrollInterval } from './useGetScrollInterval'
 
 const Title = ({ title, description, image }) => {
 
+	const [[yStart, yHalf, yEnd], ref] = useGetScrollInterval()
 	const { scrollYProgress } = useViewportScroll();
+	const boardYoffset = useTransform(scrollYProgress, [0, yStart, yHalf, yEnd, 1], [-2000, -2000, -500 , 0, 0]);
+	
 	const textYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, 0, 0, 0]);
-	const textColor = useTransform(scrollYProgress, [0, 0.8, 1], ["#000000", "#FFFFFF", "#FFFFFF"] )
-	const boardYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [-2000, 0, 0, 0]);
-	const boardScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [3, 1, 1, 1]);
-	const boardOpacity = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [0, 0.9, 1, 1]);
-	const boardImageOpacity = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [0, 0, 0, 1]);
-	const boardColor = useTransform(scrollYProgress, [0 , 0.5, 1], ["#FFFFFF", "#000000", "#000000"] )
+	const textColor = useTransform(scrollYProgress, [yStart, yHalf, yEnd], ["#000000", "#FFFFFF", "#FFFFFF"] )
+	const boardScale = useTransform(scrollYProgress, [0, yStart, yHalf, yEnd, 1], [3, 2.2, 1.8, 1, 1]);
+	const boardOpacity = useTransform(scrollYProgress, [0, yStart, yHalf, yEnd , 1], [0, 0, 0.9, 1, 1]);
+	const descriptionOpacity = useTransform(scrollYProgress, [yStart, yHalf, yEnd], [0, 0,  1]);
+	const boardColor = useTransform(scrollYProgress, [yStart, yHalf, yEnd], ["#FFFFFF", "#000000", "#000000"] )
+	
 	return (
-
-			<div className="flex flex-col  justify-start items-center h-full w-full">
+			<div  ref={ref} className="flex flex-col  justify-start items-center h-full w-full max-w-7xl ">
 				<div className="relative w-full flex flex-row justify-center items-center h-full " >
 					<motion.div
 						className="flex flex-col justify-center items-center w-full h-full "
@@ -41,7 +44,7 @@ const Title = ({ title, description, image }) => {
 							className="relative flex flex-col justify-center items-center mx-2 "
 							style={{
 								y: textYoffset,
-								opacity: boardImageOpacity,
+								opacity: descriptionOpacity,
 							}}
 						>
 							<p>{description}</p>

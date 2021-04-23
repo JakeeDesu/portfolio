@@ -99,7 +99,7 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 	const onDisplayKey = onDisplay.displayState ? 1 : 0;
 	return (
 		<motion.div
-			className="relative hidden md:flex flex-col justify-start items-center h-full w-full"
+			className="relative flex flex-col justify-start items-center h-full w-full"
 			key={onDisplayKey}
 			initial="initial"
 			animate="standing"

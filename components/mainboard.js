@@ -3,7 +3,10 @@ import Image from 'next/image'
 import Title from './title'
 import ProjectCover from './projectCover'
 import ProjectDescription from './projectDescription'
+import { mergeRefs } from './mergeRefs'
 import { useFocus } from './useFocus'
+import { useWindowDimensions } from './useWindowDimensions'
+import { useGetScrollInterval } from './useGetScrollInterval'
 import { motion, AnimatePresence, useViewportScroll, useTransform } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 
@@ -59,7 +62,10 @@ const MainBoard = ({ onDisplay, repos }) => {
 	// const boardOpacity = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0, 0.7, 1]);
 	// const boardImageOpacity = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0, 0.1, 1]);
 	// const sceneRef = useRef(null)
-	const [ref, setTrigger] = useFocus();
+	const [focuseRef, setTrigger] = useFocus();
+	const [[yStart, yHalf, yEnd], getScrollRef] = useGetScrollInterval()
+	const [height, width] = useWindowDimensions()
+	
 
 
 
@@ -124,21 +130,25 @@ const MainBoard = ({ onDisplay, repos }) => {
 				exit="disappear"
 				variants={boardVariants}
 			>
-
-				<motion.div ref={ref} className="flex flex-col justify-start items-center w-11/12 bg-yellow-500"
+				{
+					// console.log("intervals : [ " + y0 + " , " + y1 + " ] ")
+				}
+				<motion.div ref={mergeRefs(focuseRef)} className="flex flex-col justify-start items-center w-11/12  "
 					style={{
 						opacity: 1//boardImageOpacity
 					}}
 				>
 					<Title title={getTitle()} description={getDescription()}/>
 					<motion.div
-						className="relative flex flex-col items-start justify-center w-11/12 bg-blue-200"
+						className="relative flex flex-col items-start justify-center w-11/12 max-w-7xl "
 					>
+						{/* <p>window height  : {height} <br/> window width : {width} </p> */}
 						<ProjectCover imageSrc={getFrames()} width="w-3/5" />
 						{/* <ImageDisplayer projectName={getTitle()} />*/}
 					</motion.div>
 					<motion.div
-						className="relative flex flex-col items-end justify-center w-11/12 bg-red-400 "
+					ref={getScrollRef}
+						className="relative flex flex-col items-end justify-center w-11/12 max-w-7xl "
 					>
 						<ProjectDescription title={"title"} text={"text text text"} width="w-3/5"/>
 					</motion.div>

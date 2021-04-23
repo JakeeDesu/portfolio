@@ -61,7 +61,7 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 	let ss = 0;
 	useEffect(() => {
 
-		console.log(" files data : ", gitData, " loaded status : ", loaded, "window : ", window)
+		// console.log(" files data : ", gitData, " loaded status : ", loaded, "window : ", window)
 		// setElements([document.getElementById('soguma'), document.getElementById('board')])
 		// if (imageRef && imageRef.current)
 		// {

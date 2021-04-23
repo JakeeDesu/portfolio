@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 const getWindowDimensions = () => {
-  const { innerHeight : height, innerWidth : width } = window
+  const { innerHeight : height, innerWidth : width } = window ? window : {height : 0 , width : 0 };
 
   return {height, width}
 }

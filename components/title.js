@@ -4,10 +4,10 @@ import Image from 'next/image'
 const Title = ({ title, description, image }) => {
 
 	const { scrollYProgress } = useViewportScroll();
-	const textYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, 10, 50, 0]);
+	const textYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, 0, 0, 0]);
 	const textColor = useTransform(scrollYProgress, [0, 0.8, 1], ["#000000", "#FFFFFF", "#FFFFFF"] )
-	const boardYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [-2000, -800, 100, 0]);
-	const boardScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [3, 2, 1.2, 1]);
+	const boardYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [-2000, 0, 0, 0]);
+	const boardScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [3, 1, 1, 1]);
 	const boardOpacity = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [0, 0.9, 1, 1]);
 	const boardImageOpacity = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [0, 0, 0, 1]);
 	const boardColor = useTransform(scrollYProgress, [0 , 0.5, 1], ["#FFFFFF", "#000000", "#000000"] )

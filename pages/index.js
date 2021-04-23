@@ -58,9 +58,10 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme}) {
 	// const rY = maping(mousePosition.y, [0 , size.height], [0, 50])
 	// getLocalProjectData("Fractol");
 	// const [[soguma, board], setElements] = useState([null,null])
-
+	let ss= 0;
 	useEffect(() => {
-		console.log(" files data : ", gitData, " loaded status : ", loaded)
+
+		console.log(" files data : ", gitData, " loaded status : ", loaded, "window : ", window)
 		// setElements([document.getElementById('soguma'), document.getElementById('board')])
 		// if (imageRef && imageRef.current)
 		// {
@@ -110,17 +111,17 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme}) {
 	}
 	return (
 		<motion.div className={`relative flex flex-col w-full h-auto overflow-hidden`}>
+			{
+				console.log("window height : ", window.innerHeight)
+			}
 {/* {		console.log(dataLoading ? "not fetched yet" : "about :" , about, "repos : ", repos )} */}
-			{/* <div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
+		{/*	 <div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
 				<h1>onDisplay : {onDisplay.displayState ? "true" : "false"}</h1>
 				<h1>displayOff : {onDisplay.displayOff ? "true" : "false"}</h1>
 				<h1>itemId : {onDisplay.itemId}</h1>
 				<h1>type : {onDisplay.type}</h1>
-				<h1>X : {mousePosition.x}</h1>
-				<h1>Y : {mousePosition.y}</h1>
-	<			h1>top : {size.top} | left : {size.left}</h1>
 				<Link href="/home" ><a>none existing url</a></Link>
-			</div> */}
+			</div> *}
 			{/* <nav className="fixed z-50 top-20 right-8 lg:h-40 lg:w-24 md:h-32 md:w-20 h-20 w-16">
 				<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
 			</nav> */}

@@ -125,20 +125,20 @@ const MainBoard = ({ onDisplay, repos }) => {
 				variants={boardVariants}
 			>
 
-				<motion.div ref={ref} className="flex flex-col justify-center w-11/12 "
+				<motion.div ref={ref} className="flex flex-col justify-start items-center w-11/12 bg-yellow-500"
 					style={{
 						opacity: 1//boardImageOpacity
 					}}
 				>
 					<Title title={getTitle()} description={getDescription()}/>
 					<motion.div
-						className="relative flex flex-col items-start justify-center w-11/12"
+						className="relative flex flex-col items-start justify-center w-11/12 bg-blue-200"
 					>
 						<ProjectCover imageSrc={getFrames()} width="w-3/5" />
 						{/* <ImageDisplayer projectName={getTitle()} />*/}
 					</motion.div>
 					<motion.div
-						className="relative flex flex-col items-end justify-center w-11/12"
+						className="relative flex flex-col items-end justify-center w-11/12 bg-red-400 "
 					>
 						<ProjectDescription title={"title"} text={"text text text"} width="w-3/5"/>
 					</motion.div>

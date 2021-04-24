@@ -123,7 +123,7 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 			</nav> */}
 			<motion.div className={`relative flex flex-col justify-start l:h-screen ${onDisplay.displayState && onDisplay.type !== -1 ? "" : "h-screen"} m-0 p-0  w-full ${theme.dark.backgroundColor}`}
 			>
-				<motion.div id="soguma" className="relative flex justify-center items-center l:h-full md:h-screen h-screen w-full">
+				<motion.div id="soguma" className="relative flex justify-center items-center l:h-full h-screen w-full">
 					<div className="absolute top-0 left-0 lg:h-full md:h-full h-full w-full ">
 						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
 					</div>

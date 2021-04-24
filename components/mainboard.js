@@ -62,11 +62,18 @@ const MainBoard = ({ onDisplay, repos }) => {
 	// const boardOpacity = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0, 0.7, 1]);
 	// const boardImageOpacity = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0, 0.1, 1]);
 	// const sceneRef = useRef(null)
+	// const [intervals, setIntervals] = useState([0,0,0])
 	const [focuseRef, setTrigger] = useFocus();
+	const ref1 = useRef(null)
+	const ref2 = useRef(null)
+	const ref3 = useRef(null)
 
 
 
+	const [[yStart, yHalf, yEnd], refContainer, setChildRefs] = useGetScrollInterval()
 	useEffect(() => {
+
+		setChildRefs(ref1, ref2, ref3)
 		console.log("- mainboard useEffect")
 		if ((onDisplay.displayState && onDisplay.type === 1) || (onDisplay.displayState && onDisplay.type === 2)) {
 			// console.log(" **** track changes :", onDisplay, " *** " )
@@ -118,6 +125,17 @@ const MainBoard = ({ onDisplay, repos }) => {
 	// <motion.div    className="flex justify-center bg-blue-300 z-50 w-11/12"
 	// 	>
 	// </motion.div>
+	// const [height, width] = useWindowDimensions()
+
+	const { scrollYProgress } = useViewportScroll();
+	const Xoffset_1 = useTransform(scrollYProgress, [yStart, yHalf, yEnd], [ -1000, 0 , -1000]);
+	const Xoffset_2 = useTransform(scrollYProgress, [yStart, yHalf, yEnd], [ 1000, 0 , 1000]);
+	const Xoffset_3 = useTransform(scrollYProgress, [yStart, yHalf, yEnd], [ -1000, 0 , -1000]);
+
+	// const boardXoffset = useTransform(scrollYProgress, [yStart, yHalf, yEnd, 1], [ -2000, 0 , 0, -3000]);
+	// const boardScale = useTransform(scrollYProgress, [yStart, yHalf, yEnd, 1], [2.2, 2, 2, 2]);
+	// const boardOpacity = useTransform(scrollYProgress, [yStart, yHalf, yEnd , 1], [0, 0.9, 1, 1]);
+
 	return (
 		<>
 			{ (onDisplay.type === 1 || ( onDisplay.type === 2 && onDisplay.displayState )) && <motion.div
@@ -127,26 +145,42 @@ const MainBoard = ({ onDisplay, repos }) => {
 				exit="disappear"
 				variants={boardVariants}
 			>
-				{
-					// console.log("intervals : [ " + y0 + " , " + y1 + " ] ")
-				}
-				<motion.div ref={mergeRefs(focuseRef)} className="flex flex-col justify-start items-center w-11/12  "
+				<motion.div ref={mergeRefs(focuseRef, refContainer)} className="flex flex-col justify-start items-center w-11/12  "
 					style={{
 						opacity: 1//boardImageOpacity
 					}}
 				>
 					<Title title={getTitle()} description={getDescription()}/>
 					<motion.div
+						ref={ref1}
 						className="relative flex flex-col items-start justify-center w-11/12 max-w-7xl "
+						style={{
+							x: Xoffset_1,
+						  }}
 					>
 						{/* <p>window height  : {height} <br/> window width : {width} </p> */}
 						<ProjectCover imageSrc={getFrames()} width="w-3/5" />
 						{/* <ImageDisplayer projectName={getTitle()} />*/}
 					</motion.div>
 					<motion.div
-						className="relative flex flex-col items-end justify-center w-11/12 max-w-7xl "
+						ref={ref2}
+						className="relative flex flex-col items-end justify-center w-8/12 max-w-7xl "
+						style={{
+							x: Xoffset_2,
+						  }}
 					>
 						<ProjectDescription title={"title"} text={"text text text"} width="w-3/5"/>
+					</motion.div>
+					<motion.div
+						ref={ref3}
+						className="relative flex flex-col items-start justify-center w-11/12 max-w-7xl "
+						style={{
+							x: Xoffset_3,
+						  }}
+					>
+						{/* <p>window height  : {height} <br/> window width : {width} </p> */}
+						<ProjectCover imageSrc={getFrames()} width="w-3/5" />
+						{/* <ImageDisplayer projectName={getTitle()} />*/}
 					</motion.div>
 				</motion.div>
 

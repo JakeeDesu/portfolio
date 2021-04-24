@@ -63,9 +63,6 @@ const MainBoard = ({ onDisplay, repos }) => {
 	// const boardImageOpacity = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0, 0.1, 1]);
 	// const sceneRef = useRef(null)
 	const [focuseRef, setTrigger] = useFocus();
-	const [[yStart, yHalf, yEnd], getScrollRef] = useGetScrollInterval()
-	const [height, width] = useWindowDimensions()
-	
 
 
 
@@ -147,7 +144,6 @@ const MainBoard = ({ onDisplay, repos }) => {
 						{/* <ImageDisplayer projectName={getTitle()} />*/}
 					</motion.div>
 					<motion.div
-					ref={getScrollRef}
 						className="relative flex flex-col items-end justify-center w-11/12 max-w-7xl "
 					>
 						<ProjectDescription title={"title"} text={"text text text"} width="w-3/5"/>

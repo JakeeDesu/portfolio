@@ -14,9 +14,10 @@ const Title = ({ title, description, image }) => {
 	const boardOpacity = useTransform(scrollYProgress, [0, yStart, yHalf, yEnd , 1], [0, 0, 0.9, 1, 1]);
 	const descriptionOpacity = useTransform(scrollYProgress, [yStart, yHalf, yEnd], [0, 0,  1]);
 	const boardColor = useTransform(scrollYProgress, [yStart, yHalf, yEnd], ["#FFFFFF", "#000000", "#000000"] )
+	console.log("title interval : ", [yStart, yHalf, yEnd] )
 	
 	return (
-			<div  ref={ref} className="flex flex-col  justify-start items-center h-full w-full max-w-7xl ">
+			<div  ref={ref} className="flex flex-col  justify-start items-center h-full w-full max-w-7xl bg-red-300 ">
 				<div className="relative w-full flex flex-row justify-center items-center h-full " >
 					<motion.div
 						className="flex flex-col justify-center items-center w-full h-full "

@@ -4,20 +4,25 @@ import { useWindowDimensions } from './useWindowDimensions'
 export const useGetScrollInterval = () => {
 
     const cRef  = useRef(null)
-    const ref = useRef([])
-    const [[yStart, yHalf, yEnd], setIntervals] = useState([0,0,0])
+    const ref = useRef(new Set())
+    const [interval, setIntervals] = useState([])
     const [[compOffset, compHeight], setComponentProps] = useState([0, 0])
     const [ wHeight, wWidth] = useWindowDimensions()
 
     useEffect(() => {
-
-        ref.current.forEach((currentElem, i) => {
-            console.log("element " + i +" height : ", currentElem?.offsetTop );            
+        const newInterval = []
+        ref.current.forEach((currentElem) => {
+            console.log("element  offset : ", currentElem?.offsetTop );
+            let elemOffset = currentElem ? currentElem.offsetTop : 0 ;
+            console.log("hi foker2 : ", elemOffset)
+            let newValue = cRef.current ? elemOffset / cRef.current.getBoundingClientRect.height :  0 ;
+            console.log("hi foker3 : ", cRef.current)
+            newInterval.push(newValue)
         })
-
+        setIntervals(newInterval)
     //     setIntervals([ start / bodyHeight, (end - start ) / ( 2 * bodyHeight) , end / bodyHeight])
 
-    }, [wHeight, compHeight, compOffset])
+    }, [wHeight])
 
 
 
@@ -35,6 +40,7 @@ export const useGetScrollInterval = () => {
         }
     },[])
     const setChildRefs = useCallback((...compRefs) => {
+        if (ref.current.size <= 0)
         for (const compRef of compRefs)
         {
             if (!compRef)
@@ -44,12 +50,13 @@ export const useGetScrollInterval = () => {
             else
             {
                 console.log(" ref is passed | useGetScrollInterval ")
-                console.log(`element : `, compRef.current)
-                console.log("element height : ", compRef.current?.getBoundingClientRect().height );
-                ref.current.push(compRef.current)
+                // console.log(`element : `, compRef.current)
+                // console.log("element height : ", compRef.current?.getBoundingClientRect().height );
+                
+                ref.current.add(compRef.current)
             }
         }
         },[])
 
-    return [[yStart, yHalf, yEnd],setContainerRef,setChildRefs]
+    return [interval,setContainerRef,setChildRefs]
 }

@@ -286,13 +286,12 @@ const queryData = async () => {
 	}).catch(error => {
 		if (error)
 			console.log('fetching error : ', error)
+			return {
+				fetched: false,
+				fetchedData: {}
+			}
 	})
 
-	if (data.fetchedData["message"] === "Bad credentials")
-		return {
-			fetched: false,
-			fetchedData: {}
-		}
 	return data
 }
 

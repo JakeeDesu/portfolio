@@ -67,14 +67,31 @@ const MainBoard = ({ onDisplay, repos }) => {
 	const ref1 = useRef(null)
 	const ref2 = useRef(null)
 	const ref3 = useRef(null)
-	const [interval, setInterval] =useState([0, 0, 0])
-
-
-	// setChildRefs(ref1, ref2, ref3)
+	const [scrollValues,refContainer, setChildsVariables] = useGetScrollInterval()
+	
 	console.log("- mainboard useEffect")
+	const { scrollYProgress } = useViewportScroll();
+	const tt = [0, 0.3, 0.6]
+	console.log("interval :::: :::::::::::::::::", scrollValues.values[0])
+	let Xoffset_1 = useTransform(scrollYProgress,scrollValues.interval[0] ,scrollValues.values[0] );
+	let Xoffset_2 = useTransform(scrollYProgress, scrollValues.interval[1] , scrollValues.values[1] );
+	let Xoffset_3 = useTransform(scrollYProgress, scrollValues.interval[2] , scrollValues.values[2] );
 	useEffect(() => {
-		const [interval, refContainer, ref1, ref2, ref3] = useGetScrollInterval()
-		setInterval(interval)
+		if (!scrollValues.ready)
+		setChildsVariables([
+			{
+				ref : ref1,
+				anime : [-1000, 0]
+			},
+			{
+				ref : ref2,
+				anime : [1000, 0]
+			},
+			{
+				ref : ref3,
+				anime : [-1000, 0]
+			},
+		])
 		if ((onDisplay.displayState && onDisplay.type === 1) || (onDisplay.displayState && onDisplay.type === 2)) {
 			// console.log(" **** track changes :", onDisplay, " *** " )
 			setTrigger(true)
@@ -125,15 +142,12 @@ const MainBoard = ({ onDisplay, repos }) => {
 	// <motion.div    className="flex justify-center bg-blue-300 z-50 w-11/12"
 	// 	>
 	// </motion.div>
+
 	// const [height, width] = useWindowDimensions()
-
-	const { scrollYProgress } = useViewportScroll();
-	const tt = [0, 0.3, 0.6]
-	console.log("interval :::: :::::::::::::::::", interval)
-	const Xoffset_1 = useTransform(scrollYProgress, tt, [ -1000, 0 , 0]);
-	const Xoffset_2 = useTransform(scrollYProgress, tt, [ 1000, 1000 , 0]);
-	const Xoffset_3 = useTransform(scrollYProgress, tt , [ -1000, -1000 , -1000]);
-
+	// const	Xoffset_1 = 0
+	// const	Xoffset_2 = 0
+	// const	Xoffset_3 = 0
+	// }
 	// const boardXoffset = useTransform(scrollYProgress, [yStart, yHalf, yEnd, 1], [ -2000, 0 , 0, -3000]);
 	// const boardScale = useTransform(scrollYProgress, [yStart, yHalf, yEnd, 1], [2.2, 2, 2, 2]);
 	// const boardOpacity = useTransform(scrollYProgress, [yStart, yHalf, yEnd , 1], [0, 0.9, 1, 1]);
@@ -152,10 +166,10 @@ const MainBoard = ({ onDisplay, repos }) => {
 						opacity: 1//boardImageOpacity
 					}}
 				>
-					{/* <Title title={getTitle()} description={getDescription()}/> */}
+					<Title title={getTitle()} description={getDescription()}/>
 					<motion.div
 						ref={ref1}
-						className="relative flex flex-col items-start justify-center w-11/12 max-w-7xl "
+						className="relative flex flex-col items-start justify-center w-11/12 max-w-7xl"
 						style={{
 							x: Xoffset_1,
 						}}

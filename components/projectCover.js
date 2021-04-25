@@ -6,7 +6,7 @@ const ProjectCover = ({ imageSrc, width }) => {
 
   return (
     <motion.div 
-      className={`${width || "w-full"} bg-gray-100 `}
+      className={`${width || "w-full"}  `}
     >
       <motion.div
         className="relative flex justify-center items-center w-full  pt-full  border-4 border-black bg-black rounded-full"

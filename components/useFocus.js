@@ -5,23 +5,23 @@ export const useFocus = () => {
 	const ref = useRef(null)
 
 	useEffect(() => {
-		console.log("- scrollHook useEffect")
+		// console.log("- scrollHook useEffect")
 		if (ref.current && start)
 		{
-			console.log("  - lanch scrollIntoView() ")
+			// console.log("  - lanch scrollIntoView() ")
 			ref.current.scrollIntoView({ behavior : 'smooth' })
 			// setStart(false)
 		}
 	}, [start])
 
 	const setTrigger = useCallback((value) => {
-		console.log("- launch setTriger(true) ")
+		// console.log("- launch setTriger(true) ")
 		if (value !== start)
 			setStart(value)
 	})
 
 	const setRef = useCallback(node => {
-		console.log("- setRef callback()")
+		// console.log("- setRef callback()")
 
 		if (ref.current)
 		{

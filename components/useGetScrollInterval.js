@@ -1,6 +1,15 @@
 import { useState, useEffect , useRef, useCallback } from 'react'
 import { useWindowDimensions } from './useWindowDimensions'
 
+export const useGetRef = (val) => {
+    const ref = useRef(val)
+
+    const getRef = useCallback((current) => {
+        ref.current = current
+    },[])
+    return [ref, getRef]
+}
+
 export const useGetScrollInterval = () => {
 
     const [childs, setChilds] = useState([])
@@ -18,13 +27,17 @@ export const useGetScrollInterval = () => {
             let elemOffset = child.ref.current ? child.ref.current.offsetTop : 0 ;
             console.log("hi foker2 : ", elemOffset)
             let start = cRef.current ? elemOffset / cRef.current.getBoundingClientRect().height :  0 ;
-            let end = cRef.current ? (elemOffset + child.ref.current.getBoundingClientRect().height) / cRef.current.getBoundingClientRect().height :  0 ;
+            let end = cRef.current && child.ref.current ? (elemOffset + child.ref.current.getBoundingClientRect().height) / cRef.current.getBoundingClientRect().height :  0 ;
             
             if (child.anime.length <= 2)
                 return [0,start , end,1]
             else
             {
-                let newInterval = [0,start]
+                let newInterval = []
+                if (start !== 0)
+                    newInterval.push(start)
+                else
+                newInterval.push(0)
                 let subValues = child.anime.length - 2
                 let subValueUnit = (end - start) / (subValues + 1)
                 while (subValues > 0)
@@ -48,7 +61,12 @@ export const useGetScrollInterval = () => {
 
             childs.forEach((child) => {
                 let interval = getInterval(child)
-                let values = [child.anime[0]].concat(child.anime)
+                let values = []
+                if (interval.length === child.anime.length + 2)
+                    values = [child.anime[0]].concat(child.anime)
+                else
+                    values = child.anime
+
                 if (interval[1] === 0)
                 {
                     let newInterval = [0]
@@ -89,7 +107,7 @@ export const useGetScrollInterval = () => {
         
     //     setIntervals([ start / bodyHeight, (end - start ) / ( 2 * bodyHeight) , end / bodyHeight])
 
-    }, [childs])
+    }, [childs, wHeight])
 
 
 
@@ -111,6 +129,12 @@ export const useGetScrollInterval = () => {
             
         // if (isRendred)
         // {
+            childs.forEach((c, i) => {
+                if (!c.ref.current)
+                    console.log("  ref " + i + " is null")
+                else
+                console.log("  ref " + i + " not null")
+            })
             if (childs.length > 0)
                 setChilds(childs)
         // }

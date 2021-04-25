@@ -17,6 +17,8 @@ import { gql } from "@apollo/client";
 import client from "../apollo-client";
 import path from 'path'
 
+import Title from '../components/title'
+import { useGetScrollInterval, useGetRef } from '../components/useGetScrollInterval'
 function rotateByMousePosition(event, ref) {
 	const currentPosi = {
 		x: event.pageX,
@@ -51,8 +53,21 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 	const { scrollYProgress } = useViewportScroll();
 	const sogumaScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0.9, 0.8, 0.1]);
 	const sogumaYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, -10, -100, -500]);
+	
+	const [scrollValues, refContainer, setChildsVariables] = useGetScrollInterval()
 
-
+	const [ref1, getRef1] = useGetRef(null)
+	const [ref2, getRef2] = useGetRef(null)
+	const componentAnimationIntervals = [
+		{
+			ref: ref1,
+			anime: [0, -100, -100]
+		},
+		{
+			ref: ref2,
+			anime: [0, -100, -100]
+		},
+	]
 
 	// const rX = maping(mousePosition.x , [0 , size.width], [0, 50])
 	// const rY = maping(mousePosition.y, [0 , size.height], [0, 50])
@@ -60,7 +75,8 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 	// const [[soguma, board], setElements] = useState([null,null])
 	let ss = 0;
 	useEffect(() => {
-
+		if (!scrollValues.ready)
+			setChildsVariables(componentAnimationIntervals)
 		// console.log(" files data : ", gitData, " loaded status : ", loaded, "window : ", window)
 		// setElements([document.getElementById('soguma'), document.getElementById('board')])
 		// if (imageRef && imageRef.current)
@@ -132,16 +148,37 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 					>
 						<motion.div className="relative flex flex-row justify-center items-center h-full w-1/2 "
 							style={{
-								scale: sogumaScale,
-								y: sogumaYoffset
+								// scale: sogumaScale,
+								// y: sogumaYoffset
 							}}
 
 						>
 							{/* <div className="flex justify-center items-center h-full w-5/6 bg-red-600"> */}
 							<motion.div
-								className="relative flex flex-col items-center justify-center w-5/12 h-full pt-full"
+							 ref={refContainer}
+								className="relative flex flex-col items-center justify-center w-5/12 h-full pt-full bg-red-500 "
 							>
-								<hr className="absolute top-0 border-2 border-black h-1/2"></hr>
+								<Title
+									containerWidth={" w-11/12 max-w-7xl bg-gray-200"}
+									width={"w-full"}
+									title={"hamid"}
+									description={"zabi"}
+									getRef={getRef1}
+									interval={scrollValues.interval[0]}
+									values={scrollValues.values[0]}
+			
+								/>
+								<Title
+									containerWidth={" w-11/12 max-w-7xl bg-blue-200"}
+									width={"w-full"}
+									title={"hamid"}
+									description={"zabi"}
+									getRef={getRef2}
+									interval={scrollValues.interval[1]}
+									values={scrollValues.values[1]}
+			
+								/>
+								{/* <hr className="absolute top-0 border-2 border-black h-1/2"></hr>
 								<div className="absolute left-0 w-full rounded-full border-black border-4 overflow-hidden bg-black"
 									ref={imageRef}
 									onMouseMove={handleMouseMove}
@@ -150,12 +187,11 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 
 									<motion.img className="w-full object-fill" src="/me/r-1.png"
 									/>
-								</div>
+								</div> */}
 							</motion.div>
 							<motion.div
 								className="relative flex items-center justify-center w-1/3 h-full"
 							>
-								{/* <hr className="absolute top-0 border-2 border-black h-2/3"></hr> */}
 								<motion.div className="absolute top-2/3 h-1/5  w-full cursor-default"
 									ref={textRef}
 									onMouseMove={handleMouseMoveText}

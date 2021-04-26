@@ -13,7 +13,7 @@ export const useGetRef = (val) => {
 export const useGetScrollInterval = () => {
 
     const [childs, setChilds] = useState([])
-    const [scrollValues, setScrollValues] = useState({ready : false, interval: [[0,1],[0,1],[0,1]], values : [[0,0],[0,0],[0,0]]})
+    const [scrollValues, setScrollValues] = useState({ready : false, interval: [[0,1]], values : [[0,0]], animationValues : [{ x : [] , y  : [] }, { x : [], y : [] }] })
     const cRef  = useRef(null)
     const ref = useRef(new Set())
     const [isRendred, setIsRendred] = useState(false)
@@ -22,6 +22,8 @@ export const useGetScrollInterval = () => {
     const [ wHeight, wWidth] = useWindowDimensions()
 
     useEffect(() => {
+        console.log("MAAAADAAAAAAAZZZZZZZZZSHHH")
+
         const getInterval = (child) => {
             // const newInterval = [0]
             let elemOffset = child.ref.current ? child.ref.current.offsetTop : 0 ;
@@ -51,21 +53,14 @@ export const useGetScrollInterval = () => {
         }
 
 
-        if (childs.length > 0)
-        {
-            let ready = childs[0].ref.current ? true : false;
-            let intevalValues = {
-                interval : [],
-                values : []
-            }
-
-            childs.forEach((child) => {
-                let interval = getInterval(child)
-                let values = []
-                if (interval.length === child.anime.length + 2)
-                    values = [child.anime[0]].concat(child.anime)
+        const getMappedValues = (childAnimation) => {
+            let values = []
+            if (childAnimation)
+            {
+                if (interval.length === childAnimation.length + 2)
+                    values = [childAnimation[0]].concat(childAnimation)
                 else
-                    values = child.anime
+                    values = childAnimation
 
                 if (interval[1] === 0)
                 {
@@ -80,11 +75,50 @@ export const useGetScrollInterval = () => {
                     newInterval.push(1)
                     interval = newInterval
                 }
-                values.push(child.anime[child.anime.length - 1])
+                values.push(childAnimation[childAnimation.length - 1])
+            }
+                return values
+        }
+
+        const getAnimationObj = (child) => {
+            let animationObj = {}
+            if (child.hasOwnProperty("animation"))
+            {
+                for (const key in child.animation)
+                {
+                    console.log("*** : " + key + " tol : " + child.animation[key].length + " animation : " , child.animation[key] )
+                    if (child.animation[key].length > 0)
+                        animationObj[key] = getMappedValues(child.animation[key])
+                    else
+                        animationObj[key] = getMappedValues([0,0])
+                    // animationObj[key] = getMappedValues([0,0])
+                    console.log("|---", animationObj[key] , "---|");
+                }
+            }
+
+            console.log("DAAAAAAAZZZZZZZZZ");
+            return animationObj
+        }
+
+        
+        if (childs.length > 0)
+        {
+            let ready = childs[0].ref.current ? true : false;
+            let intevalValues = {
+                interval : [],
+                values : [],
+                animationValues : []
+            }
+
+            childs.forEach((child) => {
+                let interval = getInterval(child)
+                let values = getMappedValues(child.anime)
+                let animationObj = getAnimationObj(child)
                 intevalValues.interval.push(interval)
                 intevalValues.values.push(values)
+                intevalValues.animationValues.push(animationObj)
             })
-            console.log("get scroll values : ", {ready : ready, ...intevalValues})
+            console.log("get scroll values : ", {ready : ready, ...intevalValues});
             setScrollValues({ready : ready, ...intevalValues})
         }
         // if (isRendred)

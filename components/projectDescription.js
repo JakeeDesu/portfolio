@@ -1,9 +1,11 @@
 import {motion, useTransform, useViewportScroll} from 'framer-motion'
 
-const ProjectDescription = ({containerWidth, width, getRef, title, text, interval, values }) => {
+const ProjectDescription = ({animationValues, containerWidth, width, getRef, title, text, interval, values }) => {
 
   const { scrollYProgress } = useViewportScroll();
-  const xOffset = useTransform(scrollYProgress, interval, values);
+  const xOffset = useTransform(scrollYProgress, interval, animationValues['x']);
+  const yOffset = useTransform(scrollYProgress, interval, animationValues['y']);
+  const scale = useTransform(scrollYProgress, interval, animationValues['scale']);
   
 	console.log("description interval : ", interval , " description values : ", values)
   return (
@@ -11,6 +13,8 @@ const ProjectDescription = ({containerWidth, width, getRef, title, text, interva
       <motion.div className={`${width || "w-full"}`}
         style={{
           x: xOffset,
+          y: yOffset,
+          scale : scale
           }}
         >
         <div

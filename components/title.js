@@ -2,13 +2,24 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import Image from 'next/image'
 import { useGetScrollInterval } from './useGetScrollInterval'
 
-const Title = ({containerWidth, width, getRef, interval, values, title, description, image }) => {
+const Title = ({animationValues, containerWidth, width, getRef, interval, values, title, description, image }) => {
 
 	// const [[yStart, yHalf, yEnd], ref] = useGetScrollInterval()
 	const { scrollYProgress } = useViewportScroll();
-	console.log("title interval : ", interval , " title values : ", values)
-	const boardYoffset = useTransform(scrollYProgress, interval, values);
-	
+	console.log(title + " title interval : ", interval , title + " title values : ", {x: [0, 100],y: [0, 100],scale: [1,1] }, "   | " , animationValues)
+	// const boardYoffset = useTransform(scrollYProgress, interval, values);
+	// if (animationValues.hasOwnProperty("x"))
+		const xOffset = useTransform(scrollYProgress, interval , animationValues['x']);
+	// else
+	// 	const xOffset = 0
+	// if (animationValues.hasOwnProperty("y"))
+		const yOffset = useTransform(scrollYProgress, interval , animationValues['y']);
+	// else
+	// 	const yOffset = 0
+	// if (animationValues.hasOwnProperty("scale"))
+		const scale = useTransform(scrollYProgress, interval , animationValues['scale']);
+	// else
+	// 	const scale = 0
 	// const textYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, 0, 0, 0]);
 	// const textColor = useTransform(scrollYProgress, [yStart, yHalf, yEnd], ["#000000", "#FFFFFF", "#FFFFFF"] )
 	// const boardScale = useTransform(scrollYProgress, [0, yStart, yHalf, yEnd, 1], [3, 2.2, 1.8, 1, 1]);
@@ -22,7 +33,10 @@ const Title = ({containerWidth, width, getRef, interval, values, title, descript
 			<motion.div
 				className="flex flex-col justify-center items-center w-full h-full "
 				style={{
-					y: boardYoffset,
+					// y: boardYoffset,
+					x: xOffset,
+					y: yOffset,
+					scale : scale
 					// scale: boardScale,
 					// opacity: boardOpacity,
 				}}

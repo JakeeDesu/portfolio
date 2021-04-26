@@ -66,15 +66,30 @@ const MainBoard = ({ onDisplay, repos }) => {
 	const componentAnimationIntervals = [
 		{
 			ref: ref1,
-			anime: [-3000, -500, 0]
+			anime: [-3000, -500, 0],
+			animation : {
+				x : [0, 0, 0],
+				y: [-3000, -500, 0],
+				scale : [3, 2.5, 1],
+			}
 		},
 		{
 			ref: ref2,
-			anime: [-1000, -100, 0]
+			anime: [-1000, -100, 0],
+			animation : {
+				x : [-1000, -100, 0],
+				y: [100, 50, 0],
+				scale : [1.8, 1.5, 1],
+			}
 		},
 		{
 			ref: ref3,
-			anime: [1000, 100, 0]
+			anime: [1000, 100, 0],
+			animation : {
+				x : [1000, 100, 0],
+				y: [100, 50, 0],
+				scale : [1.8, 1.5, 1],
+			}
 		},
 	]
 
@@ -145,31 +160,33 @@ const MainBoard = ({ onDisplay, repos }) => {
 					}}
 				>
 					<Title
-						containerWidth={" w-8/12 max-w-7xl bg-blue-600 "}
+						containerWidth={" w-8/12 max-w-7xl "}
 						width={"w-3/5"}
 						title={getTitle()}
 						description={getDescription()}
 						getRef={getRef1}
 						interval={scrollValues.interval[0]}
 						values={scrollValues.values[0]}
-
+						animationValues={scrollValues.animationValues[0]}
 					/>
 					<ProjectCover
-						containerWidth={" w-11/12 max-w-7xl bg-red-500 "}
+						containerWidth={" w-11/12 max-w-7xl "}
 						width="w-3/5"
 						imageSrc={getFrames()}
 						getRef={getRef2}
 						interval={scrollValues.interval[1]}
 						values={scrollValues.values[1]}
+						animationValues={scrollValues.animationValues[1]}
 					/>
 					<ProjectDescription
-						containerWidth={" w-11/12 max-w-7xl bg-gray-300 "} // tailwind width style
+						containerWidth={" w-11/12 max-w-7xl "} // tailwind width style
 						width="w-3/5"
 						title={"title"}
 						text={"text text text"}
 						getRef={getRef3}
 						interval={scrollValues.interval[2]}
 						values={scrollValues.values[2]}
+						animationValues={scrollValues.animationValues[2]}
 					/>
 				</motion.div>
 

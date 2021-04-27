@@ -17,7 +17,8 @@ import { gql } from "@apollo/client";
 import client from "../apollo-client";
 import path from 'path'
 
-import Title from '../components/title'
+import Cover from '../components/cover'
+import Description from '../components/description'
 import { Dialog } from '../components/dialog'
 import { useGetScrollInterval, useGetRef } from '../components/useGetScrollInterval'
 
@@ -87,22 +88,42 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 					<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
 				</div>
 			</nav>
-			<Debug/>
+			{/* <Debug/> */}
 			<motion.div className={`relative flex flex-col justify-start l:h-screen ${onDisplay.displayState && onDisplay.type !== -1 ? "" : "h-screen"} m-0 p-0  w-full ${theme.dark.backgroundColor}`}>
 				<motion.div id="soguma" className="relative flex justify-center items-center l:h-full h-screen w-full">
 					<div className="flex absolute top-0 left-0 lg:h-full md:h-full h-100 w-full ">
 						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
 					</div>
-					<div className="absolute w-full h-full top-0 left-0 " >
-						<motion.div className="relative flex flex-row justify-center items-center h-full w-1/2 "
+					<div className="absolute flex md:flex-row flex-col justify-center items-center w-full h-full top-0 left-0  " >
+						<motion.div className="relative flex flex-row justify-start items-start h-11/12 md:w-1/2 w-full "
 							style={{
 								scale: sogumaScale,
 								// y: sogumaYoffset
 							}}>
-							<motion.div className="relative flex flex-col items-center justify-start w-5/12 h-full pt-full " >
+							<motion.div className="relative flex flex-col items-start justify-start w-2/3  pt-full" >
+								<Cover imageSrc={"/me/0.png"}
+									containerWidth=" w-full "
+									width="w-full max-w-6xl"
+								/>
 							</motion.div>
-							<motion.div className="relative flex items-center justify-center w-1/3 h-full" >
-							</motion.div>
+							{/* <motion.div className="relative flex items-center justify-center w-1/3 h-full bg-sogumaBrown" >
+							</motion.div> */}
+						</motion.div>
+						<motion.div className="relative flex flex-col justify-end items-center h-6/12 md:w-1/2 w-full " >
+							<Description
+								title={"title 2"}
+								text={"asfadsfadsfadsfadsfadsf adsfadsf sf "}
+								containerWidth=" w-11/12 "
+								width="w-6/12 max-w-6xl"
+								color="bg-black text-white"
+							/>
+							<Description
+								title={"title 1"}
+								text={"asfadsfadsfadsfadsfadsf adsfadsf sf "}
+								containerWidth=" w-11/12 "
+								width="w-5/12  max-w-6xl"
+								color="bg-white text-black"
+							/>
 						</motion.div>
 					</div>
 					{/* <motion.div className="absolute flex justify-center items-start md:h-100 lg:h-100 md:top-1/4 top-1/4 h-full lg:top-1/3 w-full z-20 pointer-events-none bg-sogumaRed" */}

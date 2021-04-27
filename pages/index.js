@@ -18,6 +18,7 @@ import client from "../apollo-client";
 import path from 'path'
 
 import Title from '../components/title'
+import { Dialog } from '../components/dialog'
 import { useGetScrollInterval, useGetRef } from '../components/useGetScrollInterval'
 
 

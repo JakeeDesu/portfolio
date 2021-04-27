@@ -4,6 +4,8 @@ import Gim from './gim'
 import Soguma from './soguma'
 import Menu from './menu'
 import { wrap } from 'popmotion'
+import { Dialog } from '../components/dialog'
+
 import SogumaEye from './sugumaEye'
 import { theme } from './theme'
 import { gimsProps } from './gimProps' // gims props
@@ -99,7 +101,7 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 	const onDisplayKey = onDisplay.displayState ? 1 : 0;
 	return (
 		<motion.div
-			className="relative hidden md:flex flex-col justify-start items-center h-full w-full"
+			className="relative hidden md:flex flex-col justify-start items-center h-full w-full "
 			key={onDisplayKey}
 			initial="initial"
 			animate="standing"
@@ -120,7 +122,6 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 				/>
 			))}
 			{ onDisplay.type !=2 && <Menu onDisplay={onDisplay}  setOnDisplay={setOnDisplay}/>}
-
 			<AnimatePresence>
 				{onDisplay.type === 2 && onDisplay.displayState && <motion.div 
 					className="absolute -top-40 h-24 w-24 rounded-full border-4 border-red-100  shadow-soft1glow cursor-pointer"

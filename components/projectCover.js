@@ -35,4 +35,5 @@ const ProjectCover = ({ animationValues, containerWidth, width, getRef, imageSrc
     </div>
   )
 }
+
 export default ProjectCover

@@ -72,19 +72,19 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 			switch (onDisplay.type) {
 				case  -1 : // none state
 					if ( onDisplay.itemId !== -1)
-						setOnDisplay(false, onDisplay.itemId, 2)
+						setOnDisplay(false, onDisplay.itemId, 2, true)
 					else
-						setOnDisplay(true, onDisplay.itemId, 0)
+						setOnDisplay(true, onDisplay.itemId, 0, true)
 					break;
 				case  0 : // menu state
-					setOnDisplay(true, onDisplay.itemId, -1)
+					setOnDisplay(true, onDisplay.itemId, -1, true)
 					break;
 				case  1 : // about state
-					setOnDisplay(true, onDisplay.itemId, 0)
+					setOnDisplay(true, onDisplay.itemId, 0, true)
 					break;
 				case  2 : //  case 1) gims on display | case 2) a project on display 
 					if (!onDisplay.displayOff)
-						onDisplay.displayState ? setOnDisplay(false, onDisplay.itemId, 2) : setOnDisplay(true, onDisplay.itemId, 2);
+						onDisplay.displayState ? setOnDisplay(false, onDisplay.itemId, 2, true) : setOnDisplay(true, onDisplay.itemId, 2, true);
 					// else
 						// setOnDisplay(false, onDisplay.itemId, 2)
 					break;
@@ -99,14 +99,13 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 	const onDisplayKey = onDisplay.displayState ? 1 : 0;
 	return (
 		<motion.div
-			className="relative flex flex-col justify-start items-center h-full w-full"
+			className="relative hidden md:flex flex-col justify-start items-center h-full w-full"
 			key={onDisplayKey}
 			initial="initial"
 			animate="standing"
 			custom={onDisplay}
 			variants={variants}
 		>
-			{/* {	console.log(" waaaiiiiiiiiiiiting projects : ", projects) } */}
 			{onDisplay.type === 2 && gimsProps.map((gim) => (
 				<Gim
 					key={gim.id}
@@ -124,7 +123,7 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 
 			<AnimatePresence>
 				{onDisplay.type === 2 && onDisplay.displayState && <motion.div 
-					className="absolute -top-40 h-24 w-24 rounded-full border-4 border-gray-100  shadow-soft1glow cursor-pointer"
+					className="absolute -top-40 h-24 w-24 rounded-full border-4 border-red-100  shadow-soft1glow cursor-pointer"
 					initial={{
 						opacity : 0,
 						scale : 0.5,

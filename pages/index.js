@@ -19,30 +19,7 @@ import path from 'path'
 
 import Title from '../components/title'
 import { useGetScrollInterval, useGetRef } from '../components/useGetScrollInterval'
-function rotateByMousePosition(event, ref) {
-	const currentPosi = {
-		x: event.pageX,
-		y: event.pageY,
-	}
 
-	let offset = { top: 0, left: 0 }
-	if (ref) {
-		offset = ref.getBoundingClientRect()
-		ref.style.transform = `rotateY(${maping(currentPosi.x - offset.left, [0, offset.width], [-20, 20])}deg)`
-		ref.style.transform += `rotateX(${maping(currentPosi.y - offset.top, [0, offset.height], [-20, 20])}deg)`
-	}
-	// console.log(maping(currentPosi.x - offset.left, [0, offset.width],[-40, 40]))
-	// ref.style.transform += ` rotateY(${maping(currentPosi.y - offset.top, [0, offset.height],[-40, 40])}deg)`
-	// return {
-	// 	x : currentPosi.x - offset.left,
-	// 	y : currentPosi.y - offset.top,
-	// 	// zab
-	// }
-}
-
-function maping(value, interval1, interval2) {
-	return (value * (interval2[1] - interval2[0]) / interval1[1]) + interval2[0]
-}
 
 export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 	const [onDisplay, setOnDisplay] = useState({ displayState: true, displayOff: false, itemId: -1, type: -1 })
@@ -50,183 +27,86 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 	// const [size, setSize] = useState({height : 0, width : 0});
 	const imageRef = useRef()
 	const textRef = useRef()
-	
-	
 
-	
+
 	const { scrollYProgress } = useViewportScroll();
 	const sogumaScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0.9, 0.8, 0.1]);
-
-
-
-
 	const sogumaYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, -10, -100, -500]);
-	
-	const [scrollValues, refContainer, setChildsVariables] = useGetScrollInterval()
 
-	// const ref1 = useRef(null)
-	const [ref1, getRef1] = useGetRef(null)
-	const [ref2, getRef2] = useGetRef(null)
-	const componentAnimationIntervals = [
-		{
-			ref: ref1,
-			anime: [0, -100, -1000],
-			animation : {
-				x : [0, -100, -1000],
-				y: [0, -100, -1000],
-				scale : [1,1,1],
-			}
-		},
-		{
-			ref: ref2,
-			anime: [0, -100, -1000],
-			animation : {
-				x : [0, -100, -1000],
-				y: [0, -100, -1000],
-				scale : [1,1,1],
-			}
-		},
-	]
-	// const rX = maping(mousePosition.x , [0 , size.width], [0, 50])
-	// const rY = maping(mousePosition.y, [0 , size.height], [0, 50])
-	// getLocalProjectData("Fractol");
-	// const [[soguma, board], setElements] = useState([null,null])
-	let ss = 0;
+
 	useEffect(() => {
-
-		console.log("asfasdfs =>  ", ref1.current )
-		if (!scrollValues.ready)
-		setChildsVariables(componentAnimationIntervals)
 		// console.log(" files data : ", gitData, " loaded status : ", loaded, "window : ", window)
 		// setElements([document.getElementById('soguma'), document.getElementById('board')])
 		// if (imageRef && imageRef.current)
 		// {
-			// 	console.log("tyyype x ", imageRef.current.getBoundingClientRect())
-			// 	let rectSize = imageRef.current.getBoundingClientRect()
-			// 	setSize({ height : rectSize.height, width : rectSize.width})
-			// }
-			let timer;
-			if (!onDisplay.displayState && onDisplay.displayOff) {
-				timer = setTimeout(() => {
-					setOnDisplay({ ...onDisplay, displayOff: false });
-				}, 300)
-			}
-			return () => clearTimeout(timer);
-		}, [onDisplay]);
-		
-		// set a gim on display mode
-		const displayGim = (displayState, itemId, type) => {
-			// setTimeout(() => {
-				// 	let board = document.getElementById('board');
-				// 	if (board && (onDisplay.displayState && onDisplay.type === 2))
-				// 	{
-					// 		board.scrollIntoView(false);
-					// 		console.log("func fired ")
-					// 	}
-					// 	else
-					console.log("scroooooooooooooooooolll: NULLLLL type : " + type + " state : " + displayState)
-					
-					// }, 100)
-					console.log(" |||  DISPLAY : ", displayState ? "true" : "false", " ||| type : " + type)
-					const newdisplayOff = onDisplay.displayState && !displayState ? true : false;
-					setOnDisplay({ ...onDisplay, displayState, displayOff: newdisplayOff, itemId, type });
-				}
-				
-				const handleMouseMove = e => {
-					rotateByMousePosition(e, imageRef.current)
-				};
-				const handleMouseLeave = e => {
-					imageRef.current.style.transform = `rotateX(0deg) rotateY(0deg)`
-				}
-				const handleMouseMoveText = e => {
-					rotateByMousePosition(e, textRef.current)
-				};
-				const handleMouseLeaveText = e => {
-					textRef.current.style.transform = `rotateX(0deg) rotateY(0deg)`
-				}
-				return (
-		<motion.div ref={refContainer} className={`relative flex flex-col w-full h-auto overflow-hidden`}>
-			
-			{/* {		console.log(dataLoading ? "not fetched yet" : "about :" , about, "repos : ", repos )} */}
-			{/*	 <div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
+		// 	console.log("tyyype x ", imageRef.current.getBoundingClientRect())
+		// 	let rectSize = imageRef.current.getBoundingClientRect()
+		// 	setSize({ height : rectSize.height, width : rectSize.width})
+		// }
+		let timer;
+		if (!onDisplay.displayState && onDisplay.displayOff) {
+			timer = setTimeout(() => {
+				setOnDisplay({ ...onDisplay, displayOff: false });
+			}, 300)
+		}
+		return () => clearTimeout(timer);
+	}, [onDisplay]);
+
+	// set a gim on display mode
+	const displayGim = (displayState, itemId, type, activeDisplayOff) => {
+		console.log("scroooooooooooooooooolll: NULLLLL type : " + type + " state : " + displayState)
+		console.log(" |||  DISPLAY : ", displayState ? "true" : "false", " ||| type : " + type)
+		const newdisplayOff = onDisplay.displayState && !displayState && activeDisplayOff ? true : false;
+		setOnDisplay({ ...onDisplay, displayState, displayOff: newdisplayOff, itemId, type });
+	}
+	const Debug = () => {
+		console.log(`
+		******  debug  *******
+ 		onDisplay : ${onDisplay.displayState ? "true" : "false"}
+		displayOff : ${onDisplay.displayOff ? "true" : "false"}
+		itemId : ${onDisplay.itemId}
+		type : ${onDisplay.type}
+		`)
+		return (
+			<div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
 				<h1>onDisplay : {onDisplay.displayState ? "true" : "false"}</h1>
 				<h1>displayOff : {onDisplay.displayOff ? "true" : "false"}</h1>
 				<h1>itemId : {onDisplay.itemId}</h1>
 				<h1>type : {onDisplay.type}</h1>
 				<Link href="/home" ><a>none existing url</a></Link>
-			</div> *}
-			{/* <nav className="fixed z-50 top-20 right-8 lg:h-40 lg:w-24 md:h-32 md:w-20 h-20 w-16">
-				<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
-			</nav> */}
-			<motion.div className={`relative flex flex-col justify-start l:h-screen ${onDisplay.displayState && onDisplay.type !== -1 ? "" : "h-screen"} m-0 p-0  w-full ${theme.dark.backgroundColor}`}
-			>
+			</div>
+		)
+	}
+
+	return (
+		<motion.div className={`relative flex flex-col w-full h-auto overflow-hidden`}>
+			<nav className="z-50 fixed flex justify-end items-center top-0  w-full h-20 md:h-32 pointer-events-none">
+				{/* <div className="z-50 top-0 right-0 lg:h-40 lg:w-24 md:h-32 md:w-full h-20 w-16 mx-8"> */}
+				<div className="z-50 h-full w-16 md:w-20 mx-5 md:mx-10" >
+					<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
+				</div>
+			</nav>
+			<Debug/>
+			<motion.div className={`relative flex flex-col justify-start l:h-screen ${onDisplay.displayState && onDisplay.type !== -1 ? "" : "h-screen"} m-0 p-0  w-full ${theme.dark.backgroundColor}`}>
 				<motion.div id="soguma" className="relative flex justify-center items-center l:h-full h-screen w-full">
-					<div className="absolute top-0 left-0 lg:h-full md:h-full h-full w-full ">
+					<div className="flex absolute top-0 left-0 lg:h-full md:h-full h-100 w-full ">
 						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
 					</div>
-					<div className="absolute w-full h-full top-0 left-0"
-
-					>
+					<div className="absolute w-full h-full top-0 left-0 " >
 						<motion.div className="relative flex flex-row justify-center items-center h-full w-1/2 "
 							style={{
 								scale: sogumaScale,
 								// y: sogumaYoffset
-							}}
-
-						>
-							{/* <div className="flex justify-center items-center h-full w-5/6 bg-red-600"> */}
-							<motion.div
-								className="relative flex flex-col items-center justify-start w-5/12 h-full pt-full "
-							>
-
-								{/* <Title
-									containerWidth={" w-11/12 max-w-7xl "}
-									width={"w-full"}
-									title={"hamid"}
-									description={"df0as00"}
-									getRef={getRef1}
-									interval={scrollValues.interval[0]}
-									values={scrollValues.values[0] || [ 0, 1]}
-									animationValues={scrollValues.animationValues[0]}
-								/>
-								<Title
-									containerWidth={" w-11/12 max-w-7xl "}
-									width={"w-full"}
-									title={"hamid"}
-									description={"zabi"}
-									getRef={getRef2}
-									interval={scrollValues.interval[1]}
-									values={scrollValues.values[1] || [ 0, 1]}
-									animationValues={scrollValues.animationValues[1]}
-								/> */}
-								{/* <hr className="absolute top-0 border-2 border-black h-1/2"></hr>
-								<div className="absolute left-0 w-full rounded-full border-black border-4 overflow-hidden bg-black"
-									ref={imageRef}
-									onMouseMove={handleMouseMove}
-									onMouseLeave={handleMouseLeave}
-								>
-
-									<motion.img className="w-full object-fill" src="/me/r-1.png"
-									/>
-								</div> */}
+							}}>
+							<motion.div className="relative flex flex-col items-center justify-start w-5/12 h-full pt-full " >
 							</motion.div>
-							<motion.div
-								className="relative flex items-center justify-center w-1/3 h-full"
-							>
-								<motion.div className="absolute top-2/3 h-1/5  w-full cursor-default"
-									ref={textRef}
-									onMouseMove={handleMouseMoveText}
-									onMouseLeave={handleMouseLeaveText}
-								>
-									<h1 className="text-5xl text-gray-800 font-extrabold my-5">JakeeDesu</h1>
-									<p className=" text-xl mx-2">sadcsdcads sdcsdac asdc sdc sacsdc s sdcsdacsadcsas scsad cdscsacasdcsdacsacsdcsdcsad</p>
-								</motion.div>
+							<motion.div className="relative flex items-center justify-center w-1/3 h-full" >
 							</motion.div>
 						</motion.div>
-						{/* </div> */}
 					</div>
-					<motion.div className="absolute flex justify-center items-start md:h-100 lg:h-100 md:top-1/4 top-1/4 h-full lg:top-1/3 w-full z-20 pointer-events-none"
-						style={onDisplay.displayState ?
+					{/* <motion.div className="absolute flex justify-center items-start md:h-100 lg:h-100 md:top-1/4 top-1/4 h-full lg:top-1/3 w-full z-20 pointer-events-none bg-sogumaRed" */}
+					<motion.div className="absolute flex justify-center items-start md:h-100 lg:h-100 md:top-1/4 top-0 h-full lg:top-1/3 w-full z-20 pointer-events-none "
+					style={onDisplay.displayState ?
 							{
 								scale: sogumaScale,
 								y: sogumaYoffset
@@ -234,16 +114,13 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 								scale: 1,
 								y: 0
 							}
-						}
-					>
+						}>
 						<SogumaVx repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
-						{/* <SogumaVxPhone repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} /> */}
+						<SogumaVxPhone repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 					</motion.div>
 				</motion.div>
 				<MainBoard id="board" onDisplay={onDisplay} repos={gitData.pinnedItems.nodes} />
-				{/* <BoardPhone onDisplay={onDisplay} about={about} repos={repos} /> */}
 			</motion.div>
-			{/* {onDisplay.displayState && <Card onDisplay={onDisplay} darkTheme={darkTheme} displayGim={displayGim} />} */}
 		</motion.div>
 	)
 }
@@ -343,10 +220,10 @@ const queryData = async () => {
 	}).catch(error => {
 		if (error)
 			console.log('fetching error : ', error)
-			return {
-				fetched: false,
-				fetchedData: {}
-			}
+		return {
+			fetched: false,
+			fetchedData: {}
+		}
 	})
 
 	return data

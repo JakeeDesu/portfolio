@@ -65,7 +65,7 @@ function SogumaPhone({ onDisplay, darkTheme, onSogumaClick, setOnDisplay }) {
 
 	return (
 		<motion.div
-			className={`relative flex flex-col justify-center items-center ${(darkTheme && theme.dark.soguma.body(onDisplay.displayState)) || theme.light.soguma.body}`}
+			className={`relative flex flex-col justify-center items-center pointer-events-auto ${(darkTheme && theme.dark.soguma.body(onDisplay.displayState)) || theme.light.soguma.body}`}
 			key={switchId}
 			custom={darkTheme}
 			variants={variants}

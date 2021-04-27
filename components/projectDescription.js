@@ -2,18 +2,22 @@ import {motion, useTransform, useViewportScroll} from 'framer-motion'
 
 const ProjectDescription = ({animationValues, containerWidth, width, getRef, title, text, interval, values }) => {
 
+  console.log( " description interval : ", interval , text + " values : ", {x: [0, 100],y: [0, 100],scale: [1,1] }, "   | " , animationValues)
+ 
   const { scrollYProgress } = useViewportScroll();
   const xOffset = useTransform(scrollYProgress, interval, animationValues['x']);
   const yOffset = useTransform(scrollYProgress, interval, animationValues['y']);
   const scale = useTransform(scrollYProgress, interval, animationValues['scale']);
+  const opacity = useTransform(scrollYProgress, interval , animationValues['opacity']);
+
   
-	console.log("description interval : ", interval , " description values : ", values)
   return (
-    <div  ref={getRef} className={`relative flex flex-col items-end justify-center ${containerWidth || " w-full "}`}>
+    <div  ref={getRef} className={`relative flex flex-col items-end justify-start ${containerWidth || " w-full "} `}>
       <motion.div className={`${width || "w-full"}`}
         style={{
           x: xOffset,
           y: yOffset,
+          opacity: opacity,
           scale : scale
           }}
         >

@@ -13,29 +13,21 @@ import { useState, useEffect } from 'react'
 
 const boardVariants = {
 	appear: {
-		// scaleY : 0,
 		opacity: 0
 	},
 	onBoard: {
-		// scaleY : 1,
 		opacity: 1,
 		transition: {
-			duration: 1
+			duration: 0
 		}
 	},
 	disappear: {
-		// originY : 0,
-		// scaleY : 0,
 		opacity: 0,
 		transition: {
-			// scaleY: { delay: 0.2, duration: 1 },
-			duration: 0.5
+			duration: 0
 		}
 	}
 }
-
-const imagesData = ["hashhsa dfsdaf sadfdsaf asdfadsf", "sadfasdf sdfasdf asdfads", "sdafsdaf asfasd afasdf", "fasdfasdf asdfasdf asdfasdfa asdfsa"]
-const images = ['/Fractol/0.png', '/Fractol/1.png', '/Fractol/2.png', '/Fractol/3.png']
 
 
 const MainBoard = ({ onDisplay, repos }) => {
@@ -57,7 +49,7 @@ const MainBoard = ({ onDisplay, repos }) => {
 			type: onDisplay.type
 		}
 	})
-	const [focuseRef, setTrigger] = useFocus();
+	// const [focuseRef, setTrigger] = useFocus();
 	const [scrollValues, refContainer, setChildsVariables] = useGetScrollInterval()
 
 	const [ref1, getRef1] = useGetRef(null)
@@ -66,29 +58,35 @@ const MainBoard = ({ onDisplay, repos }) => {
 	const componentAnimationIntervals = [
 		{
 			ref: ref1,
-			anime: [-3000, -500, 0],
+			anime: [1000, 1000, 100, 0],
 			animation : {
-				x : [0, 0, 0],
-				y: [-3000, -500, 0],
-				scale : [3, 2.5, 1],
+				x : [0,0, 0, 0],
+				y: [-3000,-3000, -500, 0],
+				scale : [3, 3, 2.5, 1],
+				opacity :[0, 0, 1, 1],
+				color : ["#000000","#000000","#444444","#000000"]
 			}
 		},
 		{
 			ref: ref2,
-			anime: [-1000, -100, 0],
+			anime: [1000, 1000, 100, 0],
 			animation : {
-				x : [-1000, -100, 0],
-				y: [100, 50, 0],
-				scale : [1.8, 1.5, 1],
+				x : [-5000, -2000, 100, 0],
+				y: [-3000, -1000, -200, 0],
+				scale : [3,3, 1.8, 1],
+				opacity :[0, 0, 1, 1],
+				color : ["#000000","#000000","#444444","#000000"]
 			}
 		},
 		{
 			ref: ref3,
-			anime: [1000, 100, 0],
+			anime: [1000, 1000, 100, 0],
 			animation : {
-				x : [1000, 100, 0],
-				y: [100, 50, 0],
-				scale : [1.8, 1.5, 1],
+				x : [5000, 2000, -100, 0],
+				y: [-3000, -1000, -200, 0],
+				scale : [3, 3, 1.8, 1],
+				opacity :[0, 0, 1, 1],
+				color : ["#000000","#000000","#444444","#000000"]
 			}
 		},
 	]
@@ -100,8 +98,8 @@ const MainBoard = ({ onDisplay, repos }) => {
 
 		if (!scrollValues.ready)
 			setChildsVariables(componentAnimationIntervals)
-		if ((onDisplay.displayState && onDisplay.type === 1) || (onDisplay.displayState && onDisplay.type === 2))
-			setTrigger(true)
+		// if ((onDisplay.displayState && onDisplay.type === 1) || (onDisplay.displayState && onDisplay.type === 2))
+		// 	setTrigger(true)
 		if ((onDisplay.type === 1 || onDisplay.type === 2)) {
 			const projectData = repos[onDisplay.itemId > 0 ? onDisplay.itemId : 0]
 			setData({
@@ -154,14 +152,14 @@ const MainBoard = ({ onDisplay, repos }) => {
 				exit="disappear"
 				variants={boardVariants}
 			>
-				<motion.div ref={mergeRefs(focuseRef, refContainer)} className="flex flex-col justify-start items-center w-11/12  "
+				<motion.div ref={mergeRefs(refContainer)} className="flex flex-col justify-start items-center w-10/12  "
 					style={{
 						opacity: 1//boardImageOpacity
 					}}
 				>
 					<Title
-						containerWidth={" w-8/12 max-w-7xl "}
-						width={"w-3/5"}
+						containerWidth={" w-9/12 "}
+						width={" md:w-2/5 w-4/5 max-w-5xl"}
 						title={getTitle()}
 						description={getDescription()}
 						getRef={getRef1}
@@ -170,8 +168,8 @@ const MainBoard = ({ onDisplay, repos }) => {
 						animationValues={scrollValues.animationValues[0]}
 					/>
 					<ProjectCover
-						containerWidth={" w-11/12 max-w-7xl "}
-						width="w-3/5"
+						containerWidth={" w-11/12 "}
+						width="w-4/5 max-w-5xl"
 						imageSrc={getFrames()}
 						getRef={getRef2}
 						interval={scrollValues.interval[1]}
@@ -179,8 +177,8 @@ const MainBoard = ({ onDisplay, repos }) => {
 						animationValues={scrollValues.animationValues[1]}
 					/>
 					<ProjectDescription
-						containerWidth={" w-11/12 max-w-7xl "} // tailwind width style
-						width="w-3/5"
+						containerWidth={" w-9/12 "} // tailwind width style
+						width="md:w-2/5 w-3/5 max-w-5xl"
 						title={"title"}
 						text={"text text text"}
 						getRef={getRef3}

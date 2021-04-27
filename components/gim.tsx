@@ -76,7 +76,7 @@ function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay,
 	const clickGim = () => {
 		
 		if (gimId == 0)
-			setOnDisplay(!onDisplay.displayState, fixGimsDataIndex(data, steps + 1), onDisplay.type)
+			setOnDisplay(!onDisplay.displayState, fixGimsDataIndex(data, steps + 1), onDisplay.type, true)
 		else if (!(onDisplay.displayState))
 		{
 			console.log("turn");

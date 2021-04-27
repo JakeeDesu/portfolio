@@ -22,12 +22,12 @@ export const useGetScrollInterval = () => {
     const [ wHeight, wWidth] = useWindowDimensions()
 
     useEffect(() => {
-        console.log("MAAAADAAAAAAAZZZZZZZZZSHHH")
+        // console.log("MAAAADAAAAAAAZZZZZZZZZSHHH")
 
         const getInterval = (child) => {
             // const newInterval = [0]
             let elemOffset = child.ref.current ? child.ref.current.offsetTop : 0 ;
-            console.log("hi foker2 : ", elemOffset)
+            // console.log("hi foker2 : ", elemOffset)
             let start = cRef.current ? elemOffset / cRef.current.getBoundingClientRect().height :  0 ;
             let end = cRef.current && child.ref.current ? (elemOffset + child.ref.current.getBoundingClientRect().height) / cRef.current.getBoundingClientRect().height :  0 ;
             
@@ -86,17 +86,17 @@ export const useGetScrollInterval = () => {
             {
                 for (const key in child.animation)
                 {
-                    console.log("*** : " + key + " tol : " + child.animation[key].length + " animation : " , child.animation[key] )
+                    // console.log("*** : " + key + " tol : " + child.animation[key].length + " animation : " , child.animation[key] )
                     if (child.animation[key].length > 0)
                         animationObj[key] = getMappedValues(child.animation[key])
                     else
                         animationObj[key] = getMappedValues([0,0])
                     // animationObj[key] = getMappedValues([0,0])
-                    console.log("|---", animationObj[key] , "---|");
+                    // console.log("|---", animationObj[key] , "---|");
                 }
             }
 
-            console.log("DAAAAAAAZZZZZZZZZ");
+            // console.log("DAAAAAAAZZZZZZZZZ");
             return animationObj
         }
 
@@ -118,7 +118,7 @@ export const useGetScrollInterval = () => {
                 intevalValues.values.push(values)
                 intevalValues.animationValues.push(animationObj)
             })
-            console.log("get scroll values : ", {ready : ready, ...intevalValues});
+            // console.log("get scroll values : ", {ready : ready, ...intevalValues});
             setScrollValues({ready : ready, ...intevalValues})
         }
         // if (isRendred)
@@ -159,16 +159,16 @@ export const useGetScrollInterval = () => {
         }
     },[])
     const setChildsVariables = useCallback((childs) => {
-        console.log("callback get childs is called")
+        // console.log("callback get childs is called")
             
         // if (isRendred)
         // {
-            childs.forEach((c, i) => {
-                if (!c.ref.current)
-                    console.log("  ref " + i + " is null")
-                else
-                console.log("  ref " + i + " not null")
-            })
+            // childs.forEach((c, i) => {
+            //     if (!c.ref.current)
+            //         console.log("  ref " + i + " is null")
+            //     else
+            //     console.log("  ref " + i + " not null")
+            // })
             if (childs.length > 0)
                 setChilds(childs)
         // }

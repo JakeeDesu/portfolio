@@ -40,7 +40,8 @@ export default function Home({ gitData, darkTheme, changeTheme }) {
 	const sogumaScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0.9, 0.8, 0.1]);
 	const sogumaYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, -10, -100, -500]);
 	const navYoffset = useTransform(scrollYProgress, [0, 0.01, 0.5, 1], [1, 0, 0, 0]);
-
+	const boardColor = useTransform(scrollYProgress, [0, 0.3,1], [ "#ffffff", "#000000", "#000000"]);
+	console.log(gitData)
 	useEffect(() => {
 		let timer;
 		if (!onDisplay.displayState && onDisplay.displayOff) {
@@ -61,8 +62,10 @@ export default function Home({ gitData, darkTheme, changeTheme }) {
 	}
 
 
+
 	return (
-		<motion.div className={`relative flex flex-col w-full h-auto overflow-hidden`}>
+		<motion.div className={`relative flex flex-col w-full h-auto overflow-hidden`}
+		>
 			<motion.nav className="z-50 fixed flex justify-center md:justify-between items-center top-0  w-full h-20 md:h-32 pointer-events-none"
 				style={{
 					opacity : navYoffset
@@ -76,7 +79,11 @@ export default function Home({ gitData, darkTheme, changeTheme }) {
 				</div>
 			</motion.nav>
 			{/* <Debug/> */}
-			<motion.div className={`relative flex flex-col justify-start ${onDisplay.displayState && onDisplay.type !== -1 ? "" : "h-screen"} m-0 p-0  w-full ${theme.dark.backgroundColor}`}>
+			<motion.div className={`relative flex flex-col justify-start ${onDisplay.displayState && onDisplay.type !== -1 ? "" : "h-screen"} m-0 p-0  w-full ${theme.dark.backgroundColor}`}
+					style={{
+						// backgroundColor : boardColor
+					}}
+			>
 				<motion.div id="soguma" className="relative flex flex-col justify-end md:justify-center items-center h-screen w-full">
 					<div className="flex absolute top-0 left-0 lg:h-full md:h-full h-100 w-full ">
 						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
@@ -94,7 +101,7 @@ export default function Home({ gitData, darkTheme, changeTheme }) {
 						<SogumaVx repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 						<SogumaVxPhone repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 					</motion.div>
-					<HomeBoard  onDisplay={onDisplay} coverImage={"/me/0.png"} title={"hamza mhindate"} description={"fsdfsad sadfsadf sadfsdaf asdfsdf sadfsd fsfas"}/>
+					<HomeBoard  onDisplay={onDisplay} coverImage={"/me/0.png"} fullName={gitData.name} bio={gitData.bio}/>
 				</motion.div>
 				<MainBoard id="board" onDisplay={onDisplay} repos={gitData.pinnedItems.nodes} />
 			</motion.div>

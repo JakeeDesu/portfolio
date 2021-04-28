@@ -64,7 +64,7 @@ const Cover = ({ onDisplay, containerWidth, width, imageSrc }) => {
           variants={variants}
           whileHover="onHover"
         >
-          <hr className="absolute bottom-full right-1/2 border-2 border-black h-screen"></hr>
+          <hr className="absolute hidden md:flex bottom-1/2 md:bottom-full right-full md:right-1/2 border-2 border-black w-screen md:w-auto h-auto md:h-screen"></hr>
           <img className=" absolute top-0 bottom-0  h-full rounded-full bg-black" src={imageSrc} />
         </motion.div>
       </motion.div>

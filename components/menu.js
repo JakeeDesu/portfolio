@@ -59,7 +59,7 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 			>
 
 				<motion.div
-					className="absolute md:text-2xl lg:text-3xl border-gray-900 border-2  shadow-soft2glow text-center text-black font-black  flex flex-col justify-center items-center lg:h-100 md:h-80 lg:w-52 md:w-44 bg-gradient-to-b  bg-gray-500 to-gray-400 bg-opacity-5 rounded-b-full top-36 lg:pt-20 md:pt-12 "
+					className="absolute md:text-2xl lg:text-3xl border-gray-900 border-2  shadow-soft2glow text-center text-black font-black  flex flex-col justify-center items-center lg:h-100 md:h-80 lg:w-52 md:w-44 bg-gradient-to-b  bg-gray-500 to-gray-400 bg-opacity-5 rounded-b-full top-36 lg:my-5 md:py-5 "
 					initial={{
 						opacity: 1,
 						y: 0,
@@ -116,7 +116,7 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 						onMouseDown={() => selectTitle(4)}
 					>ART</motion.h1>
 				</motion.div>
-				<motion.div
+				{/* <motion.div
 					className="absolute lg:w-64 md:w-56 w-20 lg:top-36 md:top-28 top-12 opacity-70 overflow-hidden"
 					initial={{
 						y: -100,
@@ -138,7 +138,7 @@ const Menu = ({ onDisplay, setOnDisplay }) => {
 						}}
 				>
 					<img src="/teeth.png" />
-				</motion.div>
+				</motion.div> */}
 			</motion.div>
 
 		</div>

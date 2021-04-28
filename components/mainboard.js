@@ -1,7 +1,7 @@
 import Scene from './scene'
 import Image from 'next/image'
 import Title from './title'
-import ProjectCover from './projectCover'
+import AboutProject from './aboutProject'
 import ProjectDescription from './projectDescription'
 import { mergeRefs } from './mergeRefs'
 import { useFocus } from './useFocus'
@@ -50,12 +50,15 @@ const MainBoard = ({ onDisplay, repos }) => {
 		}
 	})
 	// const [focuseRef, setTrigger] = useFocus();
+
+	
 	const [scrollValues, refContainer, setChildsVariables] = useGetScrollInterval()
 
 	const [ref1, getRef1] = useGetRef(null)
 	const [ref2, getRef2] = useGetRef(null)
 	const [ref3, getRef3] = useGetRef(null)
 	const [ref4, getRef4] = useGetRef(null)
+	const [ref5, getRef5] = useGetRef(null)
 	const componentAnimationIntervals = [
 		{
 			ref: ref1,
@@ -70,6 +73,17 @@ const MainBoard = ({ onDisplay, repos }) => {
 		},
 		{
 			ref: ref2,
+			anime: [0, 0, 0, 0,0],
+			animation : {
+				x : [0, 0, 0,0, 0],
+				y: [0, 0, 0,0, 0],
+				scale : [1,1, 1, 1,1],
+				opacity :[0, 0, 1, 1,1],
+				color : ["#000000","#000000","#444444","#444444","#000000"]
+			}
+		},
+		{
+			ref: ref3,
 			anime: [1000, 1000, 100, 0,0],
 			animation : {
 				x : [-5000, -2000, 100,0, 0],
@@ -80,7 +94,7 @@ const MainBoard = ({ onDisplay, repos }) => {
 			}
 		},
 		{
-			ref: ref3,
+			ref: ref4,
 			anime: [1000, 1000, 100, 0,0],
 			animation : {
 				x : [5000, 2000, -100,0, 0],
@@ -91,7 +105,7 @@ const MainBoard = ({ onDisplay, repos }) => {
 			}
 		},
 		{
-			ref: ref4,
+			ref: ref5,
 			anime: [1000, 1000, 100, 0,0],
 			animation : {
 				x : [0, 0, 0,0, 0],
@@ -102,7 +116,6 @@ const MainBoard = ({ onDisplay, repos }) => {
 			}
 		},
 	]
-
 
 	useEffect(() => {
 
@@ -166,7 +179,7 @@ const MainBoard = ({ onDisplay, repos }) => {
 				ref={refContainer}
 			>
 				{/* ref={mergeRefs(refContainer)} */}
-				<motion.div  className="flex flex-col justify-start items-center w-10/12  "
+				<motion.div  className="flex flex-col justify-start items-center w-full md:w-10/12  "
 					style={{
 						opacity: 1//boardImageOpacity
 					}}
@@ -181,27 +194,32 @@ const MainBoard = ({ onDisplay, repos }) => {
 						values={scrollValues.values[0]}
 						animationValues={scrollValues.animationValues[0]}
 					/>
-					<ProjectCover
+					<div ref={getRef2} className="w-full bg-blue-800">
+						<img  className="w-full object-cover " src={getFrames()} />
+					</div>
+					<AboutProject
 						containerWidth={" w-11/12 "}
 						width="w-4/5 max-w-5xl"
-						imageSrc={getFrames()}
-						getRef={getRef2}
-						interval={scrollValues.interval[1]}
-						values={scrollValues.values[1]}
-						animationValues={scrollValues.animationValues[1]}
+						title="about project"
+						text="Description about the project"
+						// imageSrc={getFrames()}
+						getRef={getRef3}
+						interval={scrollValues.interval[2]}
+						values={scrollValues.values[2]}
+						animationValues={scrollValues.animationValues[2]}
 					/>
 					<ProjectDescription
 						containerWidth={" w-9/12 "} // tailwind width style
 						width="md:w-2/5 w-3/5 max-w-5xl"
 						title={"title"}
 						text={"text text text"}
-						getRef={getRef3}
-						interval={scrollValues.interval[2]}
-						values={scrollValues.values[2]}
-						animationValues={scrollValues.animationValues[2]}
+						getRef={getRef4}
+						interval={scrollValues.interval[3]}
+						values={scrollValues.values[3]}
+						animationValues={scrollValues.animationValues[3]}
 					/>
 				</motion.div>
-					<div ref={getRef4} className="w-full h-100 bg-black">
+					<div ref={getRef5} className="w-full h-100 bg-black">
 
 					</div>
 

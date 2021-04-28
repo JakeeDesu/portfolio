@@ -32,7 +32,7 @@ const Title = ({animationValues, containerWidth, width, getRef, interval, values
 					// backgroundColor : boardColor
 				}}
 				>
-					<hr className="absolute bottom-full right-1/2 border-2 border-black h-screen "></hr>
+					<hr className="absolute hidden md:flex bottom-full right-1/2 border-2 border-black h-screen "></hr>
 					<div className="absolute flex justify-center items-center top-0  w-full h-full " >
 						<h1 className=" md:text-8xl  text-4xl ">{title}</h1>
 					</div>

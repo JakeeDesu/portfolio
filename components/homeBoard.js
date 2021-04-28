@@ -7,16 +7,17 @@ import Description from '../components/description'
 export const HomeBoard = ({ onDisplay, coverImage, title, description }) => {
 
 	const { scrollYProgress } = useViewportScroll();
-	const sogumaScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0.9, 0.8, 0.1]);
-	const sogumaYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, -10, -100, -500]);
+	const boardScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0.9, 0.8, 0.1]);
+	const boardYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, -10, -100, -500]);
+	// const boardOpacity = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [1, 0.4, 0, 0]);
 
 	return (
-		<motion.div className="relative flex md:flex-row flex-col justify-around items-center w-full h-2/3 top-0 left-0  " 
+		<motion.div className="relative flex md:flex-row flex-col justify-around items-center w-full h-2/3 top-0 left-0 " 
 			animate={onDisplay.displayState  ? {
 				opacity : 1,
 				y : 0,
 			} : {
-				opacity : 0.8,
+				opacity : 0.5,
 				y : -0
 			}}
 			transition={{
@@ -26,8 +27,9 @@ export const HomeBoard = ({ onDisplay, coverImage, title, description }) => {
 		>
 		<motion.div className="relative flex flex-row justify-center items-center h-full md:w-1/3 w-full "
 			style={{
-				scale: sogumaScale,
-				y: sogumaYoffset
+				scale: boardScale,
+				y: boardYoffset,
+				// opacity : boardOpacity
 			}}>
 			<Cover
 				onDisplay={onDisplay}
@@ -36,10 +38,11 @@ export const HomeBoard = ({ onDisplay, coverImage, title, description }) => {
 				width="w-full max-w-6xl"
 			/>
 		</motion.div>
-		<motion.div className="relative flex flex-row justify-end items-center h-full md:w-1/3 w-full"
+		<motion.div className="relative flex flex-row justify-end items-center h-full md:w-1/3 w-full "
 			style={{
-				scale: sogumaScale,
-				y: sogumaYoffset
+				scale: boardScale,
+				y: boardYoffset,
+				// opacity : boardOpacity
 			}}>
 			{/* <Description
 				onDisplay={onDisplay}

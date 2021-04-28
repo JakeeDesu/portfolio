@@ -107,7 +107,7 @@ export default function SogumaVxPhone({ repos, fetchedData, setOnDisplay, onDisp
 			<AnimatePresence>
 				{!onDisplay.displayState && <motion.div
 					key={onDisplayKey}
-					className="md:hidden absolute top-full flex-col justify-center items-center w-full bg-red-500"
+					className="md:hidden absolute top-full flex-col justify-center items-center w-full"
 					initial={{
 						opacity: 0,
 						originY: 0,

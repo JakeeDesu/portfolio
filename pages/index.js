@@ -12,13 +12,34 @@ import { HomeBoard } from '../components/homeBoard'
 import { queryData, saveLocalData, loadLocalData } from './api/dataFetcher'
 
 
-export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
+
+const Debug = (onDisplay) => {
+	console.log(`
+	******  debug  *******
+	 onDisplay : ${onDisplay.displayState ? "true" : "false"}
+	displayOff : ${onDisplay.displayOff ? "true" : "false"}
+	itemId : ${onDisplay.itemId}
+	type : ${onDisplay.type}
+	`)
+	return (
+		<div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
+			<h1>onDisplay : {onDisplay.displayState ? "true" : "false"}</h1>
+			<h1>displayOff : {onDisplay.displayOff ? "true" : "false"}</h1>
+			<h1>itemId : {onDisplay.itemId}</h1>
+			<h1>type : {onDisplay.type}</h1>
+			<Link href="/home" ><a>none existing url</a></Link>
+		</div>
+	)
+}
+
+export default function Home({ gitData, darkTheme, changeTheme }) {
 
 	const [onDisplay, setOnDisplay] = useState({ displayState: true, displayOff: false, itemId: -1, type: -1 })
+
 	const { scrollYProgress } = useViewportScroll();
 	const sogumaScale = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], [1, 0.9, 0.8, 0.1]);
 	const sogumaYoffset = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, -10, -100, -500]);
-
+	const navYoffset = useTransform(scrollYProgress, [0, 0.01, 0.5, 1], [1, 0, 0, 0]);
 
 	useEffect(() => {
 		let timer;
@@ -27,7 +48,9 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 				setOnDisplay({ ...onDisplay, displayOff: false });
 			}, 300)
 		}
-		return () => clearTimeout(timer);
+		return () => {
+			clearTimeout(timer)
+		};
 	}, [onDisplay]);
 
 // set a gim on display mode
@@ -38,41 +61,27 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 	}
 
 
-
-	const Debug = () => {
-		console.log(`
-		******  debug  *******
- 		onDisplay : ${onDisplay.displayState ? "true" : "false"}
-		displayOff : ${onDisplay.displayOff ? "true" : "false"}
-		itemId : ${onDisplay.itemId}
-		type : ${onDisplay.type}
-		`)
-		return (
-			<div className="absolute z-50 text-white flex flex-col justify-center top-100 left-1/4" >
-				<h1>onDisplay : {onDisplay.displayState ? "true" : "false"}</h1>
-				<h1>displayOff : {onDisplay.displayOff ? "true" : "false"}</h1>
-				<h1>itemId : {onDisplay.itemId}</h1>
-				<h1>type : {onDisplay.type}</h1>
-				<Link href="/home" ><a>none existing url</a></Link>
-			</div>
-		)
-	}
-
 	return (
 		<motion.div className={`relative flex flex-col w-full h-auto overflow-hidden`}>
-			<nav className="z-50 fixed flex justify-end items-center top-0  w-full h-20 md:h-32 pointer-events-none">
-				<div className="z-50 h-full w-16 md:w-20 mx-5 md:mx-10" >
+			<motion.nav className="z-50 fixed flex justify-center md:justify-between items-center top-0  w-full h-20 md:h-32 pointer-events-none"
+				style={{
+					opacity : navYoffset
+				}}
+			>
+				<div className=" flex justify-center items-center md:text-gray-600 text-gray-500 text-5xl whitespace-nowrap  h-full w-full md:w-1/4 mx-8   ">
+					<h1>S O G U M A</h1>
+				</div>
+				<div className="z-10 hidden md:flex h-full w-16 md:w-20 mx-8 md:mx-10 pointer-events-auto" >
 					<EyeSwitch darkTheme={darkTheme} changeTheme={changeTheme} color2="bg-green-500" color1="bg-blue-900" />
 				</div>
-			</nav>
+			</motion.nav>
 			{/* <Debug/> */}
-			<motion.div className={`relative flex flex-col justify-start l:h-screen ${onDisplay.displayState && onDisplay.type !== -1 ? "" : "h-screen"} m-0 p-0  w-full ${theme.dark.backgroundColor}`}>
-				<motion.div id="soguma" className="relative flex flex-col justify-center items-center l:h-full h-screen w-full">
+			<motion.div className={`relative flex flex-col justify-start ${onDisplay.displayState && onDisplay.type !== -1 ? "" : "h-screen"} m-0 p-0  w-full ${theme.dark.backgroundColor}`}>
+				<motion.div id="soguma" className="relative flex flex-col justify-end md:justify-center items-center h-screen w-full">
 					<div className="flex absolute top-0 left-0 lg:h-full md:h-full h-100 w-full ">
 						<DarkSkyOpen height="lg:h-full h-full md:h-1/2 w-full" darkTheme={darkTheme} />
 					</div>
-					<HomeBoard  onDisplay={onDisplay} coverImage={"/me/0.png"} title={"hamza mhindate"} description={"fsdfsad sadfsadf sadfsdaf asdfsdf sadfsd fsfas"}/>
-					<motion.div className="absolute flex justify-center items-start md:h-100 lg:h-100 md:top-1/4 top-0 h-full lg:top-1/3 w-full z-20 pointer-events-none "
+					<motion.div className="absolute flex justify-center items-end md:items-start md:h-100 lg:h-100 md:top-1/4 top-0 h-1/3 lg:top-1/3 w-full z-20 pointer-events-none  "
 						style={onDisplay.displayState ?
 							{
 								scale: sogumaScale,
@@ -85,6 +94,7 @@ export default function Home({ loaded, gitData, darkTheme, changeTheme }) {
 						<SogumaVx repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 						<SogumaVxPhone repos={gitData.pinnedItems.nodes} dataLoading setOnDisplay={displayGim} onDisplay={onDisplay} darkTheme={darkTheme} />
 					</motion.div>
+					<HomeBoard  onDisplay={onDisplay} coverImage={"/me/0.png"} title={"hamza mhindate"} description={"fsdfsad sadfsadf sadfsdaf asdfsdf sadfsd fsfas"}/>
 				</motion.div>
 				<MainBoard id="board" onDisplay={onDisplay} repos={gitData.pinnedItems.nodes} />
 			</motion.div>

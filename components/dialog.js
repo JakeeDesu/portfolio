@@ -10,11 +10,11 @@ const variants={
         }
     },
     animate :{
-        opacity : [0.9, 0.7],
+        opacity : [0, 0.8],
         scale : [1, 1.2],
         transition : {
             duration: 1,
-            opacity : { duration: 5, yoyo: Infinity },
+            opacity : { duration: 1, yoyo: Infinity },
             scale : { duration: 1, yoyo: Infinity },
         }
     }
@@ -24,7 +24,7 @@ export const Dialog = ({ text }) => {
 
     const { scrollYProgress } = useViewportScroll();
     const scale = useTransform(scrollYProgress, [0,1], [1, 0.5]);
-    const opacity = useTransform(scrollYProgress, [0,0.2,1], [1,0, 0]);
+    const opacity = useTransform(scrollYProgress, [0,0.05,0.1, 0.2,1], [1,0, 0,0,0]);
 
     return (
         <motion.div className="absolute left-3/4 top-3/4 flex justify-center items-center  w-11/12 h-full "

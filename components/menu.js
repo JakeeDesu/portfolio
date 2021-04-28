@@ -6,7 +6,9 @@ const variants = {
 	},
 	animation: {
 		opacity: 0.5,
+		scale : 1,
 		transition: {
+			scale : {duration : 0.3},
 			duration: 1
 		}
 	},

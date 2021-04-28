@@ -5,7 +5,7 @@ import { useGetScrollInterval } from './useGetScrollInterval'
 const Title = ({animationValues, containerWidth, width, getRef, interval, values, title, description, image }) => {
 
 	const { scrollYProgress } = useViewportScroll();
-	console.log(title + " title interval : ", interval , title + " title values : ", {x: [0, 100],y: [0, 100],scale: [1,1] }, "   | " , animationValues)
+	// console.log(title + " title interval : ", interval , title + " title values : ", {x: [0, 100],y: [0, 100],scale: [1,1] }, "   | " , animationValues)
 		const xOffset = useTransform(scrollYProgress, interval , animationValues['x']);
 		const yOffset = useTransform(scrollYProgress, interval , animationValues['y']);
 		const scale = useTransform(scrollYProgress, interval , animationValues['scale']);
@@ -26,14 +26,14 @@ const Title = ({animationValues, containerWidth, width, getRef, interval, values
 			>
 			<div className={`flex flex-col ${ width || "w-full "} `}>
 				<motion.div
-				className="relative flex justify-center items-center w-full pt-full border-4 border-black bg-white z-100 rounded-full"
+				className="relative flex justify-center items-center w-full pt-full border-4 border-black bg-white rounded-full"
 				style={{
 					// color : textColor,
 					// backgroundColor : boardColor
 				}}
 				>
-					<hr className="absolute bottom-full right-1/2 border-2 border-black h-screen"></hr>
-					<div className="absolute flex justify-center items-center top-0  w-full h-full" >
+					<hr className="absolute bottom-full right-1/2 border-2 border-black h-screen "></hr>
+					<div className="absolute flex justify-center items-center top-0  w-full h-full " >
 						<h1 className=" md:text-8xl  text-4xl ">{title}</h1>
 					</div>
 				</motion.div>

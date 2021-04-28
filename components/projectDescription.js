@@ -2,7 +2,7 @@ import {motion, useTransform, useViewportScroll} from 'framer-motion'
 
 const ProjectDescription = ({animationValues, containerWidth, width, getRef, title, text, interval, values }) => {
 
-  console.log( " description interval : ", interval , text + " values : ", {x: [0, 100],y: [0, 100],scale: [1,1] }, "   | " , animationValues)
+  // console.log( " description interval : ", interval , text + " values : ", {x: [0, 100],y: [0, 100],scale: [1,1] }, "   | " , animationValues)
  
   const { scrollYProgress } = useViewportScroll();
   const xOffset = useTransform(scrollYProgress, interval, animationValues['x']);

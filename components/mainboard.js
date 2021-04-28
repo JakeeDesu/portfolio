@@ -55,38 +55,50 @@ const MainBoard = ({ onDisplay, repos }) => {
 	const [ref1, getRef1] = useGetRef(null)
 	const [ref2, getRef2] = useGetRef(null)
 	const [ref3, getRef3] = useGetRef(null)
+	const [ref4, getRef4] = useGetRef(null)
 	const componentAnimationIntervals = [
 		{
 			ref: ref1,
-			anime: [1000, 1000, 100, 0],
+			anime: [1000, 1000, 100, 0,0],
 			animation : {
-				x : [0,0, 0, 0],
-				y: [-3000,-3000, -500, 0],
-				scale : [3, 3, 2.5, 1],
-				opacity :[0, 0, 1, 1],
-				color : ["#000000","#000000","#444444","#000000"]
+				x : [0,0, 0, 0,0],
+				y: [-3000,-3000, -500,0, 0],
+				scale : [3, 3, 2.5, 1,1],
+				opacity :[0, 0, 1, 1,1],
+				color : ["#000000","#000000","#444444","#444444","#000000"]
 			}
 		},
 		{
 			ref: ref2,
-			anime: [1000, 1000, 100, 0],
+			anime: [1000, 1000, 100, 0,0],
 			animation : {
-				x : [-5000, -2000, 100, 0],
-				y: [-3000, -1000, -200, 0],
-				scale : [3,3, 1.8, 1],
-				opacity :[0, 0, 1, 1],
-				color : ["#000000","#000000","#444444","#000000"]
+				x : [-5000, -2000, 100,0, 0],
+				y: [-3000, -1000, -200,0, 0],
+				scale : [3,3, 1.8, 1,1],
+				opacity :[0, 0, 1, 1,1],
+				color : ["#000000","#000000","#444444","#444444","#000000"]
 			}
 		},
 		{
 			ref: ref3,
-			anime: [1000, 1000, 100, 0],
+			anime: [1000, 1000, 100, 0,0],
 			animation : {
-				x : [5000, 2000, -100, 0],
-				y: [-3000, -1000, -200, 0],
-				scale : [3, 3, 1.8, 1],
-				opacity :[0, 0, 1, 1],
-				color : ["#000000","#000000","#444444","#000000"]
+				x : [5000, 2000, -100,0, 0],
+				y: [-3000, -1000, -200,0, 0],
+				scale : [3, 3, 1.8,1, 1],
+				opacity :[0, 0, 1, 1,1],
+				color : ["#000000","#000000","#444444","#444444","#000000"]
+			}
+		},
+		{
+			ref: ref4,
+			anime: [1000, 1000, 100, 0,0],
+			animation : {
+				x : [0, 0, 0,0, 0],
+				y: [0, 0, 0,0, 0],
+				scale : [1, 1, 1,1, 1],
+				opacity :[0, 1, 1, 1,1],
+				color : ["#000000","#000000","#444444","#444444","#000000"]
 			}
 		},
 	]
@@ -146,13 +158,15 @@ const MainBoard = ({ onDisplay, repos }) => {
 	return (
 		<>
 			{(onDisplay.type === 1 || (onDisplay.type === 2 && onDisplay.displayState)) && <motion.div
-				className="relative text-black flex flex-col justify-start items-center  z-0  w-full "
+				className="relative text-black flex flex-col justify-start items-center w-full z-50 "
 				initial="appear"
 				animate="onBoard"
 				exit="disappear"
 				variants={boardVariants}
+				ref={refContainer}
 			>
-				<motion.div ref={mergeRefs(refContainer)} className="flex flex-col justify-start items-center w-10/12  "
+				{/* ref={mergeRefs(refContainer)} */}
+				<motion.div  className="flex flex-col justify-start items-center w-10/12  "
 					style={{
 						opacity: 1//boardImageOpacity
 					}}
@@ -187,6 +201,9 @@ const MainBoard = ({ onDisplay, repos }) => {
 						animationValues={scrollValues.animationValues[2]}
 					/>
 				</motion.div>
+					<div ref={getRef4} className="w-full h-100 bg-black">
+
+					</div>
 
 			</motion.div>
 			}
@@ -195,3 +212,31 @@ const MainBoard = ({ onDisplay, repos }) => {
 }
 
 export default MainBoard;
+
+// const [scrollValuesA, refContainerA, setChildsVariablesA] = useGetScrollInterval()
+// const [ref1A, getRef1A] = useGetRef(null)
+// const [ref2A, getRef1A] = useGetRef(null)
+// const componentAnimationIntervals = [
+// 		{
+// 			ref: ref1A,
+// 			anime: [1000, 1000, 100, 0,0],
+// 			animation : {
+// 				x : [0, 0, 0,0, 0],
+// 				y: [-100, -200, -100, 0, 0],
+// 				scale : [1, 1, 1,1, 1],
+// 				opacity :[0, 1, 1, 1,1],
+// 				color : ["#000000","#000000","#444444","#444444","#000000"]
+// 			}
+// 		},
+// 		{
+// 			ref: ref2A,
+// 			anime: [1000, 1000, 100, 0,0],
+// 			animation : {
+// 				x : [0, 0, 0,0, 0],
+// 				y: [0, 0, 0,0, 0],
+// 				scale : [1, 1, 1,1, 1],
+// 				opacity :[0, 1, 1, 1,1],
+// 				color : ["#000000","#000000","#444444","#444444","#000000"]
+// 			}
+// 		},
+// ]

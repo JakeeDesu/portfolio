@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react'
-import { motion, useTransform, useViewportScroll, useMotionValue, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Gim from './gim'
 import Soguma from './soguma'
 import Menu from './menu'
-import { wrap } from 'popmotion'
-import { Dialog } from '../components/dialog'
-
-import SogumaEye from './sugumaEye'
-import { theme } from './theme'
+import { Dialog } from '../soguma  suplies/dialog'
 import { gimsProps } from './gimProps' // gims props
 
 
@@ -51,7 +47,7 @@ const variants = {
 
 const data = ["art", "about me", "p1"]
 
-export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay, darkTheme }) {
+export default function SogumaVx({ repos , setOnDisplay, onDisplay, darkTheme }) {
 
 	const [[direction, steps], setRotate] = useState([0, 0]);
 	const [clickOff, setClickOff] = useState(true);
@@ -61,13 +57,11 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 	const moveGims = (newDirection: number) => {
 		setRotate([newDirection, steps + newDirection]);
 	}
-	// console.log(dataLoading ? "fetched DATA : ": fetchedData )
 	useEffect(() => {
 		const initProjects = []
 		repos.map((project) => {
 			initProjects.push(project.name);
 		})
-		// console.log(" projects d ZAAAAAAAAAAAAAAAAAAB: ", initProjects)
 		setProjects(initProjects)
 	}, [repos])
 	const onSogumaClick = () => {
@@ -108,6 +102,7 @@ export default function SogumaVx({ repos ,fetchedData , setOnDisplay, onDisplay,
 			custom={onDisplay}
 			variants={variants}
 		>
+			{onDisplay.displayState && onDisplay.type != 0 && onDisplay.type != -1 && <Dialog text="scroll down" />}
 			{onDisplay.type === 2 && gimsProps.map((gim) => (
 				<Gim
 					key={gim.id}

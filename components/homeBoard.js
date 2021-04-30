@@ -1,8 +1,9 @@
 
 import { motion, useTransform, useViewportScroll, useMotionValue } from 'framer-motion'
-import Cover from '../components/cover'
+import ImageDisplayer from '../components/soguma  suplies/imageDisplayer'
 import Contact from './contact'
-import Description from '../components/description'
+import Description from './soguma  suplies/description'
+import MiniSoso from './soguma  suplies/miniSoso'
 
 export const HomeBoard = ({ onDisplay, coverImage, fullName, bio }) => {
 
@@ -33,34 +34,49 @@ export const HomeBoard = ({ onDisplay, coverImage, fullName, bio }) => {
 				y: boardYoffset,
 				// opacity : boardOpacity
 			}}>
-			<Cover
+			<ImageDisplayer
 				onDisplay={onDisplay}
 				imageSrc={coverImage}
 				containerWidth=" w-6/12 "
 				width="w-full max-w-6xl"
+				rounded
+				border
 			/>
-			<div className=" flex flex-col justify-center items-center w-full h-1/2  my-5 bg-black md:bg-gray-900 rounded-sm shadow-soft2dark">
-				<div className="w-11/12 h-1/6 flex justify-center md:justify-start items-center mx-10 text-white text-xl md:text-3xl">
+			{/* <Description
+			color="bg-white"
+			focus={onDisplay.displayState}
+			imageSrc={coverImage}
+			containerWidth=" w-6/12 "
+			width="w-full max-w-6xl"
+			title="hamid"
+			text="zabzoub"
+			/> */}
+			<div className=" flex flex-col justify-center items-center w-full h-1/2  my-5 bg-blck md:bg-gray-700 rounded-sm shadow-soft2ark">
+				<div className="w-11/12 h-1/6 flex justify-center md:justify-start items-center mx-10 text-gray-400 md:text-black text-xl md:text-3xl">
 					<h2>{fullName}</h2>
 				</div>
-				<div className="w-11/12 h-5/6 text-white text-center md:text-left">
+				<div className="w-11/12 h-5/6 text-gray-200 md:text-black text-center md:text-left">
 					<p className="m-4">{bio}</p>
 				</div>
 			</div>
 		</motion.div>
-		<motion.div className="relative flex flex-row justify-end items-center h-full md:w-1/3 w-full "
+		<motion.div className="relative flex flex-row justify-end items-center h-full md:w-1/3 w-full bg-sogumaGren "
 			style={{
 				scale: boardScale,
 				y: boardYoffset,
 				// opacity : boardOpacity
 			}}>
+				<MiniSoso
+					width="w-44"
+					height="h-44"
+				/>
 			<Contact
 				onDisplay={onDisplay}
 				title={"contact me"}
 				containerWidth=" w-3/12 h-full hidden md:flex justify-start "
 				width="w-full max-w-6xl"
 				color="bg-black text-white"
-
+				media={["mail","linkedin", "github", "tweeter"]}
 			/>
 		</motion.div>
 	</motion.div>

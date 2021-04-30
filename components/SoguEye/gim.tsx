@@ -1,6 +1,6 @@
 import SogumaTitle from './sogumaTitle'
 import { motion } from 'framer-motion'
-import { theme } from './theme'
+import { theme } from '../theme'
 import { gimsProps, fromProps } from './gimProps' // gims props
 
 

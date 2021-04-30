@@ -1,5 +1,4 @@
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
-import { useGetScrollInterval } from './useGetScrollInterval'
 
 const ProjectCover = ({ animationValues, containerWidth, width, getRef, imageSrc, interval, values }) => {
   

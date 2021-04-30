@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, useViewportScroll, useTransform } from 'framer-motion'
+import { motion, useViewportScroll, useTransform } from 'framer-motion'
 
 const variants={
     start : {
@@ -27,7 +27,7 @@ export const Dialog = ({ text }) => {
     const opacity = useTransform(scrollYProgress, [0,0.05,0.1, 0.2,1], [1,0, 0,0,0]);
 
     return (
-        <motion.div className="absolute left-3/4 top-3/4 flex justify-center items-center  w-11/12 h-full "
+        <motion.div className="absolute right-1/4 top-1/4  flex justify-center items-center  w-2/12 h-full "
             style={{
                 scale : scale,
                 opacity : opacity

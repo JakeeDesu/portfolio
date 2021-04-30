@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 
 const miniSosoTheme = {
-  head : 'absolute top-0 left-0',
-  hair : 'absolute bottom-3/4 h-3/4 w-3/4',
-  eye : 'absolute h-1/2 w-1/2 top-1/4 ',
-  eyelash : 'absolute w-3/4 h-3/4 top-1/4 '
+  head : 'absolute top-0 left-0 pointer-events-none',
+  hair : 'absolute bottom-3/4 h-3/4 w-3/4 pointer-events-none',
+  eye : 'absolute h-1/2 w-1/2 top-1/4 pointer-events-none',
+  eyelash : 'absolute w-3/4 h-3/4 top-1/4 pointer-events-none'
 
 }
 const scaleFactor =  Math.random() * 2;
@@ -42,7 +42,7 @@ const variants={
   animation : {
     opacity : [0.5, 0.2],
     scale : 0.5,
-    boxShadow : "0 0px 30px 5px rgba(255, 255, 255, 0.2)",
+    // boxShadow : "0 0px 30px 5px rgba(255, 255, 255, 0.2)",
     y: [0, 40 * 2, -5 * 2, 5 * 2, 0],
     x: [0, 5 * 2, 1 * 2, -1 * 2, 0],
     transition : {
@@ -117,25 +117,10 @@ export default function MiniSoso({ height, width }) {
 
 
   return (
-    <motion.div className={`relative flex justify-center rounded-full ${height} ${width}`}
+    <motion.div className={`relative flex justify-center rounded-full  ${height} ${width}`}
       variants={variants}
       initial="start"
       animate="animation"
-      drag
-      dragConstraints={{
-        top : 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-      }}
-      // whileHover={{
-      //   opacity : 1,
-      //   scale : 1.2,
-      //   transition : {
-      //     duration : 0.3
-      //   }
-      //   // boxShadow : '0 0px 20px 8px rgba(255, 255, 255, 0.5)',
-      // }}
     >
       <motion.img className={miniSosoTheme.head} src="/soso-head.svg"
       />

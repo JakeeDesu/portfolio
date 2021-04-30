@@ -47,7 +47,7 @@ const MenuPhone = ({ onDisplay, setOnDisplay }) => {
 	}
 
 	return (
-		<motion.div className="relative text-white text-xl flex flex-col justify-evenly items-center rounded-lg bg-gray-500 bg-opacity-50 h-half w-full px-4 ">
+		<motion.div className="relative text-white text-xl flex flex-col justify-evenly items-center rounded-lg bg-gray-500 bg-opacity-10 h-half w-full px-4 ">
 			<MenuButton title="ABOUT ME" clickEvent={() => selectTitle(1)} />
 			<MenuButton title="MY PROJECTS" clickEvent={() => selectTitle(2)} />
 			<MenuButton title="ART" clickEvent={() => selectTitle(0)} />

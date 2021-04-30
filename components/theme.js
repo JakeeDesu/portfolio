@@ -21,17 +21,17 @@ export const theme = {
       }
     },
     eyeSwitch : {
-      iris : 'lg:h-12 lg:w-12 md:h-10 md:w-10 h-8 w-8 border-gray-500 border-2 bg-sogumaRed',
-      pupil : 'lg:h-10 lg:w-10 h-5 w-5 bg-black',
-      upperEyeLash : ' border-b-2 border-gray-100',
-      upperEyeLash2 : ' border-2 border-gray-100 bg-white',
-      bottomEyeLash : ' border-t-2 border-gray-100',
-      bottomEyeLash2 : ' border-2 border-gray-100 bg-white',
+      iris : 'lg:h-9 lg:w-9 md:h-8 md:w-8 h-7 w-7 border-black border-2 bg-sogumaRed',
+      pupil : 'lg:h-6 lg:w-6 h-5 w-5 bg-black',
+      upperEyeLash : ' boder-b-2 border-blue-100',
+      upperEyeLash2 : ' boder-2 border-blue-100 bg-blue-400',
+      bottomEyeLash : ' borer-t-2 border-blue-100',
+      bottomEyeLash2 : ' boder-2 border-blue-100 bg-blue-400',
     }
 
 	},
 	dark : {
-		backgroundColor : 'bg-white',//'bg-gray-900 ',
+		backgroundColor : 'bg-gray-900',//'bg-gray-900 ',
 		shadowsColor : 'bg-black',//'from-gray-900 to-blue-400 ',
 		gimHolder : ' h-44 w-44 border-gray-300 border-2 h-44 w-44 shadow-glow',
     gims: {
@@ -52,7 +52,7 @@ export const theme = {
     },
     // md:h-32 md:w-20 h-16 w-12
     eyeSwitch : {
-      iris : 'lg:h-12 lg:w-12 md:h-10 md:w-10 h-8 w-8 border-gray-100 border-4 ',
+      iris : 'lg:h-10 lg:w-10 md:h-9 md:w-9 h-7 w-7 border-gray-100 border-4 ',
       pupil : 'lg:h-4 lg:w-4 h-2 w-2 bg-white',
       upperEyeLash : ' border-b-2 border-gray-200',
       upperEyeLash2 : ' border-2 border-gray-200',

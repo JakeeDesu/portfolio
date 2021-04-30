@@ -48,10 +48,10 @@ const variants = {
 }
 
 
-const Description = ({ onDisplay, containerWidth, width, title, text, color }) => {
+const Description = ({ focus, containerWidth, width, title, text, color }) => {
 
   return (
-    <motion.div className={`relative  ${containerWidth || " w-full "} ${!onDisplay.displayState && " pointer-events-none"} `}
+    <motion.div className={`relative  ${containerWidth || " w-full "} ${!focus && " pointer-events-none"} `}
     initial="start"
     animate="animate"
     variants={boucing}
@@ -61,7 +61,7 @@ const Description = ({ onDisplay, containerWidth, width, title, text, color }) =
         <motion.div
           className="relative flex justify-center items-center w-full  pt-full rounded-full"
           initial="start"
-          animate={onDisplay.displayState ? "animate" : "shrink" }
+          animate={focus ? "animate" : "shrink" }
           variants={variants}
           whileHover="onHover"
           >

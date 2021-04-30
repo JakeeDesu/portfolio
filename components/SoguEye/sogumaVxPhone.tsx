@@ -1,12 +1,7 @@
 import { useState, useEffect } from 'react'
-import { motion, useTransform, useViewportScroll, useMotionValue, AnimatePresence } from 'framer-motion'
-// import GimsPhone from './gimPhone'
+import { motion, AnimatePresence } from 'framer-motion'
 import SogumaPhone from './sogumaPhone'
 import MenuPhone from './menuPhone'
-import { wrap } from 'popmotion'
-import SogumaEye from './sugumaEye'
-import { theme } from './theme'
-import { gimsProps } from './gimProps' // gims props
 
 
 const variants = {
@@ -49,7 +44,7 @@ const variants = {
 
 const data = ["art", "about me", "p1"]
 
-export default function SogumaVxPhone({ repos, fetchedData, setOnDisplay, onDisplay, darkTheme }) {
+export default function SogumaVxPhone({ repos, setOnDisplay, onDisplay, darkTheme }) {
 
 	const [[direction, steps], setRotate] = useState([0, 0]);
 	// const [clickOff, setClickOff] = useState(true);

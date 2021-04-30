@@ -1,13 +1,8 @@
-import Scene from './scene'
-import Image from 'next/image'
 import Title from './title'
 import AboutProject from './aboutProject'
 import ProjectDescription from './projectDescription'
-import { mergeRefs } from './mergeRefs'
-import { useFocus } from './useFocus'
-import { useWindowDimensions } from './useWindowDimensions'
-import { useGetScrollInterval, useGetRef } from './useGetScrollInterval'
-import { motion, AnimatePresence, useViewportScroll, useTransform } from 'framer-motion'
+import { useGetScrollInterval, useGetRef } from './utilities/useGetScrollInterval'
+import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
 
@@ -65,10 +60,13 @@ const MainBoard = ({ onDisplay, repos }) => {
 			anime: [1000, 1000, 100, 0,0],
 			animation : {
 				x : [0,0, 0, 0,0],
-				y: [-3000,-3000, -500,0, 0],
-				scale : [3, 3, 2.5, 1,1],
-				opacity :[0, 0, 1, 1,1],
-				color : ["#000000","#000000","#444444","#444444","#000000"]
+				// y: [-3000,-3000, -500,0, 0],
+				// scale : [3, 3, 2.5, 1,1],
+				// opacity :[0, 0, 1, 1,1],
+				y: [-150,-150, -100,-30, 0],
+				scale : [0.5,0.7, 0.9, 1, 1],
+				opacity :[0, 1, 1, 1,1],
+				color : ["#000000","#000000","#000000","#000000","#ffffff"]
 			}
 		},
 		{
@@ -82,25 +80,47 @@ const MainBoard = ({ onDisplay, repos }) => {
 				color : ["#000000","#000000","#444444","#444444","#000000"]
 			}
 		},
+		// {
+		// 	ref: ref3,
+		// 	anime: [1000, 1000, 100, 0,0],
+		// 	animation : {
+		// 		x : [-5000, -2000, 100,0, 0],
+		// 		y: [-3000, -1000, -200,0, 0],
+		// 		scale : [3,3, 1.8, 1,1],
+		// 		opacity :[0, 0, 1, 1,1],
+		// 		color : ["#000000","#000000","#444444","#444444","#000000"]
+		// 	}
+		// },
 		{
 			ref: ref3,
 			anime: [1000, 1000, 100, 0,0],
 			animation : {
-				x : [-5000, -2000, 100,0, 0],
-				y: [-3000, -1000, -200,0, 0],
-				scale : [3,3, 1.8, 1,1],
-				opacity :[0, 0, 1, 1,1],
+				x : [-50, -20, 10,0, 0],
+				y: [-30, -25, -20,0, 0],
+				scale : [0.5,0.7, 0.9, 1, 1],
+				opacity :[0.8, 0.9, 1, 1,1],
 				color : ["#000000","#000000","#444444","#444444","#000000"]
 			}
 		},
+		// {
+		// 	ref: ref4,
+		// 	anime: [1000, 1000, 100, 0,0],
+		// 	animation : {
+		// 		x : [5000, 2000, -100,0, 0],
+		// 		y: [-3000, -1000, -200,0, 0],
+		// 		scale : [3, 3, 1.8,1, 1],
+		// 		opacity :[0, 0, 1, 1,1],
+		// 		color : ["#000000","#000000","#444444","#444444","#000000"]
+		// 	}
+		// },
 		{
 			ref: ref4,
 			anime: [1000, 1000, 100, 0,0],
 			animation : {
-				x : [5000, 2000, -100,0, 0],
-				y: [-3000, -1000, -200,0, 0],
-				scale : [3, 3, 1.8,1, 1],
-				opacity :[0, 0, 1, 1,1],
+				x : [-50, -20, 10,0, 0],
+				y: [-30, -25, -20,0, 0],
+				scale : [0.5,0.7, 0.9, 1, 1],
+				opacity :[0.8, 0.9, 1, 1,1],
 				color : ["#000000","#000000","#444444","#444444","#000000"]
 			}
 		},
@@ -115,6 +135,17 @@ const MainBoard = ({ onDisplay, repos }) => {
 				color : ["#000000","#000000","#444444","#444444","#000000"]
 			}
 		},
+		// {
+		// 	ref: ref3,
+		// 	anime: [1000, 1000, 100, 0,0],
+		// 	animation : {
+		// 		x : [-50, -20, 10,0, 0],
+		// 		y: [-30, -10, -20,0, 0],
+		// 		scale : [1,1, 1.05, 1,1],
+		// 		opacity :[0.8, 0.9, 1, 1,1],
+		// 		color : ["#000000","#000000","#444444","#444444","#000000"]
+		// 	}
+		// },
 	]
 
 	useEffect(() => {
@@ -179,13 +210,13 @@ const MainBoard = ({ onDisplay, repos }) => {
 				ref={refContainer}
 			>
 				{/* ref={mergeRefs(refContainer)} */}
-				<motion.div  className="flex flex-col justify-start items-center w-full md:w-10/12  "
+				<motion.div  className="flex flex-col justify-start items-center w-full   "
 					style={{
 						opacity: 1//boardImageOpacity
 					}}
 				>
 					<Title
-						containerWidth={" w-9/12 "}
+						containerWidth={" w-9/12"}
 						width={" md:w-2/5 w-4/5 max-w-5xl"}
 						title={getTitle()}
 						description={getDescription()}
@@ -194,8 +225,10 @@ const MainBoard = ({ onDisplay, repos }) => {
 						values={scrollValues.values[0]}
 						animationValues={scrollValues.animationValues[0]}
 					/>
-					<div ref={getRef2} className="w-full bg-blue-800">
-						<img  className="w-full object-cover " src={getFrames()} />
+					<div ref={getRef2} className=" h-auto w-10/12">
+						<div className="w-full h-auto my-10 overflow-hidden rounded-lg ">
+							<img  className="w-full h-auto object-center " src={getFrames()} />
+						</div>
 					</div>
 					<AboutProject
 						containerWidth={" w-11/12 "}
@@ -219,7 +252,7 @@ const MainBoard = ({ onDisplay, repos }) => {
 						animationValues={scrollValues.animationValues[3]}
 					/>
 				</motion.div>
-					<div ref={getRef5} className="w-full h-100 bg-black">
+					<div ref={getRef5} className=" w-full h-50 bg-black">
 
 					</div>
 

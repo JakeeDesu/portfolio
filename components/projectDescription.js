@@ -13,7 +13,7 @@ const ProjectDescription = ({animationValues, containerWidth, width, getRef, tit
   
   return (
     <div  ref={getRef} className={`relative flex flex-col items-end justify-start ${containerWidth || " w-full "} `}>
-      <motion.div className={`${width || "w-full"}`}
+      <motion.div className={`${width || "w-full"} my-10`}
         style={{
           x: xOffset,
           y: yOffset,

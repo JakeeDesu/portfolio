@@ -1,10 +1,9 @@
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 
-const Title = ({ animationValues, containerWidth, width, getRef, interval, values, title, description, image }) => {
+const Title = ({ animationValues, containerWidth, width, getRef, interval, title}) => {
 
 	const { scrollYProgress } = useViewportScroll();
 	// console.log(title + " title interval : ", interval , title + " title values : ", {x: [0, 100],y: [0, 100],scale: [1,1] }, "   | " , animationValues)
-	const xOffset = useTransform(scrollYProgress, interval, animationValues['x']);
 	const yOffset = useTransform(scrollYProgress, interval, animationValues['y']);
 	const scale = useTransform(scrollYProgress, interval, animationValues['scale']);
 	const opacity = useTransform(scrollYProgress, interval, animationValues['opacity']);
@@ -15,38 +14,23 @@ const Title = ({ animationValues, containerWidth, width, getRef, interval, value
 			<motion.div
 				className="flex flex-col justify-center items-center w-full h-full my-10 "
 				style={{
-					// y: boardYoffset,
-					x: xOffset,
 					y: yOffset,
 					scale: scale,
-					opacity: opacity,
-					// scale: boardScale,
+					// opacity: opacity,s
 				}}
 			>
 				<div className={`flex flex-col ${width || "w-full "} `}>
 					<motion.div
-						className="relative flex justify-center items-center w-full pt-full border-4 border-black bg-whte rounded-full"
-						style={{
-							// color : textColor,
-							// backgroundColor : boardColor
-							backgroundColor: color
-						}}
+						className="relative flex justify-center items-center w-full pt-full bordr-4 border-black bg-black  rounded-full"
+						// style={{ backgroundColor: color }}
 					>
-						{/* <hr className="absolute hidden md:flex bottom-full right-1/2 border-2 border-black h-screen "></hr> */}
-						<div className="absolute flex justify-center items-center top-0  w-full h-full " >
-							<h1 className=" md:text-8xl  text-4xl ">{title}</h1>
-						</div>
+						<motion.div className="absolute flex justify-center items-center top-0  shadow-soft2glow w-full h-full rounded-full "
+							style={{ opacity: opacity }}
+						>
+							<h1 className=" md:text-7xl text-gray-200 text-4xl ">{title}</h1>
+						</motion.div>
 					</motion.div>
 				</div>
-				<motion.div
-					className="relative flex flex-col justify-center items-center mx-2 "
-					style={{
-						// y: textYoffset,
-						// opacity: descriptionOpacity,
-					}}
-				>
-					<p>{description}</p>
-				</motion.div>
 			</motion.div>
 		</div>
 	);

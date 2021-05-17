@@ -8,6 +8,7 @@ import MainBoard from '../components/mainboard'
 
 const Home = ({ gitData, darkTheme, changeTheme }) => {
 	
+	// const [onDisplay, setOnDisplay] = useState({ displayState: false, displayOff: false, itemId: -1, type: 1})
 	const [onDisplay, setOnDisplay] = useState({ displayState: true, displayOff: false, itemId: -1, type: -1})
 	const displayGim = (displayState, itemId, type, activeDisplayOff) => {
 		const newdisplayOff = onDisplay.displayState && !displayState && activeDisplayOff ? true : false;
@@ -37,7 +38,7 @@ const Home = ({ gitData, darkTheme, changeTheme }) => {
 					darkTheme={darkTheme} />
 				<HomeBoard
 					onDisplay={onDisplay}
-					coverImage={"/me/0.png"}
+					coverImage={"/me/r-0.png"}
 					fullName={gitData.name}
 					bio={gitData.bio} />
 			</div>

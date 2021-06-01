@@ -1,18 +1,18 @@
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 
 const AboutProject = ({ animationValues, containerWidth, width, titlesWidth, getRef, interval, title, text, subTitles }) => {
-
+  
   // console.log(" imageCover interval : ", interval, " cover values : ", animationValues)
-
+  
   const { scrollYProgress } = useViewportScroll();
   const xOffset = useTransform(scrollYProgress, interval, animationValues['x']);
   const yOffset = useTransform(scrollYProgress, interval, animationValues['y']);
   const scale = useTransform(scrollYProgress, interval, animationValues['scale']);
   const opacity = useTransform(scrollYProgress, interval, animationValues['opacity']);
   // const shadow = useTransform(scrollYProgress, interval, animationValues['shadow']);
-
+  
   // const color = useTransform(scrollYProgress, interval, animationValues['color']);
-
+  
   const LinkedTitle = ({ title, bodyStyle, linesStyle, dashedLineStyle, rotatedLineStyle, linkWidth, linkRotation, borderColor, textStyle }) => {
     return (
       <div className={`${bodyStyle || "relative flex justify-start items-center w-1/4 md:w-full h-24"}`}>
@@ -81,26 +81,10 @@ const AboutProject = ({ animationValues, containerWidth, width, titlesWidth, get
     )
   }
   return (
-    <div ref={getRef} className={`relative flex flex-col-reverse md:flex-row items-center justify-start ${containerWidth || " w-full "}`}>
-      <motion.div className={`relative md:absolute top-0 w bottom-0 right-0 flex flex-col md:flex-row  items-center justify-end ${titlesWidth || "w-1/3"}`}
-        style={{
-          opacity : opacity
-        }}
-      >
-        <DashedTitles3
-          title1={subTitles[0]}
-          title2={subTitles[1]}
-          title3={subTitles[2]}
-          width="w-full md:w-1/4"
-          linesWidth="w-2xfull"
-          height="h-3/5"
-          textStyle="text-gray-100 text-base md:text-2xl text-center whitespace-nowrap"
-          borderColor="border-gray-400"
-        />
-      </motion.div>
+    <div ref={getRef} className={`relative flex flex-col md:flex-row items-center justify-start ${containerWidth || " w-full "}`}>
       <motion.div
         // ref={getRef}
-        className={`${width || "w-2/3"} my-10`}
+        className={`flex flex-col-reverse ${width || "w-2/3"} my-10 bg-yellow-30`}
         style={{
           x: xOffset,
           y: yOffset,
@@ -108,6 +92,22 @@ const AboutProject = ({ animationValues, containerWidth, width, titlesWidth, get
           // shadow : shadow
         }}
       >
+        <motion.div className={`relative md:absolute top-full md:top-0 md:bottom-0 md:-right-1/2 flex flex-col md:flex-row  items-center justify-end ${titlesWidth || "w-1/3"}`}
+          style={{
+            opacity : opacity
+          }}
+        >
+          <DashedTitles3
+            title1={subTitles[0]}
+            title2={subTitles[1]}
+            title3={subTitles[2]}
+            width="w-full md:w-1/4"
+            linesWidth="w-2xfull"
+            height="h-3/5"
+            textStyle="text-gray-100 text-base md:text-2xl text-center whitespace-nowrap"
+            borderColor="border-gray-400"
+          />
+        </motion.div>
         <CircleDisplayer
           bodyStyle="flex flex-col justify-evenly items-center brder-2 border-white bg-black shadow-soft2glow "
           lineStyle="hidden md:flex border-black border-4 shadow-soft2glow top-1/2 right-full"

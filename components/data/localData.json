@@ -2,6 +2,22 @@
 	"localProjects": [
 		{
 			"name": "Fractol",
+			"objectives" :[
+				"2D Computer Graphics",
+				"Program Optimisation",
+				"Parallel Computing"
+			],
+			"skills" : [
+				"Graphics",
+				"Algorithms & AI",
+				"Imperative programming",
+				"Rigor" 
+			],
+			"technologies" : [
+				"C Programming language",
+				"minilibX",
+				"OpenCL"
+			],
 			"type": ".png",
 			"path": "/Fractol/",
 			"infos": {
@@ -23,6 +39,16 @@
 					"2",
 					"3"
 				]
+			}
+		},
+		{
+			"name": "CORE-WAR",
+			"type": ".png",
+			"path": "/FDF/",
+			"infos": {
+				"titles": [],
+				"descriptions": [],
+				"images": []
 			}
 		},
 		{

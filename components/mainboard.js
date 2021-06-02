@@ -8,6 +8,7 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 
 import { useState, useEffect } from 'react'
 import ProjectCover from './projectCover'
+import VidDisplayer from './vidDisplayer'
 
 
 const boardVariants = {
@@ -50,7 +51,7 @@ const MainBoard = ({ onDisplay, repos }) => {
 	})
 	// const [focuseRef, setTrigger] = useFocus();
 
-	
+
 	const [scrollValues, refContainer, setChildsVariables] = useGetScrollInterval()
 
 	const [ref1, getRef1] = useGetRef(null)
@@ -59,67 +60,78 @@ const MainBoard = ({ onDisplay, repos }) => {
 	const [ref4, getRef4] = useGetRef(null)
 	const [ref5, getRef5] = useGetRef(null)
 	const [ref6, getRef6] = useGetRef(null)
+	const [ref7, getRef7] = useGetRef(null)
 	const componentAnimationIntervals = [
 		{
 			ref: ref1,
-			anime: [1000, 1000, 100, 0,0],
-			animation : {
-				y: [10,-150, -100,-30, 5],
-				scale : [0.5,0.7, 0.9, 1, 1],
-				opacity :[0, 0, 0.2, 0.5,1],
-				color : ["#bbbbbb","#bbbbbb","#bbbbbb","#bbbbbb","#bbbbbb"]
+			anime: [1000, 1000, 100, 0, 0],
+			animation: {
+				y: [10, -150, -100, -30, 5],
+				scale: [0.5, 0.7, 0.9, 1, 1],
+				opacity: [0, 0, 0.2, 0.5, 1],
+				color: ["#bbbbbb", "#bbbbbb", "#bbbbbb", "#bbbbbb", "#bbbbbb"]
 			}
 		},
 		{
 			ref: ref2,
-			anime: [1000, 1000, 100, 0,0,0,0],
-			animation : {
-				y: [110, -10, -35,-50, -45,-5, 0],
-				scale : [1.05,1.08, 1.1, 1.05,1, 1,1],
+			anime: [1000, 1000, 100, 0, 0, 0, 0],
+			animation: {
+				y: [110, -10, -35, -50, -45, -5, 5],
+				scale: [1.05, 1.08, 1.1, 1.05, 1, 1, 1],
 			}
 		},
 		{
 			ref: ref3,
-			anime: [1000, 1000, 100, 0,0,0,0],
-			animation : {
-				x : [0, 0, 0,0, 0,0,-1],
-				y: [-30, -25, -10,-5, -1,0,5],
-				scale : [0.5,0.7, 0.9, 1.01,1.01, 1.01,1],
-				opacity :[0, 0, 0, 0,0,1,1],
-				color : ["#000000","#000000","#000000","#444444","#444444","#000000"],
+			anime: [1000, 1000, 100, 0, 0, 0, 0],
+			animation: {
+				x: [0, 0, 0, 0, 0, 0, -1],
+				y: [-30, -25, -10, -5, -1, 0, 5],
+				scale: [0.5, 0.7, 0.9, 1.01, 1.01, 1.01, 1],
+				opacity: [0, 0, 0, 0, 0, 1, 1],
+				color: ["#000000", "#000000", "#000000", "#444444", "#444444", "#000000"],
 			}
 		},
 		{
 			ref: ref4,
-			anime: [1000, 1000, 100, 0,0],
-			animation : {
-				x : [0, 0, 0,0, 0],
-				y: [-30, -25, -20,0, 5],
-				scale : [0.5,0.7, 0.9, 1, 1],
-				opacity :[0.8, 0.9, 1, 1,1],
-				color : ["#000000","#000000","#444444","#444444","#171717"]
+			anime: [1000, 1000, 100, 0, 0],
+			animation: {
+				y: [110, -10, -35, -45, 5],
+				scale: [0.5, 0.7, 0.9, 1, 1],
+				opacity: [1,1, 1,1,1],
+				color: ["#bbbbbb", "#bbbbbb", "#bbbbbb", "#bbbbbb", "#bbbbbb"]
 			}
 		},
 		{
 			ref: ref5,
-			anime: [1000, 1000, 100, 0,0],
-			animation : {
-				x : [0, 0, 0,0, 0],
-				y: [-30, -25, -20,0, 5],
-				scale : [0.5,0.7, 0.9, 1, 1],
-				opacity :[0.8, 0.9, 1, 1,1],
-				color : ["#000000","#000000","#444444","#444444","#171717"]
+			anime: [1000, 1000, 100, 0, 0],
+			animation: {
+				x: [0, 0, 0, 0, 0],
+				y: [-30, -25, -20, 0, 5],
+				scale: [0.5, 0.7, 0.9, 1, 1],
+				opacity: [0.8, 0.9, 1, 1, 1],
+				color: ["#000000", "#000000", "#444444", "#444444", "#171717"]
 			}
 		},
 		{
 			ref: ref6,
-			anime: [1000, 1000, 100, 0,0],
-			animation : {
-				x : [0, 0, 0,0, 0],
-				y: [0, 0, 0,0, 0],
-				scale : [1, 1, 1,1, 1],
-				opacity :[0, 1, 1, 1,1],
-				color : ["#000000","#000000","#444444","#444444","#000000"]
+			anime: [1000, 1000, 100, 0, 0],
+			animation: {
+				x: [0, 0, 0, 0, 0],
+				y: [-30, -25, -20, 0, 5],
+				scale: [0.5, 0.7, 0.9, 1, 1],
+				opacity: [0.8, 0.9, 1, 1, 1],
+				color: ["#000000", "#000000", "#444444", "#444444", "#171717"]
+			}
+		},
+		{
+			ref: ref7,
+			anime: [1000, 1000, 100, 0, 0],
+			animation: {
+				x: [0, 0, 0, 0, 0],
+				y: [0, 0, 0, 0, 0],
+				scale: [1, 1, 1, 1, 1],
+				opacity: [0, 1, 1, 1, 1],
+				color: ["#000000", "#000000", "#444444", "#444444", "#000000"]
 			}
 		},
 	]
@@ -186,31 +198,41 @@ const MainBoard = ({ onDisplay, repos }) => {
 				ref={refContainer}
 			>
 				{/* ref={mergeRefs(refContainer)} */}
-				<motion.div  className="flex flex-col justify-start items-center w-full"
+				<motion.div className="flex flex-col justify-start items-center w-full"
 					style={{
 						opacity: 1//boardImageOpacity
 					}}
 				>
 					<Title
-						containerWidth={" w-9/12"}
+						containerWidth={" w-9/12 py-10"}
 						width={" md:w-2/5 w-4/5 max-w-5xl"}
 						title={"C.Graphics"}
 						getRef={getRef1}
 						interval={scrollValues.interval[0]}
 						animationValues={scrollValues.animationValues[0]}
 					/>
+						<TechDisplayer
+							containerWidth={" w-full py-10 bg-red-0"} // tailwind width style
+							width="w-full max-w-5xl"
+							title={"Tools & Tech"}
+							titleStyle="text-xl"
+							text={""}
+							getRef={getRef4}
+							interval={scrollValues.interval[3]}
+							animationValues={scrollValues.animationValues[3]}
+						/>
 					<ProjectCover
-					image={getFrames()}
-					containerStyle={"w-full md:w-11/12"}
-					title="about project"
-					// imageSrc={getFrames()}
-					getRef={getRef2}
-					interval={scrollValues.interval[1]}
-					animationValues={scrollValues.animationValues[1]}
-					
+						image={getFrames()}
+						containerStyle={"w-full md:w-11/12 py-10 "}
+						title="about project"
+						// imageSrc={getFrames()}
+						getRef={getRef2}
+						interval={scrollValues.interval[1]}
+						animationValues={scrollValues.animationValues[1]}
+
 					/>
 					<AboutProject
-						containerWidth={" w-11/12 bg-red-70"}
+						containerWidth={" w-11/12 py-10 bg-red-70"}
 						width="w-full md:w-3/5 max-w-5xl "
 						titlesWidth="w-full max-w-5xl "
 						title={getTitle()}
@@ -221,30 +243,30 @@ const MainBoard = ({ onDisplay, repos }) => {
 						interval={scrollValues.interval[2]}
 						animationValues={scrollValues.animationValues[2]}
 					/>
-							<ProjectDescription
-								containerWidth={" w-9/12 "} // tailwind width style
-								width="md:w-2/5 w-3/5 max-w-5xl"
-								titleStyle="text-6xl"
-								title={"Skills"}
-								text={""}
-								getRef={getRef4}
-								interval={scrollValues.interval[3]}
-								animationValues={scrollValues.animationValues[3]}
-							/>
-						<TechDisplayer
-							containerWidth={" w-full"} // tailwind width style
-							width="w-full max-w-5xl"
-							title={"Tools & Tech"}
-							titleStyle="text-xl"
-							text={""}
-							getRef={getRef5}
-							interval={scrollValues.interval[4]}
-							animationValues={scrollValues.animationValues[4]}
-						/>
+					<ProjectDescription
+						containerWidth={" w-7/12 py-10 "} // tailwind width style
+						width="md:w-2/5 w-3/5 max-w-5xl"
+						titleStyle="text-4xl"
+						title={"tools & technologies"}
+						text={""}
+						getRef={getRef5}
+						interval={scrollValues.interval[4]}
+						animationValues={scrollValues.animationValues[4]}
+					/>
+					<VidDisplayer
+						containerWidth={" w-full py-10"} // tailwind width style
+						width="w-full max-w-5xl"
+						title={"Tools & Tech"}
+						titleStyle="text-xl"
+						text={""}
+						getRef={getRef6}
+						interval={scrollValues.interval[5]}
+						animationValues={scrollValues.animationValues[5]}
+					/>
 				</motion.div>
-					<div ref={getRef6} className=" w-full h-50 bg-black">
+				<div ref={getRef7} className=" w-full h-80 bg-black">
 
-					</div>
+				</div>
 
 			</motion.div>
 			}

@@ -2,7 +2,7 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 
 const AboutProject = ({ animationValues, containerWidth, width, titlesWidth, getRef, interval, title, text, subTitles }) => {
   
-  // console.log(" imageCover interval : ", interval, " cover values : ", animationValues)
+  console.log(" subtitles : ", subTitles)
   
   const { scrollYProgress } = useViewportScroll();
   const xOffset = useTransform(scrollYProgress, interval, animationValues['x']);
@@ -67,7 +67,7 @@ const AboutProject = ({ animationValues, containerWidth, width, titlesWidth, get
 
   const CircleDisplayer = ({ title, text, bodyStyle, titleStyle, textStyle, lineStyle}) => {
     return (
-      <div className="relative flex justify-center items-center w-full pt-full rounded-full">
+      <div className="relative  flex justify-center items-center w-full pt-full rounded-full">
         <hr className={`absolute ${ lineStyle || "right-full top-1/2 border-2 border-black " } w-screen`}></hr>
         <div className={`absolute top-0 h-full w-full rounded-full overflow-hidden ${bodyStyle || "bg-black  flex flex-col justify-center items-center"} `}>
           <div className={titleStyle || "text-white text-3xl" } >

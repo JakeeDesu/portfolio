@@ -1,6 +1,6 @@
 import Title from './title'
 import AboutProject from './aboutProject'
-import ProjectDescription from './projectDescription'
+import ToolsAndTech from './ToolsAndTech'
 import TechDisplayer from './techDisplayer'
 import { useGetScrollInterval, useGetRef } from './utilities/useGetScrollInterval'
 // import { motion } from 'framer-motion'
@@ -9,6 +9,9 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import ProjectCover from './projectCover'
 import VidDisplayer from './vidDisplayer'
+// project local data
+
+import LocalData from './utilities/getLocalProjectData';
 
 
 const boardVariants = {
@@ -46,6 +49,9 @@ const MainBoard = ({ onDisplay, repos }) => {
 			data: {},
 			title: "",
 			description: "",
+			objectives : [],
+			skills : [],
+			technologies : [],
 			type: onDisplay.type
 		}
 	})
@@ -145,7 +151,8 @@ const MainBoard = ({ onDisplay, repos }) => {
 		// if ((onDisplay.displayState && onDisplay.type === 1) || (onDisplay.displayState && onDisplay.type === 2))
 		// 	setTrigger(true)
 		if ((onDisplay.type === 1 || onDisplay.type === 2)) {
-			const projectData = repos[onDisplay.itemId > 0 ? onDisplay.itemId : 0]
+			const projectData = repos[onDisplay.itemId > 0 ? onDisplay.itemId : 0] // fetched data
+			let staticLocalData = new LocalData(projectData.name) // static data
 			setData({
 				...data,
 				empty: false,
@@ -157,6 +164,9 @@ const MainBoard = ({ onDisplay, repos }) => {
 				project: {
 					title: projectData.name,
 					description: projectData.description,
+					objectives : staticLocalData ? staticLocalData.getObjectives() : [],
+					skills : staticLocalData ? staticLocalData.getSkills() : [],
+					technologies : staticLocalData ? staticLocalData.getTechnologies() : [],
 					data: projectData
 				}
 			})
@@ -211,16 +221,6 @@ const MainBoard = ({ onDisplay, repos }) => {
 						interval={scrollValues.interval[0]}
 						animationValues={scrollValues.animationValues[0]}
 					/>
-						<TechDisplayer
-							containerWidth={" w-full py-10 bg-red-0"} // tailwind width style
-							width="w-full max-w-5xl"
-							title={"Tools & Tech"}
-							titleStyle="text-xl"
-							text={""}
-							getRef={getRef4}
-							interval={scrollValues.interval[3]}
-							animationValues={scrollValues.animationValues[3]}
-						/>
 					<ProjectCover
 						image={getFrames()}
 						containerStyle={"w-full md:w-11/12 py-10 "}
@@ -231,24 +231,34 @@ const MainBoard = ({ onDisplay, repos }) => {
 						animationValues={scrollValues.animationValues[1]}
 
 					/>
+						<TechDisplayer
+							containerWidth={" w-full py-10 bg-red-0"} // tailwind width style
+							width="w-full max-w-5xl"
+							skillsList={data.project.skills}
+							titleStyle="text-xl"
+							text={""}
+							getRef={getRef4}
+							interval={scrollValues.interval[3]}
+							animationValues={scrollValues.animationValues[3]}
+						/>
 					<AboutProject
 						containerWidth={" w-11/12 py-10 bg-red-70"}
 						width="w-full md:w-3/5 max-w-5xl "
 						titlesWidth="w-full max-w-5xl "
 						title={getTitle()}
 						text={getDescription()}
-						subTitles={["Optimisations", "Parallel Computing", "C programing"]}
+						subTitles={data.project.objectives}
 						// imageSrc={getFrames()}
 						getRef={getRef3}
 						interval={scrollValues.interval[2]}
 						animationValues={scrollValues.animationValues[2]}
 					/>
-					<ProjectDescription
-						containerWidth={" w-7/12 py-10 "} // tailwind width style
-						width="md:w-2/5 w-3/5 max-w-5xl"
-						titleStyle="text-4xl"
-						title={"tools & technologies"}
-						text={""}
+					<ToolsAndTech
+						containerWidth={" w-9/12 py-10 "} // tailwind width style
+						width="md:w-3/12 lg:w-2/12 w-3/5 max-w-xl "
+						titleStyle="md:text-lg lg:text-xl"
+						title={"tools / Tech"}
+						toolsList={data.project.technologies}
 						getRef={getRef5}
 						interval={scrollValues.interval[4]}
 						animationValues={scrollValues.animationValues[4]}
@@ -257,14 +267,14 @@ const MainBoard = ({ onDisplay, repos }) => {
 						containerWidth={" w-full py-10"} // tailwind width style
 						width="w-full max-w-5xl"
 						title={"Tools & Tech"}
-						titleStyle="text-xl"
+						titleStyle=" md:text-tiny lg:text-xl"
 						text={""}
 						getRef={getRef6}
 						interval={scrollValues.interval[5]}
 						animationValues={scrollValues.animationValues[5]}
 					/>
 				</motion.div>
-				<div ref={getRef7} className=" w-full h-80 bg-black">
+				<div ref={getRef7} className=" w-full h-0 bg-black">
 
 				</div>
 

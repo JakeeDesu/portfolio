@@ -42,7 +42,23 @@
 			}
 		},
 		{
-			"name": "CORE-WAR",
+			"name": "Core-War",
+			"objectives" :[
+				"Compilation",
+				"Simplistic Virtual Machine",
+				"Simplistic Language Type Assembly",
+				"Visualization"
+			],
+			"skills" : [
+				"Adaptation & Creativity",
+				"Organization",
+				"group & interpersonal",
+				"Algorithms & AI" 
+			],
+			"technologies" : [
+				"C Programming language",
+				"Ncurses"
+			],
 			"type": ".png",
 			"path": "/FDF/",
 			"infos": {
@@ -53,6 +69,22 @@
 		},
 		{
 			"name": "FDF",
+			"objectives" :[
+				"2D Computer Graphics",
+				"Program Optimisation",
+				"Parallel Computing"
+			],
+			"skills" : [
+				"Graphics",
+				"Algorithms & AI",
+				"Imperative programming",
+				"Rigor" 
+			],
+			"technologies" : [
+				"C Programming language",
+				"minilibX",
+				"OpenCL"
+			],
 			"type": ".png",
 			"path": "/FDF/",
 			"infos": {

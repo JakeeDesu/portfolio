@@ -38,7 +38,7 @@ const GimTitle = ({ symb, title, width, height, color, textStyle }) => {
   )
 }
 
-const TechDisplayer = ({ animationValues, containerWidth, width, getRef, titleStyle, title, text, interval, values }) => {
+const TechDisplayer = ({ animationValues, containerWidth, width, getRef, titleStyle, skillsList, text, interval, values }) => {
 
   const { scrollYProgress } = useViewportScroll();
   // const xOffset = useTransform(scrollYProgress, interval, animationValues['x']);
@@ -57,31 +57,18 @@ const TechDisplayer = ({ animationValues, containerWidth, width, getRef, titleSt
             scale: scale
           }}
           >
-        <div className="relative flex flex-row w-full  h-full flex justify-evenly items-center ">
-          <GimTitle
-            symb=""
-            title="Adaptation &amp; creativity"
-            width="w-24"
-            height="h-24"
-            textStyle="whitespace-nowrap text-gray-300 text-xl right-full text-right m-5"
-            color="bg-black"
-          />
-          <GimTitle
-            symb=""
-            title="Adaptation &amp; creativity"
-            width="w-32"
-            height="h-32"
-            textStyle="whitespace-nowrap text-gray-300 text-xl right-full text-right m-5"
-            color="bg-black"
-          />
-          <GimTitle
-            symb=""
-            title="Adaptation &amp; creativity"
-            width="w-24"
-            height="h-24"
-            textStyle="whitespace-nowrap text-gray-300 text-xl right-full text-right m-5"
-            color="bg-black"
-          />
+        <div className="relative flex-row w-full  h-full flex justify-evenly items-center ">
+          {skillsList.map((skill, index) => (
+            <GimTitle
+              key={index}
+              symb=""
+              title={skill}
+              width={index == 0 || index == (skillsList.size() - 1) ? "w-20" : "w-24"}
+              height={index == 0 || index == (skillsList.size() - 1) ? "h-20" : "h-24"}
+              textStyle="whitespace-nowrap text-gray-300 text-xl right-full text-right m-5"
+              color="bg-black"
+            />
+          ))}
         </div>
       </motion.div>
     </div>

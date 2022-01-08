@@ -18,7 +18,7 @@ function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay,
 	const animationKey = onDisplay.displayState ? steps + 1 : steps;
 
 
-	const variants = {
+	const variants : any = {
 		enter: (onDisplay: any) => {
 			return {
 				opacity : 1,

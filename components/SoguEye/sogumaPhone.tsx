@@ -1,3 +1,4 @@
+//@ts-ignore
 import { motion } from 'framer-motion'
 import Eye from '../soguma  suplies/Eye'
 import { theme } from '../theme'
@@ -59,7 +60,7 @@ const variants = {
 	}
 
 }
-
+//@ts-ignore
 function SogumaPhone({ onDisplay, darkTheme, onSogumaClick, setOnDisplay }) {
 	const switchId = darkTheme ? 1 : 0;
 

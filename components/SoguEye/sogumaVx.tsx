@@ -1,4 +1,6 @@
+//@ts-ignore
 import { useState, useEffect } from 'react'
+//@ts-ignore
 import { motion, AnimatePresence } from 'framer-motion'
 import Gim from './gim'
 import Soguma from './soguma'
@@ -46,7 +48,7 @@ const variants = {
 
 
 const data = ["art", "about me", "p1"]
-
+//@ts-ignore
 export default function SogumaVx({ repos , setOnDisplay, onDisplay, darkTheme }) {
 
 	const [[direction, steps], setRotate] = useState([0, 0]);
@@ -58,12 +60,16 @@ export default function SogumaVx({ repos , setOnDisplay, onDisplay, darkTheme })
 		setRotate([newDirection, steps + newDirection]);
 	}
 	useEffect(() => {
+//@ts-ignore
 		const initProjects = []
+//@ts-ignore
 		repos.map((project) => {
 			initProjects.push(project.name);
 		})
+//@ts-ignore
 		setProjects(initProjects)
 	}, [repos])
+//@ts-ignore
 	const onSogumaClick = () => {
 			switch (onDisplay.type) {
 				case  -1 : // none state
@@ -105,6 +111,7 @@ export default function SogumaVx({ repos , setOnDisplay, onDisplay, darkTheme })
 			{onDisplay.displayState && onDisplay.type != 0 && onDisplay.type != -1 && <Dialog text="scroll down" />}
 			{onDisplay.type === 2 && gimsProps.map((gim) => (
 				<Gim
+				//@ts-ignore
 					key={gim.id}
 					gimId={gim.id}
 					data={projects}
@@ -142,19 +149,27 @@ export default function SogumaVx({ repos , setOnDisplay, onDisplay, darkTheme })
 						transition : {
 							duration : 0.3
 						}
-
+						
 					}}
 					whileHover={{
 						opacity : 1,
 						scale : 1,
 						y: -20
-
+						
 					}}
 					onMouseDown={backToMenu}
-				>
+					>
+					{/* 
+					//@ts-ignore*/}
 					<div className="relative flex justify-center items-center w-full h-full text-2xl text-white pointer-events-auto">
+					{/* 
+					//@ts-ignore*/}
 						<h1 className="">Menu</h1>
+					{/* 
+					//@ts-ignore*/}
 						<hr className="absolute top-full border-2 border-gray-100 h-52" ></hr>
+					{/* 
+					//@ts-ignore*/}
 					</div>
 				</motion.div>}				
 			</AnimatePresence>

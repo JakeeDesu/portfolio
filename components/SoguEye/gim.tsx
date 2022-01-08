@@ -1,4 +1,5 @@
 import SogumaTitle from './sogumaTitle'
+//@ts-ignore
 import { motion } from 'framer-motion'
 import { theme } from '../theme'
 import { gimsProps, fromProps } from './gimProps' // gims props
@@ -9,7 +10,7 @@ import { gimsProps, fromProps } from './gimProps' // gims props
 const getGimPropsById = (gimId: number) => {
 	return gimsProps.filter((gimProps) => gimProps.id == gimId).pop() || gimsProps[0];
 }
-
+//@ts-ignore
 function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay, darkTheme }) {
 
 	const currentGim = getGimPropsById(gimId);
@@ -119,12 +120,12 @@ function Gim({ data, gimId, direction, steps, moveGims, setOnDisplay, onDisplay,
 
 
 
-
+//@ts-ignore
 function fixGimsDataIndex(data, steps) {
 	let fixedIndex = steps < 0 ? ((data.length) + (steps % data.length)) % data.length : steps % data.length;
 	return (fixedIndex);
 }
-
+//@ts-ignore
 function getGimCurrenData(data, gimId, moveSteps, moveDirection) {
 	switch (gimId) {
 		case 0: // main gim

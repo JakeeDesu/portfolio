@@ -1,4 +1,6 @@
+//@ts-ignore
 import { useState, useEffect } from 'react'
+//@ts-ignore
 import { motion, AnimatePresence } from 'framer-motion'
 import SogumaPhone from './sogumaPhone'
 import MenuPhone from './menuPhone'
@@ -43,7 +45,7 @@ const variants = {
 
 
 const data = ["art", "about me", "p1"]
-
+//@ts-ignore
 export default function SogumaVxPhone({ repos, setOnDisplay, onDisplay, darkTheme }) {
 
 	const [[direction, steps], setRotate] = useState([0, 0]);

@@ -1,3 +1,4 @@
+//@ts-ignore
 import { motion } from 'framer-motion'
 
 const variants = {
@@ -15,7 +16,7 @@ const variants = {
 		}
 	}
 }
-
+//@ts-ignore
 const PageWrapper = ({ children, darkTheme }) => {
 
 	return (

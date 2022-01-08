@@ -9,6 +9,7 @@ import MainBoard from '../components/mainboard'
 const Home = ({ gitData, darkTheme, changeTheme }) => {
 	
 	// const [onDisplay, setOnDisplay] = useState({ displayState: false, displayOff: false, itemId: -1, type: 1})
+	console.log("starting data : ", gitData)
 	const [onDisplay, setOnDisplay] = useState({ displayState: true, displayOff: false, itemId: -1, type: -1})
 	const displayGim = (displayState, itemId, type, activeDisplayOff) => {
 		const newdisplayOff = onDisplay.displayState && !displayState && activeDisplayOff ? true : false;

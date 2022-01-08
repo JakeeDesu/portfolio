@@ -153,6 +153,7 @@ const MainBoard = ({ onDisplay, repos }) => {
 		if ((onDisplay.type === 1 || onDisplay.type === 2)) {
 			const projectData = repos[onDisplay.itemId > 0 ? onDisplay.itemId : 0] // fetched data
 			let staticLocalData = new LocalData(projectData.name) // static data
+			console.log( " ------ hello skills list :", staticLocalData.getSkills())
 			setData({
 				...data,
 				empty: false,

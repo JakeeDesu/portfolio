@@ -3,7 +3,4 @@ module.exports = {
     tailwindcss: {},
     autoprefixer: {},
   },
-  // resolve: {
-  //   extensions: [".js", ".json", ".ts", ".tsx"],
-  // },
 }

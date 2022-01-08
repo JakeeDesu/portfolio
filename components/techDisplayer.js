@@ -63,8 +63,8 @@ const TechDisplayer = ({ animationValues, containerWidth, width, getRef, titleSt
               key={index}
               symb=""
               title={skill}
-              width={index == 0 || index == (skillsList.size() - 1) ? "w-20" : "w-24"}
-              height={index == 0 || index == (skillsList.size() - 1) ? "h-20" : "h-24"}
+              width={index == 0 || index == (skillsList.lenght - 1) ? "w-20" : "w-24"}
+              height={index == 0 || index == (skillsList.lenght - 1) ? "h-20" : "h-24"}
               textStyle="whitespace-nowrap text-gray-300 text-xl right-full text-right m-5"
               color="bg-black"
             />

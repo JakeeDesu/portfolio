@@ -1,7 +1,9 @@
+//@ts-ignore
 import { motion, useTransform, useViewportScroll} from 'framer-motion'
 import SogumaVx from './sogumaVx'
 import SogumaVxPhone from './sogumaVxPhone'
 
+//@ts-ignore
 const SoguEye = ({ onDisplay, itemsToDisplay, displayItem, darkTheme }) => {
 
 	const { scrollYProgress } = useViewportScroll();

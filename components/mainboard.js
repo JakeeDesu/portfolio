@@ -168,6 +168,7 @@ const MainBoard = ({ onDisplay, repos }) => {
 					objectives : staticLocalData ? staticLocalData.getObjectives() : [],
 					skills : staticLocalData ? staticLocalData.getSkills() : [],
 					technologies : staticLocalData ? staticLocalData.getTechnologies() : [],
+					youtube_vid_id : staticLocalData ? staticLocalData.get_youtube_vid_id() : "z8So1L7poro",
 					data: projectData
 				}
 			})
@@ -269,6 +270,7 @@ const MainBoard = ({ onDisplay, repos }) => {
 						width="w-full max-w-5xl"
 						title={"Tools & Tech"}
 						titleStyle=" md:text-tiny lg:text-xl"
+						youtube_vid_id={data.project.youtube_vid_id}
 						text={""}
 						getRef={getRef6}
 						interval={scrollValues.interval[5]}

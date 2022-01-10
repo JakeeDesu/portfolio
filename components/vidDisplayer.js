@@ -27,7 +27,7 @@ const variants = {
   }
 }
 
-const VidDisplayer = ({ animationValues, containerWidth, width, getRef, titleStyle, title, text, interval, values }) => {
+const VidDisplayer = ({ animationValues, containerWidth, width, getRef, youtube_vid_id, titleStyle, title, text, interval, values }) => {
 
 	// console.log( " description interval : ", interval , text + " values : ", {x: [0, 100],y: [0, 100],scale: [1,1] }, "   | " , animationValues)
   
@@ -52,7 +52,7 @@ const VidDisplayer = ({ animationValues, containerWidth, width, getRef, titleSty
 			<iframe className="absolute text-white text-xl md:text-3xl flex flex-col justify-center items-center top-0 h-full w-full  overflow-hidden"
 			  width="quto"
 			  height="480"
-			  src={`https://www.youtube.com/embed/${"39d2jr1wQYU"}`}
+			  src={`https://www.youtube.com/embed/${youtube_vid_id}`}
 			  frameBorder="0"
 			  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 			  allowFullScreen

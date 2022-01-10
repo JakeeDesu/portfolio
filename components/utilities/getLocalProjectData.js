@@ -40,6 +40,12 @@ class LocalData {
 		console.log("localProjectData.objectives not found");
 		return [""]
 	}
+	get_youtube_vid_id () {
+		if (!(this.projectData == null || this.projectData == undefined))
+			return this.projectData.youtube_vid_id
+		console.log("localProjectData.youtube_vid_id not found");
+		return ""
+	}
 }
 
 export default LocalData

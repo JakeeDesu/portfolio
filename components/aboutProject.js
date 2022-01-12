@@ -30,7 +30,7 @@ const AboutProject = ({ animationValues, containerWidth, width, titlesWidth, get
       <div className={`flex flex-col justify-evenly md:justify-between items-center md:items-start  ${width || "w-full"} ${height || "h-full"} bg-red-00 `}>
         <LinkedTitle
           title={title1}
-          bodyStyle="relative flex justify-center md:justify-start items-center w-4/12 md:w-full h-14 md:h-24 "
+          bodyStyle={`relative ${(title1 == "" || !title1 ) ? "hidden" : "flex" } justify-center md:justify-start items-center w-4/12 md:w-full h-14 md:h-24 `}
           linesStyle="absolute flex flex-row justify-end items-center right-full top-0 h-full bg"
           dashedLineStyle="w-1/12 md:w-1/6 lg:w-3/12 mx-1 border-dashed border-2 rounded-lg"
           rotatedLineStyle="w-4/6 bg-gradient-to-b md:bg-gradient-to-l from-gray-400 to-gray-900 h-1 border-none rounded-lg  transform origin-right"
@@ -41,7 +41,7 @@ const AboutProject = ({ animationValues, containerWidth, width, titlesWidth, get
         />
         <LinkedTitle
           title={title2}
-          bodyStyle="relative flex justify-center md:justify-start items-center w-5/12 md:w-full h-14 md:h-24 "
+          bodyStyle={`relative ${(title2 == "" || !title2) ? "hidden" : "flex" } justify-center md:justify-start items-center w-5/12 md:w-full h-14 md:h-24 `}
           linesStyle="absolute flex flex-row-reverse md:flex-row justify-end items-center -right-2xfull md:right-full top-0 h-full "
           dashedLineStyle="w-1/6 lg:w-3/12 mx-1 border-dashed border-2 rounded-lg"
           rotatedLineStyle="w-full md:w-4/6 bg-gradient-to-b md:bg-gradient-to-l from-gray-400 to-gray-900 h-1 border-none rounded-lg  transform md:origin-right origin-left"
@@ -52,7 +52,7 @@ const AboutProject = ({ animationValues, containerWidth, width, titlesWidth, get
         />
         <LinkedTitle
           title={title3}
-          bodyStyle="relative flex justify-center md:justify-start items-center w-6/12 md:w-full h-14 md:h-24 "
+          bodyStyle={`relative ${(title3 == "" || !title3) ? "hidden" : "flex" } justify-center md:justify-start items-center w-6/12 md:w-full h-14 md:h-24 `}
           linesStyle="absolute flex flex-row justify-end items-center right-full top-0 h-full  "
           dashedLineStyle="w-1/12 md:w-1/6 lg:w-3/12 mx-1 border-dashed border-2 rounded-lg "
           rotatedLineStyle="w-full md:w-4/6 bg-gradient-to-b md:bg-gradient-to-l from-gray-400 to-gray-900 h-1 border-none rounded-lg  transform origin-right"

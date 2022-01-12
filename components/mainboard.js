@@ -193,10 +193,11 @@ const MainBoard = ({ onDisplay, repos }) => {
 	}
 	const getFrames = () => {
 		if (onDisplay.type === 1)
-			return "/img4.jpg"
+			return "/FDF/cover_fdf.png"
 		else if (onDisplay.type === 2)
-			return data.project.data.openGraphImageUrl
-		return "/me/0.png"
+			return "/FDF/cover_fdf.png"
+			// return data.project.data.openGraphImageUrl
+		return "/FDF/cover_fdf.png"
 	}
 
 	return (
@@ -218,7 +219,7 @@ const MainBoard = ({ onDisplay, repos }) => {
 					<Title
 						containerWidth={" w-9/12 py-10"}
 						width={" md:w-2/5 w-4/5 max-w-5xl"}
-						title={"C.Graphics"}
+						title={getTitle()}
 						getRef={getRef1}
 						interval={scrollValues.interval[0]}
 						animationValues={scrollValues.animationValues[0]}

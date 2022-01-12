@@ -95,6 +95,116 @@
 				"descriptions": [],
 				"images": []
 			}
+		},
+		{
+			"name": "Push-Swap",
+			"objectives" :[
+				"Sorting Algorithms",
+				"Battery Concept And Handling Elements",
+				"Algorithm Implementation"
+			],
+			"skills" : [
+				"Unix",
+				"Algorithms & AI",
+				"Imperative Programming",
+				"Rigor" 
+			],
+			"technologies" : [
+				"C Programming language"
+			],
+			"youtube_vid_id" : "S-pdP8orD5A",
+			"type": ".png",
+			"path": "/Push-Swap/",
+			"infos": {
+				"titles": [
+					"burningShip",
+					"mandelbrot",
+					"tricorn",
+					"i dont know"
+				],
+				"descriptions": [
+					"fasdfasdf sdfsadfsdaf dsfsdafsdaf dfsadfsdaf dfasdfsdf asdfasdf asdfsa fasdf sadf  sadfsda fasf safsdafasdfs",
+					"fasdfasdf sdfsadfsdaf dsfsdafsdaf dfsadfsdaf dfasdfsdf asdfasdf asdfsa fasdf sadf  sadfsda fasf safsdafasdfs",
+					"fasdfasdf sdfsadfsdaf dsfsdafsdaf dfsadfsdaf dfasdfsdf asdfasdf asdfsa fasdf sadf  sadfsda fasf safsdafasdfs",
+					"fasdfasdf sdfsadfsdaf dsfsdafsdaf dfsadfsdaf dfasdfsdf asdfasdf asdfsa fasdf sadf  sadfsda fasf safsdafasdfs"
+				],
+				"images": [
+					"0",
+					"1",
+					"2",
+					"3"
+				]
+			}
+		},
+		{
+			"name": "Lem-In",
+			"objectives" :[
+				"Graph Course",
+				"Algorithms In Depth",
+				"Algorithm Implementation"
+			],
+			"skills" : [
+				"Algorithms & AI",
+				"Imperative programming",
+				"Rigor" 
+			],
+			"technologies" : [
+				"C Programming language"
+			],
+			"youtube_vid_id" : "z8So1L7poro",
+			"type": ".png",
+			"path": "/Lem-In/",
+			"infos": {
+				"titles": [],
+				"descriptions": [],
+				"images": []
+			}
+		},
+		{
+			"name": "Fillit",
+			"objectives" :[
+				"Algorithms Basics : backtracking ..",
+				"Inputs/Outputs"
+			],
+			"skills" : [
+				"Algorithms & AI",
+				"Group & interpersonal",
+				"Unix",
+				"Rigor"
+			],
+			"technologies" : [
+				"C Programming language"
+			],
+			"youtube_vid_id" : "z8So1L7poro",
+			"type": ".png",
+			"path": "/Fillit/",
+			"infos": {
+				"titles": [],
+				"descriptions": [],
+				"images": []
+			}
+		},
+		{
+			"name": "Mini-Libc",
+			"objectives" :[
+				"Unix Logic"
+			],
+			"skills" : [
+				"Rigor",
+				"Imperative programming",
+				"Algorithms & AI"
+			],
+			"technologies" : [
+				"C Programming language"
+			],
+			"youtube_vid_id" : "z8So1L7poro",
+			"type": ".png",
+			"path": "/Mini-Libc/",
+			"infos": {
+				"titles": [],
+				"descriptions": [],
+				"images": []
+			}
 		}
 	]
 }

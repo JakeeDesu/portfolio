@@ -18,7 +18,7 @@ const ProjectCover = ({ image, containerStyle, getRef, interval, animationValues
 				// opacity : opacity
 			}}
 		>
-			<img  className="h-full object-cover md:border-2 border-b-2 border-t-2 rounded-md md:rounded-lg md:shadow-soft2glow border-gray-700" src={image} />
+			<img  className="w-full object-cor object-center md:border-2 border-b-2 border-t-2 rounded-md md:rounded-lg md:shadow-soft2glow border-gray-700" src={image} />
 		</motion.div>
 	</div>
 	)

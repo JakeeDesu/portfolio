@@ -72,7 +72,7 @@ const Debug = (onDisplay) => {
 
 
 const graphQl_ENDPOINT = "https://api.github.com/graphql"
-const TOKEN = "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"
+const TOKEN = "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"
 
 const HEADERS = {
 	'Content-Type': 'application/json',

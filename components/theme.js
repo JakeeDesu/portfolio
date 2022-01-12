@@ -36,7 +36,7 @@ export const theme = {
 		gimHolder : ' h-44 w-44 border-gray-300 border-2 h-44 w-44 shadow-glow',
     gims: {
       style : (displayState) => { return ` bg-black rounded-full lg:h-36 lg:w-36 md:h-28 md:w-28 h-16 w-16  ${!displayState && "shadow-soft1glow"}`},//' bg-black border-blue-400 border-4 shadow-softglow '
-      text : 'text-white'
+      text : 'text-white '
     },
     soguma : {
       text : 'text-white text-center text-2xl h-1/4 ',

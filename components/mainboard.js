@@ -188,14 +188,20 @@ const MainBoard = ({ onDisplay, repos }) => {
 		if (onDisplay.type === 1)
 			return data.about.description
 		else if (onDisplay.type === 2)
-			return data.project.description
+			if (data.project.data && data.project.data.description) 
+				return data.project.data.description
+			else
+				return data.project.description
 		return ""
 	}
 	const getFrames = () => {
 		if (onDisplay.type === 1)
 			return "/FDF/cover_fdf.png"
 		else if (onDisplay.type === 2)
-			return "/FDF/cover_fdf.png"
+			if (data.project.data && data.project.data.openGraphImageUrl) 
+				return data.project.data.openGraphImageUrl
+			else
+				return "/FDF/cover_fdf.png"
 			// return data.project.data.openGraphImageUrl
 		return "/FDF/cover_fdf.png"
 	}

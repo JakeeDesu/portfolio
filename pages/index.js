@@ -72,7 +72,7 @@ const Debug = (onDisplay) => {
 
 
 const graphQl_ENDPOINT = "https://api.github.com/graphql"
-const TOKEN = "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"
+const TOKEN = "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"
 
 const HEADERS = {
 	'Content-Type': 'application/json',
@@ -120,6 +120,8 @@ export async function getStaticProps() {
 
 	if (fetchedData.fetched)
 		saveLocalData(fetchedData.fetchedData)
+	else
+		console.log("****************************************************************************************", fetchedData);
 
 	const localData = await loadLocalData()
 

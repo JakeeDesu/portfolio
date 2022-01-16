@@ -38,22 +38,25 @@ export const queryData = async (graphQl_ENDPOINT, REQUEST) => {
 	const data = await fetch(graphQl_ENDPOINT, REQUEST).then(res => res.text()).then(response => {
 		const jsonData = JSON.parse(response)
 		if (jsonData["message"] === "Bad credentials")
+			{console.log("zab 1")
 			return {
 				fetched: false,
 				fetchedData: {}
-			}
+			}}
 		else
-			return {
+		{console.log("zab 1")
+		return {
 				fetched: true,
 				fetchedData: response
-			}
+			}}
 	}).catch(error => {
 		if (error)
 			console.log('fetching error : ', error)
+			{console.log("zab 1")
 		return {
 			fetched: false,
 			fetchedData: {}
-		}
+		}}
 	})
 
 	return data

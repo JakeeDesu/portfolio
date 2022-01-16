@@ -10,7 +10,7 @@ const ProjectCover = ({ image, containerStyle, getRef, interval, animationValues
 
 	return (
 		<div ref={getRef} className={`${containerStyle || "w-full md:w-10/12"}`}>
-		<motion.div className="flex justify-center w-full my-10 h-96 md:h-100 lg:h-150 "
+		<motion.div className="flex justify-center items-center w-full my-10 h-96 md:h-100 lg:h-150 md:border-2 border-b-2 border-t-2 rounded-md md:rounded-lg md:shadow-soft2glow border-gray-700 bg-black overflow-hidden "
 			style={{
 				// x: xOffset,
 				y: yOffset,
@@ -18,7 +18,9 @@ const ProjectCover = ({ image, containerStyle, getRef, interval, animationValues
 				// opacity : opacity
 			}}
 		>
-			<img  className="w-full object-cor object-center md:border-2 border-b-2 border-t-2 rounded-md md:rounded-lg md:shadow-soft2glow border-gray-700" src={image} />
+			<img  className="h-full object-contain bg-black " src={image} />
+			<div className="z-50 absolute w-full h-full shadow-in"></div>
+			
 		</motion.div>
 	</div>
 	)

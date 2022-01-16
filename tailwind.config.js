@@ -152,6 +152,7 @@ module.exports = {
       'soft2dark': '0 0px 60px 15px rgba(0, 0, 0, 0.2)',
       'dark': '0 0px 20px 8px rgba(0, 0, 0, 0.5)',
       '2dark': '0 0px 60px 15px rgba(0, 0, 0, 0.5)',
+      'in': 'inset 0 0px 100px 50px rgba(0, 0, 0, 0.5)',
     },
     fontSize: {
       'xs': '.75rem',
